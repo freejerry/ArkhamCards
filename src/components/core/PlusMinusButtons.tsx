@@ -8,7 +8,8 @@ import {
 // @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 
-import { iconSizeScale } from 'styles/space';
+import COLORS from '@styles/colors';
+import { iconSizeScale } from '@styles/space';
 
 interface Props {
   count: number;
@@ -20,7 +21,7 @@ interface Props {
   size?: number;
   disabled?: boolean;
   disablePlus?: boolean;
-  color?: 'light' | 'dark';
+  color?: 'light' | 'dark' | 'white';
   noFill?: boolean;
   allowNegative?: boolean;
   countRender?: React.ReactNode;
@@ -33,10 +34,11 @@ export default class PlusMinusButtons extends React.PureComponent<Props> {
       color,
     } = this.props;
     switch (color) {
-      case 'dark': return '#888';
-      case 'light': return '#FFF';
+      case 'dark': return COLORS.lightText;
+      case 'light': return COLORS.lightText;
+      case 'white': return 'white';
       default:
-        return '#ddd';
+        return COLORS.veryLightText;
     }
   }
 
@@ -45,9 +47,10 @@ export default class PlusMinusButtons extends React.PureComponent<Props> {
       color,
     } = this.props;
     switch (color) {
-      case 'dark': return '#000';
-      case 'light': return '#FFF';
-      default: return '#888';
+      case 'dark': return COLORS.darkText;
+      case 'light': return COLORS.background;
+      case 'white': return 'white';
+      default: return COLORS.lightText;
     }
   }
 
@@ -66,7 +69,7 @@ export default class PlusMinusButtons extends React.PureComponent<Props> {
     if (count === null || atMax || disabled || disablePlus || max === 0) {
       return (
         <TouchableOpacity disabled>
-          { color === 'light' ? (
+          { color === 'light' || color === 'white' ? (
             <View style={{ width: size, height: size }} />
           ) : (
             <MaterialCommunityIcons

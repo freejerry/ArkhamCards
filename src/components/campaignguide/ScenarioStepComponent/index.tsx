@@ -8,13 +8,16 @@ import { Navigation } from 'react-native-navigation';
 import { filter } from 'lodash';
 import { t } from 'ttag';
 
-import BasicButton from 'components/core/BasicButton';
+import BasicButton from '@components/core/BasicButton';
 import LocationSetupButton from './LocationSetupButton';
+import TableStepComponent from './TableStepComponent';
 import EffectsStepComponent from './EffectsStepComponent';
 import ResolutionStepComponent from './ResolutionStepComponent';
 import CampaignGuideContext, { CampaignGuideContextType } from '../CampaignGuideContext';
 import ScenarioGuideContext, { ScenarioGuideContextType } from '../ScenarioGuideContext';
 import ScenarioStepContext, { ScenarioStepContextType } from '../ScenarioStepContext';
+import CampaignLogCountComponent from './CampaignLogCountComponent';
+import XpCountComponent from './XpCountComponent';
 import BranchStepComponent from './BranchStepComponent';
 import EncounterSetStepComponent from './EncounterSetStepComponent';
 import LocationConnectorsStepComponent from './LocationConnectorsStepComponent';
@@ -22,10 +25,10 @@ import GenericStepComponent from './GenericStepComponent';
 import InputStepComponent from './InputStepComponent';
 import RuleReminderStepComponent from './RuleReminderStepComponent';
 import StoryStepComponent from './StoryStepComponent';
-import ScenarioStep from 'data/scenario/ScenarioStep';
-import typography from 'styles/typography';
-import COLORS from 'styles/colors';
-import space, { m, s } from 'styles/space';
+import ScenarioStep from '@data/scenario/ScenarioStep';
+import typography from '@styles/typography';
+import COLORS from '@styles/colors';
+import space, { m, s } from '@styles/space';
 
 interface Props {
   componentId: string;
@@ -50,6 +53,10 @@ export default class ScenarioStepComponent extends React.Component<Props> {
       return <GenericStepComponent step={step} />;
     }
     switch (step.type) {
+      case 'table':
+        return (
+          <TableStepComponent step={step} />
+        );
       case 'branch':
         return (
           <BranchStepComponent
@@ -74,6 +81,15 @@ export default class ScenarioStepComponent extends React.Component<Props> {
         return <RuleReminderStepComponent step={step} />;
       case 'resolution':
         return <ResolutionStepComponent step={step} />;
+      case 'campaign_log_count':
+        return <CampaignLogCountComponent step={step} />;
+      case 'xp_count':
+        return (
+          <XpCountComponent 
+            step={step} 
+            campaignLog={campaignLog}
+          />
+        );
       case 'input':
         return (
           <InputStepComponent

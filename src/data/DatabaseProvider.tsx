@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Database from './Database';
 import DatabaseContext from './DatabaseContext';
-import { AppState } from 'reducers';
+import { AppState } from '@reducers';
 
 interface OwnProps {
   children: React.ReactNode;
@@ -48,7 +48,7 @@ class DatabaseProvider extends React.Component<Props> {
       <DatabaseContext.Provider value={{
         db: theDatabase,
         playerCardsByTaboo: theDatabase.state?.playerCards,
-        tabooSets: theDatabase.state?.tabooSets,
+        tabooSets: theDatabase.state?.tabooSets || [],
       }}>
         { this.props.children }
       </DatabaseContext.Provider>

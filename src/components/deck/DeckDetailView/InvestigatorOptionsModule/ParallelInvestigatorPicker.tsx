@@ -1,12 +1,12 @@
 import React from 'react';
 import { findIndex, map } from 'lodash';
-import { SettingsPicker } from 'react-native-settings-components';
 import { t } from 'ttag';
 
-import SinglePickerComponent from 'components/core/SinglePickerComponent';
-import { FactionCodeType } from 'constants';
-import Card from 'data/Card';
-import COLORS from 'styles/colors';
+import { SettingsPicker } from '@lib/react-native-settings-components';
+import SinglePickerComponent from '@components/core/SinglePickerComponent';
+import { FactionCodeType } from '@app_constants';
+import Card from '@data/Card';
+import COLORS from '@styles/colors';
 
 interface Props {
   investigator: Card;
@@ -19,14 +19,7 @@ interface Props {
 }
 
 export default class ParallelInvestigatorPicker extends React.Component<Props> {
-  ref?: SettingsPicker<FactionCodeType>;
-
-  _captureRef = (ref: SettingsPicker<FactionCodeType>) => {
-    this.ref = ref;
-  };
-
   _onChange = (index: number) => {
-    this.ref && this.ref.closeModal();
     const {
       onChange,
       parallelInvestigators,
@@ -67,7 +60,7 @@ export default class ParallelInvestigatorPicker extends React.Component<Props> {
         description={editWarning ? t`Parallel investigator options should only be selected at deck creation time, not between scenarios.` : undefined}
         colors={{
           modalColor: investigatorFaction ?
-            COLORS.faction[investigatorFaction].primary :
+            COLORS.faction[investigatorFaction].background :
             COLORS.lightBlue,
           modalTextColor: 'white',
           backgroundColor: 'transparent',

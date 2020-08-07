@@ -1,6 +1,6 @@
 import { find } from 'lodash';
 
-import { Deck, NumberChoices } from 'actions/types';
+import { Deck, NumberChoices } from '@actions/types';
 import { FullCampaign, Effect } from './types';
 import CampaignGuide, { CampaignLog } from './CampaignGuide';
 import ScenarioGuide from './ScenarioGuide';
@@ -69,11 +69,34 @@ export interface PersonalizedChoices {
 
 export type Choices = PersonalizedChoices | UniversalChoices;
 
+
+function load(lang: string): {
+  allLogEntries: CampaignLog[];
+  allCampaigns: FullCampaign[];
+} {
+  switch (lang) {
+    case 'es':
+      return {
+        allLogEntries: require('../../../assets/campaignLogs_es.json'),
+        allCampaigns: require('../../../assets/allCampaigns_es.json'),
+      };
+      default:
+      case 'en':
+      return {
+        allLogEntries: require('../../../assets/campaignLogs.json'),
+        allCampaigns: require('../../../assets/allCampaigns.json'),
+      };
+  }
+}
+
 export function getCampaignGuide(
-  id: string
+  id: string,
+  lang: string
 ): CampaignGuide | undefined {
-  const allLogEntries: CampaignLog[] = require('../../../assets/campaignLogs.json');
-  const allCampaigns: FullCampaign[] = require('../../../assets/allCampaigns.json');
+  const {
+    allLogEntries,
+    allCampaigns,
+  } = load(lang);
 
   const campaign = find(allCampaigns, campaign =>
     campaign.campaign.id === id

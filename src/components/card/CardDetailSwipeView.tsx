@@ -11,17 +11,18 @@ import { connect } from 'react-redux';
 import { t } from 'ttag';
 import Swiper from 'react-native-swiper';
 
+import { FOOTER_HEIGHT } from '@components/DeckNavFooter/constants';
 import CardDetailComponent from './CardDetailView/CardDetailComponent';
 import { rightButtonsForCard } from './CardDetailView';
 import { CardFaqProps } from './CardFaqView';
-import { getTabooSet, AppState } from 'reducers';
+import { getTabooSet, AppState } from '@reducers';
 import CardQuantityComponent from '../cardlist/CardSearchResult/CardQuantityComponent';
 import { InvestigatorCardsProps } from '../cardlist/InvestigatorCardsView';
-import { NavigationProps } from 'components/nav/types';
-import { Slots } from 'actions/types';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import Card from 'data/Card';
-import COLORS from 'styles/colors';
+import { NavigationProps } from '@components/nav/types';
+import { Slots } from '@actions/types';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import Card from '@data/Card';
+import COLORS from '@styles/colors';
 
 interface ReduxProps {
   showSpoilers: { [pack_code: string]: boolean };
@@ -81,6 +82,12 @@ class CardDetailSwipeView extends React.Component<Props, State> {
 
   componentDidMount() {
     this._syncNavigationButtons();
+  }
+
+  componentDidAppear() {
+    const { componentId } = this.props;
+    console.log('merge options');
+    Navigation.mergeOptions(componentId, CardDetailSwipeView.options(this.props));
   }
 
   currentCard() {
@@ -242,7 +249,7 @@ class CardDetailSwipeView extends React.Component<Props, State> {
       card.deck_limit || 0
     );
     return (
-      <View>
+      <View style={{ height: FOOTER_HEIGHT, position: 'relative' }}>
         <CardQuantityComponent
           key={card.code}
           fontScale={fontScale}
@@ -251,7 +258,6 @@ class CardDetailSwipeView extends React.Component<Props, State> {
           limit={deck_limit}
           showZeroCount
           forceBig
-          light
         />
       </View>
     );
@@ -278,6 +284,7 @@ class CardDetailSwipeView extends React.Component<Props, State> {
         style={styles.wrapper}
         overScrollMode="never"
         bounces={false}
+        contentContainerStyle={styles.contentContainer}
       >
         <CardDetailComponent
           componentId={componentId}
@@ -314,7 +321,7 @@ class CardDetailSwipeView extends React.Component<Props, State> {
     } = this.state;
     const card = this.currentCard();
     if (!card) {
-      return null;
+      return <View style={styles.wrapper} />;
     }
     return (
       <View
@@ -323,9 +330,12 @@ class CardDetailSwipeView extends React.Component<Props, State> {
         <Swiper
           index={initialIndex}
           width={width}
-          containerStyle={{ flex: 1 }}
+          height={height}
+          style={{ backgroundColor: COLORS.background }}
+          containerStyle={{ flex: 1, backgroundColor: COLORS.background }}
           loadMinimal
-          loadMinimalSize={2}
+          loadMinimalSize={1}
+          loadMinimalLoader={<View style={[styles.wrapper, { width, height }]} />}
           showsPagination={false}
           onIndexChanged={this._onIndexChange}
           loop={false}
@@ -362,6 +372,10 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: COLORS.background,
+  },
+  contentContainer: {
+    backgroundColor: COLORS.background,
   },
   gutter: {
     position: 'absolute',

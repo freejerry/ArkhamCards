@@ -7,13 +7,13 @@ import {
   View,
 } from 'react-native';
 import { t } from 'ttag';
-import DialogComponent from 'react-native-dialog';
+import DialogComponent from '@lib/react-native-dialog';
 
-import Dialog from 'components/core/Dialog';
-import PlusMinusButtons from 'components/core/PlusMinusButtons';
-import COLORS from 'styles/colors';
-import space, { m } from 'styles/space';
-import typography from 'styles/typography';
+import Dialog from '@components/core/Dialog';
+import PlusMinusButtons from '@components/core/PlusMinusButtons';
+import COLORS from '@styles/colors';
+import space, { m } from '@styles/space';
+import typography from '@styles/typography';
 
 interface Props {
   name: string;
@@ -39,7 +39,7 @@ export default class EditDeckDetailsDialog extends React.Component<Props, State>
     xpAdjustment: 0,
     saving: false,
   };
-  _textInputRef?: TextInput;
+  _textInputRef = React.createRef<TextInput>();
 
   componentDidUpdate(prevProps: Props) {
     const {
@@ -77,10 +77,6 @@ export default class EditDeckDetailsDialog extends React.Component<Props, State>
       name,
     });
   }
-
-  _captureTextInputRef = (ref: TextInput) => {
-    this._textInputRef = ref;
-  };
 
   _onOkayPress = () => {
     const {
@@ -129,7 +125,7 @@ export default class EditDeckDetailsDialog extends React.Component<Props, State>
             { t`NAME` }
           </DialogComponent.Description>
           <DialogComponent.Input
-            textInputRef={this._captureTextInputRef}
+            textInputRef={this._textInputRef}
             value={name}
             onChangeText={this._onDeckNameChange}
             returnKeyType="done"

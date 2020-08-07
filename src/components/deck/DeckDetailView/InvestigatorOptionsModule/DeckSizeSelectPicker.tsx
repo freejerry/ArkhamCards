@@ -1,11 +1,10 @@
 import React from 'react';
 import { findIndex, map } from 'lodash';
-import { SettingsPicker } from 'react-native-settings-components';
 import { t } from 'ttag';
 
-import SinglePickerComponent from 'components/core/SinglePickerComponent';
-import { FactionCodeType } from 'constants';
-import COLORS from 'styles/colors';
+import SinglePickerComponent from '@components/core/SinglePickerComponent';
+import { FactionCodeType } from '@app_constants';
+import COLORS from '@styles/colors';
 
 interface Props {
   name: string;
@@ -18,14 +17,7 @@ interface Props {
 }
 
 export default class DeckSizeSelectPicker extends React.Component<Props> {
-  ref?: SettingsPicker<string>;
-
-  _captureRef = (ref: SettingsPicker<string>) => {
-    this.ref = ref;
-  };
-
   _onChange = (index: number) => {
-    this.ref && this.ref.closeModal();
     const {
       onChange,
       sizes,
@@ -53,7 +45,7 @@ export default class DeckSizeSelectPicker extends React.Component<Props> {
         description={editWarning ? t`Note: Deck size should only be selected at deck creation time, not between scenarios.` : undefined}
         colors={{
           modalColor: investigatorFaction ?
-            COLORS.faction[investigatorFaction].primary :
+            COLORS.faction[investigatorFaction].background :
             COLORS.lightBlue,
           modalTextColor: 'white',
           backgroundColor: 'transparent',

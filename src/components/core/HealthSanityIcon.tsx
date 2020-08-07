@@ -5,7 +5,7 @@ import {
   View,
 } from 'react-native';
 
-import ArkhamIcon from 'icons/ArkhamIcon';
+import ArkhamIcon from '@icons/ArkhamIcon';
 import TextStroke from './TextStroke';
 
 export function costIconSize(fontScale: number) {
@@ -93,6 +93,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Teutonic',
     fontWeight: '600',
     fontSize: 36,
-    color: '#FFF',
+    color: '#FFFFFF',
   },
 });

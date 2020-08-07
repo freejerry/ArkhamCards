@@ -6,10 +6,11 @@ import {
 } from 'react-native';
 import { t } from 'ttag';
 
-import ToggleFilter from 'components/core/ToggleFilter';
+import ToggleFilter from '@components/core/ToggleFilter';
 import SliderChooser from './SliderChooser';
 import withFilterFunctions, { FilterProps } from './withFilterFunctions';
-import { xs } from 'styles/space';
+import { xs } from '@styles/space';
+import COLORS from '@styles/colors';
 
 class CardLocationFilterView extends React.Component<FilterProps> {
   static get options() {
@@ -39,7 +40,7 @@ class CardLocationFilterView extends React.Component<FilterProps> {
       onFilterChange,
     } = this.props;
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.container}>
         <SliderChooser
           label={t`Shroud`}
           width={width}
@@ -114,5 +115,8 @@ const styles = StyleSheet.create({
     marginTop: xs,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+  },
+  container: {
+    backgroundColor: COLORS.background,
   },
 });

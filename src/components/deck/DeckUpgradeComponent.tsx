@@ -1,5 +1,5 @@
 import React from 'react';
-import { forEach, find, throttle } from 'lodash';
+import { forEach, find, keys, throttle } from 'lodash';
 import {
   ActivityIndicator,
   View,
@@ -8,17 +8,17 @@ import {
 } from 'react-native';
 import { t } from 'ttag';
 
-import { Deck, Slots } from 'actions/types';
-import BasicListRow from 'components/core/BasicListRow';
-import CardSectionHeader from 'components/core/CardSectionHeader';
-import { NavigationProps } from 'components/nav/types';
-import { showCard } from 'components/nav/helper';
-import ExileCardSelectorComponent from 'components/campaign/ExileCardSelectorComponent';
-import Card from 'data/Card';
-import { DeckChanges } from 'components/deck/actions';
-import PlusMinusButtons from 'components/core/PlusMinusButtons';
-import typography from 'styles/typography';
-import space, { m } from 'styles/space';
+import { Deck, Slots } from '@actions/types';
+import BasicListRow from '@components/core/BasicListRow';
+import CardSectionHeader from '@components/core/CardSectionHeader';
+import { NavigationProps } from '@components/nav/types';
+import { showCard } from '@components/nav/helper';
+import ExileCardSelectorComponent from '@components/campaign/ExileCardSelectorComponent';
+import Card from '@data/Card';
+import { DeckChanges } from '@components/deck/actions';
+import PlusMinusButtons from '@components/core/PlusMinusButtons';
+import typography from '@styles/typography';
+import space, { m } from '@styles/space';
 
 interface OwnProps {
   investigator: Card;
@@ -73,11 +73,11 @@ export default class DeckUpgradeComponent extends React.Component<Props, State> 
       storyCounts,
       ignoreStoryCounts,
     } = this.props;
-    const hasStoryChange = !!find(storyCounts, (count, code) =>
-      (upgradedDeck.slots[code] || 0) !== count
-    ) || !!find(ignoreStoryCounts, (count, code) =>
-      (upgradedDeck.ignoreDeckLimitSlots[code] || 0) !== count
-    );
+    const hasStoryChange = !!find(keys(storyCounts), (code) => {
+      return (upgradedDeck.slots[code] || 0) !== storyCounts[code];
+    }) || !!find(keys(ignoreStoryCounts), (code) => {
+      return (upgradedDeck.ignoreDeckLimitSlots[code] || 0) !== ignoreStoryCounts[code];
+    });
     if (hasStoryChange) {
       const newSlots: Slots = { ...upgradedDeck.slots };
       forEach(storyCounts, (count, code) => {
@@ -197,7 +197,7 @@ export default class DeckUpgradeComponent extends React.Component<Props, State> 
     const xpString = xp >= 0 ? `+${xp}` : `${xp}`;
     return (
       <View style={styles.container}>
-        { !!error && <Text>{ error }</Text> }
+        { !!error && <Text style={[typography.text, typography.error]}>{ error }</Text> }
         <CardSectionHeader
           investigator={investigator}
           fontScale={fontScale}

@@ -1,26 +1,26 @@
 import React from 'react';
 import { Linking, Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import DialogComponent from 'react-native-dialog';
+import DialogComponent from '@lib/react-native-dialog';
 import { find, flatMap } from 'lodash';
 import { t } from 'ttag';
 
-import Dialog from 'components/core/Dialog';
-import DialogPlusMinusButtons from 'components/core/DialogPlusMinusButtons';
-import BasicButton from 'components/core/BasicButton';
+import Dialog from '@components/core/Dialog';
+import DialogPlusMinusButtons from '@components/core/DialogPlusMinusButtons';
+import BasicButton from '@components/core/BasicButton';
 import SideScenarioButton from './SideScenarioButton';
-import { NavigationProps } from 'components/nav/types';
-import CampaignGuideContext, { CampaignGuideContextType } from 'components/campaignguide/CampaignGuideContext';
-import withCampaignGuideContext, { CampaignGuideInputProps, CampaignGuideProps } from 'components/campaignguide/withCampaignGuideContext';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import TabView from 'components/core/TabView';
-import { ScenarioId } from 'data/scenario';
-import { Scenario } from 'data/scenario/types';
-import typography from 'styles/typography';
-import space from 'styles/space';
+import { NavigationProps } from '@components/nav/types';
+import CampaignGuideContext, { CampaignGuideContextType } from '@components/campaignguide/CampaignGuideContext';
+import withCampaignGuideContext, { CampaignGuideInputProps, CampaignGuideProps } from '@components/campaignguide/withCampaignGuideContext';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import TabView from '@components/core/TabView';
+import { ScenarioId } from '@data/scenario';
+import { Scenario } from '@data/scenario/types';
+import typography from '@styles/typography';
+import space from '@styles/space';
 import SetupStepWrapper from '../SetupStepWrapper';
 import CampaignGuideTextComponent from '../CampaignGuideTextComponent';
-import COLORS from 'styles/colors';
+import COLORS from '@styles/colors';
 
 export interface AddSideScenarioProps extends CampaignGuideInputProps {
   latestScenarioId: ScenarioId;
@@ -180,7 +180,7 @@ class AddSideScenarioView extends React.Component<Props, State> {
             <View style={styles.header}>
               <SetupStepWrapper bulletType="none">
                 <CampaignGuideTextComponent
-                  text={t`A side-story is a scenario that may be played between any two scenarios of an <i>Arkham Horror: The Card Game</i> campaign. Playing a side-story costs each investigator in the campaign a certain amount of experience. Weaknesses, trauma, experience, and rewards granted by playing a side-story stay with the investigators for the remainder of the campaign. Each sidestory may only be played once per campaign.\nThe experience required to play these scenarios will be deducted automatically at the end of the scenario`} />
+                  text={t`A side-story is a scenario that may be played between any two scenarios of an <i>Arkham Horror: The Card Game</i> campaign. Playing a side-story costs each investigator in the campaign a certain amount of experience. Weaknesses, trauma, experience, and rewards granted by playing a side-story stay with the investigators for the remainder of the campaign. Each sidestory may only be played once per campaign.\nThe experience required to play these scenarios will be deducted automatically at the end of the scenario.`} />
               </SetupStepWrapper>
             </View>
             { flatMap(campaignGuide.sideScenarios(), scenario => {
@@ -270,6 +270,7 @@ export default withCampaignGuideContext(
 const styles = StyleSheet.create({
   scrollView: {
     paddingBottom: 32,
+    backgroundColor: COLORS.background,
   },
   header: {
     borderBottomWidth: StyleSheet.hairlineWidth,

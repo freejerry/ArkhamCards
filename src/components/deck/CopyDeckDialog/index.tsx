@@ -3,23 +3,23 @@ import { ActivityIndicator, Platform, Text, TouchableOpacity, StyleSheet, View }
 import { throttle } from 'lodash';
 import { bindActionCreators, Action, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import DialogComponent from 'react-native-dialog';
+import DialogComponent from '@lib/react-native-dialog';
 import { NetInfoStateType } from '@react-native-community/netinfo';
 import { t } from 'ttag';
 
 import SelectDeckSwitch from './SelectDeckSwitch';
 import { saveClonedDeck } from '../actions';
-import withPlayerCards, { PlayerCardProps } from 'components/core/withPlayerCards';
-import { showDeckModal } from 'components/nav/helper';
-import Dialog from 'components/core/Dialog';
-import withNetworkStatus, { NetworkStatusProps } from 'components/core/withNetworkStatus';
-import { login } from 'actions';
-import { Deck } from 'actions/types';
-import { parseBasicDeck } from 'lib/parseDeck';
-import { getDeck, getBaseDeck, getLatestDeck, AppState } from 'reducers';
-import typography from 'styles/typography';
-import COLORS from 'styles/colors';
-import space from 'styles/space';
+import withPlayerCards, { PlayerCardProps } from '@components/core/withPlayerCards';
+import { showDeckModal } from '@components/nav/helper';
+import Dialog from '@components/core/Dialog';
+import withNetworkStatus, { NetworkStatusProps } from '@components/core/withNetworkStatus';
+import { login } from '@actions';
+import { Deck } from '@actions/types';
+import { parseBasicDeck } from '@lib/parseDeck';
+import { getDeck, getBaseDeck, getLatestDeck, AppState } from '@reducers';
+import typography from '@styles/typography';
+import COLORS from '@styles/colors';
+import space from '@styles/space';
 
 interface OwnProps {
   componentId: string;
@@ -51,7 +51,6 @@ interface State {
 }
 
 class CopyDeckDialog extends React.Component<Props, State> {
-  _textInputRef: View | null = null;
   _onOkayPress!: () => void;
   constructor(props: Props) {
     super(props);
@@ -105,10 +104,6 @@ class CopyDeckDialog extends React.Component<Props, State> {
         selectedDeckId: undefined,
       });
     }
-  };
-
-  _captureTextInputRef = (ref: View) => {
-    this._textInputRef = ref;
   };
 
   resetForm() {
@@ -281,7 +276,6 @@ class CopyDeckDialog extends React.Component<Props, State> {
           { t`New Name` }
         </DialogComponent.Description>
         <DialogComponent.Input
-          textInputRef={this._captureTextInputRef}
           value={deckName || ''}
           placeholder={t`Required`}
           onChangeText={this._onDeckNameChange}

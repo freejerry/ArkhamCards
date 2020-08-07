@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import { t } from 'ttag';
 
-import BasicButton from 'components/core/BasicButton';
-import BasicSectionHeader from 'components/core/BasicSectionHeader';
+import BasicButton from '@components/core/BasicButton';
+import BasicSectionHeader from '@components/core/BasicSectionHeader';
 import {
   CUSTOM,
   ALL_CAMPAIGNS,
@@ -19,13 +19,13 @@ import {
   TDEA,
   TDEB,
   CampaignCycleCode,
-} from 'actions/types';
+} from '@actions/types';
 import CycleItem from './CycleItem';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
 import { campaignName } from '../constants';
-import { NavigationProps } from 'components/nav/types';
-import { getPacksInCollection, AppState } from 'reducers';
-import COLORS from 'styles/colors';
+import { NavigationProps } from '@components/nav/types';
+import { getPacksInCollection, AppState } from '@reducers';
+import COLORS from '@styles/colors';
 
 export interface SelectCampagaignProps {
   campaignChanged: (packCode: CampaignCycleCode, text: string, hasGuide: boolean) => void;
@@ -35,6 +35,7 @@ interface ReduxProps {
   in_collection: {
     [code: string]: boolean;
   };
+  lang: string;
 }
 
 type Props = NavigationProps &
@@ -137,6 +138,7 @@ class SelectCampaignDialog extends React.Component<Props> {
 function mapStateToProps(state: AppState): ReduxProps {
   return {
     in_collection: getPacksInCollection(state),
+    lang: state.cards.lang || 'en',
   };
 }
 
@@ -147,6 +149,7 @@ export default connect(mapStateToProps)(
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   button: {
     borderBottomWidth: StyleSheet.hairlineWidth,

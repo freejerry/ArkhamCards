@@ -6,21 +6,21 @@ import { connect } from 'react-redux';
 import { t } from 'ttag';
 
 import CampaignGuideSummary from './CampaignGuideSummary';
-import withDialogs, { InjectedDialogProps } from 'components/core/withDialogs';
-import { Campaign } from 'actions/types';
-import CampaignInvestigatorsComponent from 'components/campaignguide/CampaignInvestigatorsComponent';
-import CampaignLogComponent from 'components/campaignguide/CampaignLogComponent';
-import ScenarioListComponent from 'components/campaignguide/ScenarioListComponent';
-import TabView from 'components/core/TabView';
-import { deleteCampaign, updateCampaign } from 'components/campaign/actions';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
+import withDialogs, { InjectedDialogProps } from '@components/core/withDialogs';
+import { Campaign } from '@actions/types';
+import CampaignInvestigatorsComponent from '@components/campaignguide/CampaignInvestigatorsComponent';
+import CampaignLogComponent from '@components/campaignguide/CampaignLogComponent';
+import ScenarioListComponent from '@components/campaignguide/ScenarioListComponent';
+import TabView from '@components/core/TabView';
+import { deleteCampaign, updateCampaign } from '@components/campaign/actions';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
 import withCampaignGuideContext, {
   CampaignGuideProps as InjectedCampaignGuideProps,
   CampaignGuideInputProps,
-} from 'components/campaignguide/withCampaignGuideContext';
-import { NavigationProps } from 'components/nav/types';
-import { s, m } from 'styles/space';
-import COLORS from 'styles/colors';
+} from '@components/campaignguide/withCampaignGuideContext';
+import { NavigationProps } from '@components/nav/types';
+import { s, m } from '@styles/space';
+import COLORS from '@styles/colors';
 
 export type CampaignGuideProps = CampaignGuideInputProps;
 
@@ -121,7 +121,7 @@ class CampaignGuideView extends React.Component<Props> {
         key: 'investigators',
         title: t`Decks`,
         node: (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.container}>
             <View style={[styles.section, styles.bottomBorder]}>
               <CampaignGuideSummary
                 difficulty={processedCampaign.campaignLog.campaignData.difficulty}
@@ -143,7 +143,7 @@ class CampaignGuideView extends React.Component<Props> {
         key: 'scenarios',
         title: t`Scenarios`,
         node: (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.container}>
             <ScenarioListComponent
               campaignId={campaignId}
               campaignData={campaignData}
@@ -158,7 +158,7 @@ class CampaignGuideView extends React.Component<Props> {
         key: 'log',
         title: t`Log`,
         node: (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.container}>
             <CampaignLogComponent
               campaignId={campaignId}
               campaignGuide={campaignGuide}
@@ -205,5 +205,8 @@ const styles = StyleSheet.create({
   bottomBorder: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: COLORS.divider,
+  },
+  container: {
+    backgroundColor: COLORS.background,
   },
 });

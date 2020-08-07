@@ -11,9 +11,11 @@ import {
 import { Brackets } from 'typeorm/browser';
 import { t } from 'ttag';
 
-import { Pack } from 'actions/types';
-import CardSectionHeader from 'components/core/CardSectionHeader';
+import { Pack } from '@actions/types';
+import CardSectionHeader from '@components/core/CardSectionHeader';
 import PackRow from './PackRow';
+import typography from '@styles/typography';
+import COLORS from '@styles/colors';
 
 interface PackCycle extends SectionListData<Pack> {
   title: string;
@@ -117,7 +119,7 @@ export default class PackListComponent extends React.Component<Props> {
     if (!packs.length) {
       return (
         <View>
-          <Text>Loading</Text>
+          <Text style={typography.text}>{t`Loading`}</Text>
         </View>
       );
     }
@@ -149,6 +151,7 @@ export default class PackListComponent extends React.Component<Props> {
           renderSectionHeader={this._renderSectionHeader}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
+          stickySectionHeadersEnabled={false}
           extraData={checkState}
         />
       </View>
@@ -159,5 +162,6 @@ export default class PackListComponent extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
 });

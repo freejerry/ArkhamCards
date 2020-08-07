@@ -10,13 +10,13 @@ import {
   CampaignGuideState,
   GuideStartSideScenarioInput,
   GuideStartCustomSideScenarioInput,
-} from 'actions/types';
+} from '@actions/types';
 import { UniversalCampaignProps } from './withUniversalCampaignData';
-import { CampaignGuideContextType } from 'components/campaignguide/CampaignGuideContext';
-import CampaignGuide from 'data/scenario/CampaignGuide';
-import CampaignStateHelper from 'data/scenario/CampaignStateHelper';
-import Card, { CardsMap } from 'data/Card';
-import { getCampaignGuide } from 'data/scenario';
+import { CampaignGuideContextType } from '@components/campaignguide/CampaignGuideContext';
+import CampaignGuide from '@data/scenario/CampaignGuide';
+import CampaignStateHelper from '@data/scenario/CampaignStateHelper';
+import Card, { CardsMap } from '@data/Card';
+import { getCampaignGuide } from '@data/scenario';
 import {
   AppState,
   getCampaign,
@@ -24,7 +24,7 @@ import {
   getLatestCampaignInvestigators,
   getAllDecks,
   getLatestCampaignDeckIds,
-} from 'reducers';
+} from '@reducers';
 
 export interface CampaignGuideReduxData {
   campaign: SingleCampaign;
@@ -46,7 +46,7 @@ export function campaignGuideReduxData(
   if (!campaign) {
     return undefined;
   }
-  const campaignGuide = getCampaignGuide(campaign.cycleCode);
+  const campaignGuide = getCampaignGuide(campaign.cycleCode, state.cards.lang || 'en');
   if (!campaignGuide) {
     return undefined;
   }

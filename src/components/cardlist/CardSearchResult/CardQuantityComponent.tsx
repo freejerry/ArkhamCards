@@ -8,12 +8,13 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import Button from 'components/core/Button';
-import PlusMinusButtons from 'components/core/PlusMinusButtons';
+import Button from '@components/core/Button';
+import PlusMinusButtons from '@components/core/PlusMinusButtons';
 import CountButton from './CountButton';
 import { rowHeight, buttonWidth, BUTTON_PADDING, toggleButtonMode } from './constants';
-import typography from 'styles/typography';
-import { s, xs } from 'styles/space';
+import typography from '@styles/typography';
+import { s, xs } from '@styles/space';
+import COLORS from '@styles/colors';
 
 interface Props {
   count: number;
@@ -22,7 +23,6 @@ interface Props {
   limit: number;
   showZeroCount?: boolean;
   forceBig?: boolean;
-  light?: boolean;
 }
 
 interface State {
@@ -199,7 +199,6 @@ export default class CardQuantityComponent extends React.PureComponent<Props, St
       limit,
       showZeroCount,
       forceBig,
-      light,
       fontScale,
     } = this.props;
     if (toggleButtonMode(fontScale) && !forceBig) {
@@ -218,10 +217,10 @@ export default class CardQuantityComponent extends React.PureComponent<Props, St
           onIncrement={this._increment}
           onDecrement={this._decrement}
           max={limit}
-          color={light ? 'light' : undefined}
+          color={forceBig ? 'white' : undefined}
           hideDisabledMinus
           countRender={
-            <Text style={[typography.text, styles.count, light ? { color: 'white', fontSize: 22 } : {}]}>
+            <Text style={[typography.text, styles.count, forceBig ? { color: 'white', fontSize: 22 } : {}]}>
               { (showZeroCount || count !== 0) ? count : ' ' }
             </Text>
           }
@@ -271,7 +270,7 @@ const styles = StyleSheet.create({
     overflow: 'visible',
   },
   slideDrawer: {
-    borderColor: '#888888',
+    borderColor: COLORS.divider,
     borderLeftWidth: 1,
   },
   gradient: {

@@ -8,13 +8,13 @@ import ViewControl from 'react-native-zoom-view';
 import { Navigation, EventSubscription } from 'react-native-navigation';
 import { t } from 'ttag';
 
-import SingleCardWrapper from 'components/card/SingleCardWrapper';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import { iconsMap } from 'app/NavIcons';
-import Card from 'data/Card';
-import { HEADER_HEIGHT } from 'styles/sizes';
-import COLORS from 'styles/colors';
-import { NavigationProps } from 'components/nav/types';
+import SingleCardWrapper from '@components/card/SingleCardWrapper';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import { iconsMap } from '@app/NavIcons';
+import Card from '@data/Card';
+import { HEADER_HEIGHT } from '@styles/sizes';
+import COLORS from '@styles/colors';
+import { NavigationProps } from '@components/nav/types';
 
 export interface CardImageProps {
   id: string;
@@ -76,7 +76,7 @@ class CardImageView extends React.Component<Props, State> {
             rightButtons: [{
               id: 'flip',
               icon: iconsMap.flip_card,
-              color: COLORS.navButton,
+              color: '#FFFFFF',
               testID: t`Flip Card`,
             }],
           },
@@ -163,6 +163,7 @@ export default withDimensions(CardImageView);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   pinchZoom: {
     flex: 1,

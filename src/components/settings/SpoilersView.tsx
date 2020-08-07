@@ -8,13 +8,14 @@ import { bindActionCreators, Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
 import { t } from 'ttag';
 
-import { Pack } from 'actions/types';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import { setPackSpoiler, setCyclePackSpoiler } from 'actions';
-import PackListComponent from 'components/core/PackListComponent';
-import { NavigationProps } from 'components/nav/types';
-import { getAllPacks, getPackSpoilers, AppState } from 'reducers';
-import space from 'styles/space';
+import { Pack } from '@actions/types';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import { setPackSpoiler, setCyclePackSpoiler } from '@actions';
+import PackListComponent from '@components/core/PackListComponent';
+import { NavigationProps } from '@components/nav/types';
+import { getAllPacks, getPackSpoilers, AppState } from '@reducers';
+import space from '@styles/space';
+import typography from '@styles/typography';
 
 interface ReduxProps {
   packs: Pack[];
@@ -51,7 +52,7 @@ class SpoilersView extends React.Component<Props> {
     if (!packs.length) {
       return (
         <View>
-          <Text>{ t`Loading` }</Text>
+          <Text style={typography.text}>{ t`Loading` }</Text>
         </View>
       );
     }

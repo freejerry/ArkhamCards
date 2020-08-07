@@ -4,26 +4,27 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  Linking,
 } from 'react-native';
 import { bindActionCreators, Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
-import { SettingsCategoryHeader, SettingsSwitch } from 'react-native-settings-components';
 import { t } from 'ttag';
 
 import LanguagePicker from './LanguagePicker';
+import CategoryHeader from './CategoryHeader';
 import SettingsTabooPicker from './SettingsTabooPicker';
-import { clearDecks } from 'actions';
-import { fetchCards } from 'components/card/actions';
-import { setSingleCardView } from './actions';
-import { prefetch } from 'lib/auth';
-import Database from 'data/Database';
-import DatabaseContext, { DatabaseContextType } from 'data/DatabaseContext';
-import { getAllDecks, AppState } from 'reducers';
+import SettingsSwitch from '@components/core/SettingsSwitch';
+import { clearDecks } from '@actions';
+import { fetchCards } from '@components/card/actions';
+import { setSingleCardView, setAlphabetizeEncounterSets} from './actions';
+import { prefetch } from '@lib/auth';
+import Database from '@data/Database';
+import DatabaseContext, { DatabaseContextType } from '@data/DatabaseContext';
+import { getAllDecks, AppState } from '@reducers';
 import SettingsItem from './SettingsItem';
 import LoginButton from './LoginButton';
-import COLORS from 'styles/colors';
-import typography from 'styles/typography';
+import COLORS from '@styles/colors';
 
 interface OwnProps {
   componentId: string;
@@ -31,6 +32,7 @@ interface OwnProps {
 
 interface ReduxProps {
   showCardsingleCardView: boolean;
+  alphabetizeEncounterSets: boolean;
   lang: string;
   cardsLoading?: boolean;
   cardsError?: string;
@@ -41,20 +43,11 @@ interface ReduxActionProps {
   fetchCards: (db: Database, lang: string) => void;
   clearDecks: () => void;
   setSingleCardView: (value: boolean) => void;
+  setAlphabetizeEncounterSets: (value: boolean) => void;
 }
 
 
 type Props = OwnProps & ReduxProps & ReduxActionProps;
-
-function CategoryHeader({ title }: { title: string }) {
-  return (
-    <SettingsCategoryHeader
-      title={title}
-      titleStyle={typography.smallLabel}
-      containerStyle={styles.categoryContainer}
-    />
-  );
-}
 
 class SettingsView extends React.Component<Props> {
   static contextType = DatabaseContext;
@@ -98,6 +91,10 @@ class SettingsView extends React.Component<Props> {
     this.navButtonPressed('About', t`About Arkham Cards`);
   };
 
+  _contactPressed = () => {
+    Linking.openURL('mailto:arkhamcards@gmail.com');
+  }
+
   _doSyncCards = () => {
     const {
       lang,
@@ -123,8 +120,12 @@ class SettingsView extends React.Component<Props> {
     this.props.setSingleCardView(!value);
   };
 
+  _alphabetizeEncounterSetsChanged = (value: boolean) => {
+    this.props.setAlphabetizeEncounterSets(value);
+  };
+
   render() {
-    const { cardsLoading, showCardsingleCardView } = this.props;
+    const { cardsLoading, showCardsingleCardView, alphabetizeEncounterSets } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.list}>
@@ -151,10 +152,15 @@ class SettingsView extends React.Component<Props> {
           <CategoryHeader title={t`Preferences`} />
           <SettingsSwitch
             title={t`Swipe between card results`}
-            titleStyle={{ color: COLORS.darkText }}
-            containerStyle={{ backgroundColor: COLORS.background }}
             value={!showCardsingleCardView}
             onValueChange={this._swipeBetweenCardsChanged}
+            settingsStyle
+          />
+          <SettingsSwitch
+            title={t`Alphabetize guide encounter sets`}
+            value={alphabetizeEncounterSets}
+            onValueChange={this._alphabetizeEncounterSetsChanged}
+            settingsStyle
           />
           <SettingsItem
             navigation
@@ -167,6 +173,11 @@ class SettingsView extends React.Component<Props> {
             onPress={this._aboutPressed}
             text={t`About Arkham Cards`}
           />
+          <SettingsItem
+            navigation
+            onPress={this._contactPressed}
+            text={t`Contact us`}
+          />
         </ScrollView>
       </SafeAreaView>
     );
@@ -176,6 +187,7 @@ class SettingsView extends React.Component<Props> {
 function mapStateToProps(state: AppState): ReduxProps {
   return {
     showCardsingleCardView: state.settings.singleCardView || false,
+    alphabetizeEncounterSets: state.settings.alphabetizeEncounterSets || false,
     cardsLoading: state.cards.loading,
     cardsError: state.cards.error || undefined,
     deckCount: keys(getAllDecks(state)).length,
@@ -188,6 +200,7 @@ function mapDispatchToProps(dispatch: Dispatch<Action>): ReduxActionProps {
     clearDecks,
     fetchCards,
     setSingleCardView,
+    setAlphabetizeEncounterSets,
   }, dispatch);
 }
 
@@ -199,6 +212,7 @@ export default connect<ReduxProps, ReduxActionProps, OwnProps, AppState>(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
   list: {
     flex: 1,

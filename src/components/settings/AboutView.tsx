@@ -8,8 +8,9 @@ import {
   View,
 } from 'react-native';
 
-import typography from 'styles/typography';
-import space from 'styles/space';
+import typography from '@styles/typography';
+import space from '@styles/space';
+import COLORS from '@styles/colors';
 
 export default class AboutView extends React.Component {
   _octopusLink = () => {
@@ -18,7 +19,7 @@ export default class AboutView extends React.Component {
 
   render() {
     return (
-      <ScrollView style={space.paddingM}>
+      <ScrollView style={[space.paddingM, styles.background]}>
         <Text style={typography.text}>
           The information presented in this app about Arkham Horror: The Card
           Game, both literal and graphical, is copyrighted by Fantasy Flight
@@ -38,6 +39,20 @@ export default class AboutView extends React.Component {
           project would not have been possible.
           { '\n\n' }
         </Text>
+        <Text style={typography.text}>
+          <Text style={typography.bold}>Translation Support:</Text>
+          { '\n' }
+          • Spanish: Midraed, Alvaro, and Casalderrey
+          { '\n' }
+          • French: Fabrice2
+        </Text>
+        <Text style={typography.text}>
+          <Text style={typography.bold}>Additional Support:</Text>
+          { '\n' }
+          • Digital chaos bag + odds calculator: Joshua Payne (@suxur)
+          { '\n' }
+          • Tooling and build support: Akaan
+        </Text>
         <Text style={typography.small}>
           <Text style={typography.bold}>Icon Attribution:</Text>
           { '\n' }
@@ -56,6 +71,7 @@ export default class AboutView extends React.Component {
             • <Text style={styles.underline}>Octopus Vectors by Vecteezy</Text>
           </Text>
         </TouchableOpacity>
+        
         <View style={styles.footer} />
       </ScrollView>
     );
@@ -68,5 +84,8 @@ const styles = StyleSheet.create({
   },
   underline: {
     textDecorationLine: 'underline',
+  },
+  background: {
+    backgroundColor: COLORS.background,
   },
 });

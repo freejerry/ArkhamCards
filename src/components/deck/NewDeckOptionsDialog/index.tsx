@@ -10,30 +10,30 @@ import { Navigation } from 'react-native-navigation';
 import { find, forEach, map, sumBy, throttle } from 'lodash';
 import { bindActionCreators, Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
-import { SettingsSwitch } from 'react-native-settings-components';
 import { NetInfoStateType } from '@react-native-community/netinfo';
 import { t } from 'ttag';
 
-import EditText from 'components/core/EditText';
+import SettingsSwitch from '@components/core/SettingsSwitch';
+import EditText from '@components/core/EditText';
 import RequiredCardSwitch from './RequiredCardSwitch';
-import { showDeckModal } from 'components/nav/helper';
-import TabooSetPicker from 'components/core/TabooSetPicker';
-import CardSectionHeader from 'components/core/CardSectionHeader';
-import NavButton from 'components/core/NavButton';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import BasicButton from 'components/core/BasicButton';
-import withNetworkStatus, { NetworkStatusProps } from 'components/core/withNetworkStatus';
-import withLoginState, { LoginStateProps } from 'components/core/withLoginState';
-import withPlayerCards, { PlayerCardProps } from 'components/core/withPlayerCards';
-import { saveNewDeck, NewDeckParams } from 'components/deck/actions';
-import { NavigationProps } from 'components/nav/types';
-import { Deck, Slots } from 'actions/types';
-import { RANDOM_BASIC_WEAKNESS } from 'constants';
-import Card from 'data/Card';
-import { getTabooSet, AppState } from 'reducers';
-import typography from 'styles/typography';
-import space from 'styles/space';
-import COLORS from 'styles/colors';
+import { showDeckModal } from '@components/nav/helper';
+import TabooSetPicker from '@components/core/TabooSetPicker';
+import CardSectionHeader from '@components/core/CardSectionHeader';
+import SettingsItem from '@components/settings/SettingsItem';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import BasicButton from '@components/core/BasicButton';
+import withNetworkStatus, { NetworkStatusProps } from '@components/core/withNetworkStatus';
+import withLoginState, { LoginStateProps } from '@components/core/withLoginState';
+import withPlayerCards, { PlayerCardProps } from '@components/core/withPlayerCards';
+import { saveNewDeck, NewDeckParams } from '@components/deck/actions';
+import { NavigationProps } from '@components/nav/types';
+import { Deck, Slots } from '@actions/types';
+import { RANDOM_BASIC_WEAKNESS } from '@app_constants';
+import Card from '@data/Card';
+import { getTabooSet, AppState } from '@reducers';
+import typography from '@styles/typography';
+import space from '@styles/space';
+import COLORS from '@styles/colors';
 import starterDecks from '../../../../assets/starter-decks';
 
 export interface NewDeckOptionsProps {
@@ -148,6 +148,9 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
         }
         slots[card.code] = card.deck_limit || card.quantity || 0;
       });
+      if (investigator.code === '06002') {
+        slots['06008'] = 1;
+      }
     }
 
     if (optionSelected[0] !== true ||
@@ -317,7 +320,7 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
           value={deckName}
         />
         <TabooSetPicker
-          color={COLORS.faction[investigator.factionCode()].primary}
+          color={COLORS.faction[investigator.factionCode()].background}
           tabooSetId={tabooSetId}
           setTabooSet={this._setTabooSetId}
         />
@@ -346,16 +349,14 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
         { signedIn ? (
           <SettingsSwitch
             title={t`Create on ArkhamDB`}
-            containerStyle={{ borderBottomWidth: StyleSheet.hairlineWidth, borderColor: COLORS.divider }}
             value={!offlineDeck}
             disabled={!signedIn || !isConnected || networkType === NetInfoStateType.none}
             onValueChange={this._onDeckTypeChange}
-            trackColor={COLORS.switchTrackColor}
+            settingsStyle
           />
         ) : (
-          <NavButton
-            indent
-            fontScale={fontScale}
+          <SettingsItem 
+            navigation
             text={t`Sign in to ArkhamDB`}
             onPress={login}
           />
@@ -371,9 +372,8 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
           <SettingsSwitch
             title={t`Use Starter Deck`}
             value={starterDeck}
-            containerStyle={{ borderBottomWidth: StyleSheet.hairlineWidth, borderColor: COLORS.divider }}
             onValueChange={this._onStarterDeckChange}
-            trackColor={COLORS.switchTrackColor}
+            settingsStyle
           />
         ) }
       </>
@@ -396,7 +396,7 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
     }
     const okDisabled = saving || !find(optionSelected, selected => selected);
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.container}>
         { this.renderFormContent(investigator) }
         { !saving && (
           <>
@@ -446,5 +446,8 @@ export default withPlayerCards<NavigationProps & NewDeckOptionsProps>(
 const styles = StyleSheet.create({
   spinner: {
     height: 80,
+  },
+  container: {
+    backgroundColor: COLORS.background,
   },
 });

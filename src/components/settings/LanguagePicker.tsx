@@ -2,15 +2,14 @@ import React from 'react';
 import { findIndex, map } from 'lodash';
 import { bindActionCreators, Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
-import { SettingsPicker } from 'react-native-settings-components';
 import { t } from 'ttag';
 
-import SinglePickerComponent from 'components/core/SinglePickerComponent';
-import { fetchCards } from 'components/card/actions';
-import Database from 'data/Database';
-import DatabaseContext, { DatabaseContextType } from 'data/DatabaseContext';
-import { AppState } from 'reducers';
-import COLORS from 'styles/colors';
+import SinglePickerComponent from '@components/core/SinglePickerComponent';
+import { fetchCards } from '@components/card/actions';
+import Database from '@data/Database';
+import DatabaseContext, { DatabaseContextType } from '@data/DatabaseContext';
+import { AppState } from '@reducers';
+import COLORS from '@styles/colors';
 
 interface ReduxProps {
   lang: string;
@@ -39,15 +38,8 @@ class LanguagePicker extends React.Component<Props> {
   static contextType = DatabaseContext;
   context!: DatabaseContextType;
 
-  languagePickerRef?: SettingsPicker<string>;
-
-  _captureLanguagePickerRef = (ref: SettingsPicker<string>) => {
-    this.languagePickerRef = ref;
-  }
-
   _onLanguageChange = (index: number) => {
     const newLang = LANGUAGES[index].value;
-    this.languagePickerRef && this.languagePickerRef.closeModal();
     const {
       lang,
       fetchCards,

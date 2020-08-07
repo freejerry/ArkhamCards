@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { SettingsSwitch } from 'react-native-settings-components';
 
-import COLORS from 'styles/colors';
+import SettingsSwitch from '@components/core/SettingsSwitch';
+import COLORS from '@styles/colors';
 
 interface Props {
   index: number;
@@ -31,11 +31,9 @@ export default class RequiredCardSwitch extends React.Component<Props> {
       <SettingsSwitch
         disabled={disabled}
         title={label}
-        containerStyle={{ borderBottomWidth: StyleSheet.hairlineWidth, borderColor: COLORS.divider }}
-        disabledOverlayStyle={{ backgroundColor: 'transparent' }}
         value={value}
         onValueChange={this._onValueChange}
-        trackColor={COLORS.switchTrackColor}
+        settingsStyle
       />
     );
   }

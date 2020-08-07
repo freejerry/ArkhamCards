@@ -43,6 +43,13 @@ export default StyleSheet.create({
     letterSpacing: 0.3,
     color: COLORS.lightText,
   },
+  categoryHeader: {
+    fontFamily: 'System',
+    fontSize: 12 * sizeScale,
+    lineHeight: 18 * sizeScale,
+    letterSpacing: 0.3,
+    color: COLORS.darkText,
+  },
   label: {
     fontFamily: 'System',
     fontSize: 16 * sizeScale,
@@ -80,11 +87,11 @@ export default StyleSheet.create({
   dialogLabel: Platform.select({
     ios: {
       fontSize: 13 * sizeScale,
-      color: 'black',
+      color: COLORS.darkText,
     },
     android: {
       fontSize: 16 * sizeScale,
-      color: '#33383D',
+      color: COLORS.darkText,
     },
   }) as TextStyle,
   left: {
@@ -119,7 +126,10 @@ export default StyleSheet.create({
     paddingRight: m,
   },
   darkGray: {
-    color: COLORS.darkGray,
+    color: COLORS.lightText,
+  },
+  white: {
+    color: COLORS.white,
   },
   uppercase: {
     textTransform: 'uppercase',

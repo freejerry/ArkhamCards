@@ -1,13 +1,13 @@
 import React from 'react';
 import { ngettext, msgid } from 'ttag';
 
-import CampaignGuideTextComponent from 'components/campaignguide/CampaignGuideTextComponent';
-import SetupStepWrapper from 'components/campaignguide/SetupStepWrapper';
-import ScenarioStepContext, { ScenarioStepContextType } from 'components/campaignguide/ScenarioStepContext';
-import InvestigatorCounterComponent from 'components/campaignguide/prompts/InvestigatorCounterComponent';
-import { InputStep, InvestigatorCounterInput } from 'data/scenario/types';
-import GuidedCampaignLog from 'data/scenario/GuidedCampaignLog';
-import Card from 'data/Card';
+import CampaignGuideTextComponent from '@components/campaignguide/CampaignGuideTextComponent';
+import SetupStepWrapper from '@components/campaignguide/SetupStepWrapper';
+import ScenarioStepContext, { ScenarioStepContextType } from '@components/campaignguide/ScenarioStepContext';
+import InvestigatorCounterComponent from '@components/campaignguide/prompts/InvestigatorCounterComponent';
+import { InputStep, InvestigatorCounterInput } from '@data/scenario/types';
+import GuidedCampaignLog from '@data/scenario/GuidedCampaignLog';
+import Card from '@data/Card';
 import { forEach } from 'lodash';
 
 interface Props {
@@ -47,8 +47,8 @@ export default class InvestigatorCounterInputComponent extends React.Component<P
     forEach(scenarioInvestigators, investigator => {
       const specialXp = campaignLog.specialXp(investigator.code, specialXpType);
       description[investigator.code] = ngettext(
-        msgid`${specialXp} resupply point available`,
-        `${specialXp} resupply points available`,
+        msgid`${specialXp} resupply experience available`,
+        `${specialXp} resupply experience available`,
         specialXp
       );
     });

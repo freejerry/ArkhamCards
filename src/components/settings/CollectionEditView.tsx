@@ -7,12 +7,13 @@ import { bindActionCreators, Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
 import { t } from 'ttag';
 
-import PackListComponent from 'components/core/PackListComponent';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import { NavigationProps } from 'components/nav/types';
-import { Pack } from 'actions/types';
-import { setInCollection, setCycleInCollection } from 'actions';
-import { getAllPacks, getPacksInCollection, AppState } from 'reducers';
+import PackListComponent from '@components/core/PackListComponent';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import { NavigationProps } from '@components/nav/types';
+import { Pack } from '@actions/types';
+import { setInCollection, setCycleInCollection } from '@actions';
+import { getAllPacks, getPacksInCollection, AppState } from '@reducers';
+import typography from '@styles/typography';
 
 interface ReduxProps {
   packs: Pack[];
@@ -48,7 +49,7 @@ class CollectionEditView extends React.Component<Props> {
     if (!packs.length) {
       return (
         <View>
-          <Text>Loading</Text>
+          <Text style={typography.text}>{t`Loading`}</Text>
         </View>
       );
     }

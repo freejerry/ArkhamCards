@@ -7,11 +7,12 @@ import {
 import { connect } from 'react-redux';
 
 import { t } from 'ttag';
-import { Pack } from 'actions/types';
-import PackListComponent from 'components/core/PackListComponent';
-import { getAllPacks, AppState } from 'reducers';
+import { Pack } from '@actions/types';
+import PackListComponent from '@components/core/PackListComponent';
+import { getAllPacks, AppState } from '@reducers';
 import withFilterFunctions, { FilterProps } from './withFilterFunctions';
-import COLORS from 'styles/colors';
+import COLORS from '@styles/colors';
+import typography from '@styles/typography';
 
 interface OwnProps {
   componentId: string;
@@ -86,7 +87,7 @@ class PackFilterView extends React.Component<Props> {
     if (!allPacks.length) {
       return (
         <View>
-          <Text>Loading</Text>
+          <Text style={typography.text}>{t`Loading`}</Text>
         </View>
       );
     }

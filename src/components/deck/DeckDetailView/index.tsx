@@ -22,23 +22,23 @@ import {
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Navigation, EventSubscription, OptionsTopBarButton } from 'react-native-navigation';
-import DialogComponent from 'react-native-dialog';
+import DialogComponent from '@lib/react-native-dialog';
 import deepDiff from 'deep-diff';
 import { ngettext, msgid, t } from 'ttag';
 import SideMenu from 'react-native-side-menu';
+
 import {
   SettingsButton,
   SettingsCategoryHeader,
-} from 'react-native-settings-components';
-
-import BasicButton from 'components/core/BasicButton';
-import withLoginState, { LoginStateProps } from 'components/core/withLoginState';
-import withTraumaDialog, { TraumaProps } from 'components/campaign/withTraumaDialog';
-import Dialog from 'components/core/Dialog';
-import withDialogs, { InjectedDialogProps } from 'components/core/withDialogs';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import CopyDeckDialog from 'components/deck/CopyDeckDialog';
-import { iconsMap } from 'app/NavIcons';
+} from '@lib/react-native-settings-components';
+import BasicButton from '@components/core/BasicButton';
+import withLoginState, { LoginStateProps } from '@components/core/withLoginState';
+import withTraumaDialog, { TraumaProps } from '@components/campaign/withTraumaDialog';
+import Dialog from '@components/core/Dialog';
+import withDialogs, { InjectedDialogProps } from '@components/core/withDialogs';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import CopyDeckDialog from '@components/deck/CopyDeckDialog';
+import { iconsMap } from '@app/NavIcons';
 import {
   fetchPrivateDeck,
   fetchPublicDeck,
@@ -46,13 +46,13 @@ import {
   uploadLocalDeck,
   saveDeckChanges,
   DeckChanges,
-} from 'components/deck/actions';
-import { Campaign, Deck, DeckMeta, ParsedDeck, Slots } from 'actions/types';
-import { updateCampaign } from 'components/campaign/actions';
-import withPlayerCards, { TabooSetOverride, PlayerCardProps } from 'components/core/withPlayerCards';
-import Card, { CardsMap } from 'data/Card';
-import TabooSet from 'data/TabooSet';
-import { parseDeck, parseBasicDeck } from 'lib/parseDeck';
+} from '@components/deck/actions';
+import { Campaign, Deck, DeckMeta, ParsedDeck, Slots } from '@actions/types';
+import { updateCampaign } from '@components/campaign/actions';
+import withPlayerCards, { TabooSetOverride, PlayerCardProps } from '@components/core/withPlayerCards';
+import Card, { CardsMap } from '@data/Card';
+import TabooSet from '@data/TabooSet';
+import { parseDeck, parseBasicDeck } from '@lib/parseDeck';
 import { EditDeckProps } from '../DeckEditView';
 import { CardUpgradeDialogProps } from '../CardUpgradeDialog';
 import { DeckDescriptionProps } from '../DeckDescriptionView';
@@ -62,8 +62,8 @@ import { EditSpecialCardsProps } from '../EditSpecialDeckCardsView';
 import EditDeckDetailsDialog from './EditDeckDetailsDialog';
 import DeckViewTab from './DeckViewTab';
 import withTabooSetOverride, { TabooSetOverrideProps } from './withTabooSetOverride';
-import DeckNavFooter from 'components/DeckNavFooter';
-import { NavigationProps } from 'components/nav/types';
+import DeckNavFooter from '@components/DeckNavFooter';
+import { NavigationProps } from '@components/nav/types';
 import {
   getCampaign,
   getDeck,
@@ -71,11 +71,11 @@ import {
   getCampaignForDeck,
   getPacksInCollection,
   AppState,
-} from 'reducers';
-import { m } from 'styles/space';
-import typography from 'styles/typography';
-import COLORS from 'styles/colors';
-import { getDeckOptions, showCardCharts, showDrawSimulator } from 'components/nav/helper';
+} from '@reducers';
+import { m } from '@styles/space';
+import typography from '@styles/typography';
+import COLORS from '@styles/colors';
+import { getDeckOptions, showCardCharts, showDrawSimulator } from '@components/nav/helper';
 
 const SHOW_DESCRIPTION_EDITOR = false;
 
@@ -587,7 +587,7 @@ class DeckDetailView extends React.Component<Props, State> {
               color: 'white',
             },
             background: {
-              color: COLORS.faction[investigator ? investigator.factionCode() : 'neutral'].dark,
+              color: COLORS.faction[investigator ? investigator.factionCode() : 'neutral'].darkBackground,
             },
           },
         },
@@ -643,7 +643,7 @@ class DeckDetailView extends React.Component<Props, State> {
               color: 'white',
             },
             background: {
-              color: COLORS.faction[investigator ? investigator.factionCode() : 'neutral'].dark,
+              color: COLORS.faction[investigator ? investigator.factionCode() : 'neutral'].darkBackground,
             },
           },
         },
@@ -688,7 +688,7 @@ class DeckDetailView extends React.Component<Props, State> {
               color: 'white',
             },
             background: {
-              color: COLORS.faction[parsedDeck ? parsedDeck.investigator.factionCode() : 'neutral'].dark,
+              color: COLORS.faction[parsedDeck ? parsedDeck.investigator.factionCode() : 'neutral'].darkBackground,
             },
           },
         },
@@ -928,9 +928,9 @@ class DeckDetailView extends React.Component<Props, State> {
   }
 
   _setMeta = (key: keyof DeckMeta, value?: string) => {
+    let { slots } = this.state;
     const {
       meta,
-      slots,
       ignoreDeckLimitSlots,
       xpAdjustment,
       nameChange,
@@ -949,8 +949,16 @@ class DeckDetailView extends React.Component<Props, State> {
       ...meta,
       [key]: value,
     };
+
     if (value === undefined) {
       delete updatedMeta[key];
+    } else {
+      if (deck.investigator_code === '06002' && key === 'deck_size_selected') {
+        slots = {
+          ...slots,
+          '06008': (parseInt(value, 10) - 20) / 10,
+        };
+      }
     }
     const parsedDeck = parseDeck(
       deck,
@@ -1595,6 +1603,7 @@ class DeckDetailView extends React.Component<Props, State> {
               onPress={this._showEditDetailsVisible}
               title={t`Name`}
               description={nameChange || deck.name}
+              descriptionStyle={styles.text}
               titleStyle={styles.text}
               containerStyle={styles.button}
             />
@@ -1622,7 +1631,6 @@ class DeckDetailView extends React.Component<Props, State> {
                 description={`${deck.id}`}
                 descriptionStyle={styles.text}
                 onPress={this._showEditDetailsVisible}
-                disabledOverlayStyle={{ backgroundColor: 'transparent' }}
                 disabled
               />
             ) }
@@ -1687,6 +1695,7 @@ class DeckDetailView extends React.Component<Props, State> {
               containerStyle={styles.button}
               disabled={!!hasPendingEdits}
               description={hasPendingEdits ? t`Save changes before upgrading` : undefined}
+              descriptionStyle={styles.text}
             />
             { !!deck.previous_deck && (
               <SettingsButton
@@ -1695,6 +1704,7 @@ class DeckDetailView extends React.Component<Props, State> {
                 titleStyle={styles.text}
                 containerStyle={styles.button}
                 description={xpString}
+                descriptionStyle={styles.text}
               />
             ) }
             { !!deck.previous_deck && (

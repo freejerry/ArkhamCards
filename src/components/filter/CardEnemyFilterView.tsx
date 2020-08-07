@@ -7,10 +7,10 @@ import {
 import { t } from 'ttag';
 
 import SliderChooser from './SliderChooser';
-import ToggleFilter from 'components/core/ToggleFilter';
+import ToggleFilter from '@components/core/ToggleFilter';
 import withFilterFunctions, { FilterProps } from './withFilterFunctions';
-import COLORS from 'styles/colors';
-import space from 'styles/space';
+import COLORS from '@styles/colors';
+import space from '@styles/space';
 
 class CardEnemyFilterView extends React.Component<FilterProps> {
   static get options() {
@@ -150,7 +150,7 @@ class CardEnemyFilterView extends React.Component<FilterProps> {
       fontScale,
     } = this.props;
     return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.container}>
         <SliderChooser
           label={t`Fight`}
           width={width}
@@ -256,5 +256,8 @@ const styles = StyleSheet.create({
   toggleRow: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
+  },
+  container: {
+    backgroundColor: COLORS.background,
   },
 });

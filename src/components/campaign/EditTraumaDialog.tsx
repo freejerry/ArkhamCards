@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import DialogComponent from 'react-native-dialog';
+import DialogComponent from '@lib/react-native-dialog';
 
 import EditTraumaDialogContent from './EditTraumaDialogContent';
-import Dialog from 'components/core/Dialog';
+import Dialog from '@components/core/Dialog';
 import { t } from 'ttag';
-import { Trauma } from 'actions/types';
-import Card from 'data/Card';
+import { Trauma } from '@actions/types';
+import Card from '@data/Card';
 
 interface Props {
   visible: boolean;

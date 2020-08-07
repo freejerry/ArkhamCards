@@ -1,29 +1,29 @@
 import React from 'react';
 import { filter, find, flatMap, forEach, head, map } from 'lodash';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { t } from 'ttag';
 import LinearGradient from 'react-native-linear-gradient';
 import KeepAwake from 'react-native-keep-awake';
 
-import BasicButton from 'components/core/BasicButton';
+import BasicButton from '@components/core/BasicButton';
 import InvestigatorOddsComponent from './InvestigatorOddsComponent';
 import SkillOddsRow from './SkillOddsRow';
 import VariableTokenInput from './VariableTokenInput';
 import { add, subtract } from './oddsHelper';
-import CardTextComponent from 'components/card/CardTextComponent';
-import ChaosBagLine from 'components/core/ChaosBagLine';
-import PlusMinusButtons from 'components/core/PlusMinusButtons';
-import { CAMPAIGN_COLORS, Scenario, completedScenario } from 'components/campaign/constants';
-import Difficulty from 'components/campaign/Difficulty';
-import GameHeader from 'components/campaign/GameHeader';
-import BackgroundIcon from 'components/campaign/BackgroundIcon';
-import { Campaign, CampaignDifficulty, CUSTOM } from 'actions/types';
-import { ChaosBag, CHAOS_TOKEN_COLORS, SPECIAL_TOKENS, SpecialTokenValue } from 'constants';
-import Card from 'data/Card';
-import typography from 'styles/typography';
-import { s } from 'styles/space';
-import COLORS from 'styles/colors';
+import CardTextComponent from '@components/card/CardTextComponent';
+import ChaosBagLine from '@components/core/ChaosBagLine';
+import PlusMinusButtons from '@components/core/PlusMinusButtons';
+import { CAMPAIGN_COLORS, Scenario, completedScenario } from '@components/campaign/constants';
+import Difficulty from '@components/campaign/Difficulty';
+import GameHeader from '@components/campaign/GameHeader';
+import BackgroundIcon from '@components/campaign/BackgroundIcon';
+import { Campaign, CampaignDifficulty, CUSTOM } from '@actions/types';
+import { ChaosBag, CHAOS_TOKEN_COLORS, SPECIAL_TOKENS, SpecialTokenValue } from '@app_constants';
+import Card from '@data/Card';
+import typography from '@styles/typography';
+import { s } from '@styles/space';
+import COLORS from '@styles/colors';
 
 interface Props {
   campaign: Campaign;
@@ -397,24 +397,23 @@ export default class OddsCalculatorComponent extends React.Component<Props, Stat
             </Text>
           </View>
         </ScrollView>
-        <View style={styles.footer}>
-          <LinearGradient
-            colors={['#ededed', '#f0f0f0']}
-            style={[styles.countRow, styles.footerRow]}
-          >
-            <Text style={typography.text}>{ t`Difficulty` }</Text>
-            <Text style={[{ color: 'black', fontSize: 30, marginLeft: 10, marginRight: 10 }]}>
-              { testDifficulty }
-            </Text>
-            <PlusMinusButtons
-              count={testDifficulty}
-              size={36}
-              onIncrement={this._incrementDifficulty}
-              onDecrement={this._decrementDifficulty}
-              color="dark"
-            />
-          </LinearGradient>
-        </View>
+        <SafeAreaView>
+          <View style={styles.footer}>
+            <View style={[styles.countRow, styles.footerRow, ]}>
+              <Text style={typography.text}>{ t`Difficulty` }</Text>
+              <Text style={[{ color: COLORS.darkText, fontSize: 30, marginLeft: 10, marginRight: 10 }]}>
+                { testDifficulty }
+              </Text>
+              <PlusMinusButtons
+                count={testDifficulty}
+                size={36}
+                onIncrement={this._incrementDifficulty}
+                onDecrement={this._decrementDifficulty}
+                color="dark"
+              />
+            </View>
+          </View>
+        </SafeAreaView>
       </View>
     );
   }
@@ -433,10 +432,11 @@ const styles = StyleSheet.create({
   },
   footer: {
     borderTopWidth: 1,
-    borderColor: '#444',
+    borderColor: COLORS.divider,
   },
   footerRow: {
     padding: s,
+    backgroundColor: COLORS.lightBackground,
   },
   countRow: {
     flexDirection: 'row',

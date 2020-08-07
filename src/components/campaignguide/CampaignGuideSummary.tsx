@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { CampaignCycleCode, CampaignDifficulty } from 'actions/types';
-import { CAMPAIGN_COLORS, difficultyString } from 'components/campaign/constants';
-import typography from 'styles/typography';
-import GameHeader from 'components/campaign/GameHeader';
-import BackgroundIcon from 'components/campaign/BackgroundIcon';
-import CampaignGuide from 'data/scenario/CampaignGuide';
-import COLORS from 'styles/colors';
-import { m, s } from 'styles/space';
+import { CampaignCycleCode, CampaignDifficulty } from '@actions/types';
+import { CAMPAIGN_COLORS, difficultyString } from '@components/campaign/constants';
+import typography from '@styles/typography';
+import GameHeader from '@components/campaign/GameHeader';
+import BackgroundIcon from '@components/campaign/BackgroundIcon';
+import CampaignGuide from '@data/scenario/CampaignGuide';
+import COLORS from '@styles/colors';
+import { m, s } from '@styles/space';
 
 interface Props {
   campaignGuide: CampaignGuide;
@@ -34,7 +34,7 @@ export default class CampaignSummaryComponent extends React.Component<Props> {
       ]}>
         <BackgroundIcon
           code={campaignGuide.campaignCycleCode()}
-          color={inverted ? COLORS.black : color}
+          color={inverted ? COLORS.darkText : color}
           small
         />
         <View>
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     paddingTop: 24,
     paddingBottom: 24,
+    backgroundColor: COLORS.background,
   },
   section: {
     padding: m,

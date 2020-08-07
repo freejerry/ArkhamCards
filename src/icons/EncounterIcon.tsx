@@ -96,7 +96,6 @@ export default class EncounterIcon extends React.PureComponent<Props> {
         return this.coreIcon('midnight_masks', size, color);
       case 'tentacles':
         return this.coreIcon('the_devourer_below', size, color);
-
       case 'dwl': // THE DUNWICH LEGACY
         return this.dunwichIcon('set', size, color);
       case 'rtdwl':
@@ -220,10 +219,19 @@ export default class EncounterIcon extends React.PureComponent<Props> {
         return this.standaloneIcon('curse_of_the_rougarou', size, color);
       case 'bayou':
         return this.standaloneIcon('the_bayou', size, color);
+      case 'blob':
+      case 'blob_that_ate_everything':
+        return this.standaloneIcon('the_blob_that_ate_everything', size, color);
+      case 'migo_incursion':
+        return this.standaloneIcon('migo', size, color);
+      case 'blob_epic_multiplayer':
+      case 'epic_multiplayer':
+        return this.standaloneIcon('epic_multiplayer', size, color);
+      case 'single_group':
+      case 'blob_single_group':
+        return this.standaloneIcon('single_group', size, color);
       case 'lol':
       case 'in_the_labyrinths_of_lunacy':
-      case 'epic_multiplayer':
-      case 'single_group':
       case 'guardians':
       case 'abyssal_gifts':
       case 'abyssal_tribute':
@@ -247,6 +255,8 @@ export default class EncounterIcon extends React.PureComponent<Props> {
       case 'tcoa':
       case 'the_city_of_archives':
         return this.forgottenIcon('city_of_archives', size, color);
+      case 'return_to_the_city_of_archives':
+        return this.forgottenIcon('return_to_city_of_archives', size, color);
       case 'tfa':
         return this.forgottenIcon('the_forgotten_age', size, color);
       case 'sha':
@@ -301,7 +311,6 @@ export default class EncounterIcon extends React.PureComponent<Props> {
       case 'return_to_the_doom_of_eztli':
       case 'return_to_threads_of_fate':
       case 'return_to_the_boundary_beyond':
-      case 'return_to_heart_of_the_elders':
       case 'return_to_pillars_of_judgement':
       case 'return_to_knyan':
       case 'return_to_the_city_of_archives':
@@ -310,6 +319,9 @@ export default class EncounterIcon extends React.PureComponent<Props> {
       case 'return_to_turn_back_time':
       case 'return_to_the_forgotten_age':
         return this.forgottenIcon(encounter_code, size, color);
+      case 'return_to_heart_of_the_elders':
+      case 'return_to_the_heart_of_the_elders':
+        return this.forgottenIcon('return_to_the_heart_of_the_elders', size, color);
       case 'tcu':
         return this.circleIcon('the_circle_undone', size, color);
       case 'tsn':

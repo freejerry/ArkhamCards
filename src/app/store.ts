@@ -6,7 +6,7 @@ import offlineConfig from '@redux-offline/redux-offline/lib/defaults';
 import { createMigrate, persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import reducers, { AppState } from 'reducers';
+import reducers, { AppState } from '@reducers';
 // import Reactotron from './ReactotronConfig';
 
 /**
@@ -45,6 +45,9 @@ export default function configureStore(initialState: AppState) {
     key: 'persist',
     version: 0,
     storage: AsyncStorage,
+    // Disable timeout since hitting the timeout causes it to reset all data?
+    // WHY is that the default behavior?!?!?
+    timeout: 0,
     // These three have some transient fields and are handled separately.
     blacklist: ['cards', 'decks', 'packs', 'signedIn', 'filters'],
     migrate: createMigrate(migrations, { debug: false }),

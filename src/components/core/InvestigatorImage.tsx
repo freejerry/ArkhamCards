@@ -8,13 +8,14 @@ import {
 import FastImage from 'react-native-fast-image';
 import { Sepia } from 'react-native-color-matrix-image-filters';
 
-import { showCard } from 'components/nav/helper';
-import { createFactionIcons } from 'constants';
-import Card from 'data/Card';
-import { isBig } from 'styles/space';
-import COLORS from 'styles/colors';
+import { showCard } from '@components/nav/helper';
+import { toggleButtonMode } from '@components/cardlist/CardSearchResult/constants';
+import { createFactionIcons } from '@app_constants';
+import Card from '@data/Card';
+import { isBig } from '@styles/space';
+import COLORS from '@styles/colors';
 
-const FACTION_ICONS = createFactionIcons('#FFF');
+const FACTION_ICONS = createFactionIcons({ defaultColor: '#FFFFFF' });
 
 const scaleFactor = isBig ? 1.2 : 1.0;
 
@@ -25,6 +26,7 @@ interface Props {
   small?: boolean;
   killedOrInsane?: boolean;
   yithian?: boolean;
+  fontScale: number;
 }
 
 export default class InvestigatorImage extends React.Component<Props> {
@@ -38,15 +40,19 @@ export default class InvestigatorImage extends React.Component<Props> {
     }
   };
 
+  small() {
+    const { small, fontScale } = this.props;
+    return small || toggleButtonMode(fontScale);
+  }
+
   imageStyle() {
     const {
-      small,
       yithian,
     } = this.props;
     if (yithian) {
-      return small ? styles.smallYithianImage : styles.bigImage;
+      return this.small() ? styles.smallYithianImage : styles.bigImage;
     }
-    return small ? styles.image : styles.bigImage;
+    return this.small() ? styles.image : styles.bigImage;
   }
 
   renderInvestigatorImage() {
@@ -82,10 +88,10 @@ export default class InvestigatorImage extends React.Component<Props> {
   renderImage() {
     const {
       card,
-      small,
       killedOrInsane,
       border,
     } = this.props;
+    const small = this.small();
     const size = (small ? 65 : 110) * scaleFactor;
     const faction_icon = FACTION_ICONS[card.factionCode()];
     return (
@@ -97,7 +103,7 @@ export default class InvestigatorImage extends React.Component<Props> {
               {
                 width: size,
                 height: size,
-                backgroundColor: COLORS.faction[killedOrInsane ? 'dead' : card.factionCode()].primary,
+                backgroundColor: COLORS.faction[killedOrInsane ? 'dead' : card.factionCode()].background,
               },
             ]}>
               <Text style={styles.placeholderIcon} allowFontScaling={false}>
@@ -116,7 +122,7 @@ export default class InvestigatorImage extends React.Component<Props> {
             <View style={[
               styles.border,
               {
-                borderColor: COLORS.faction[killedOrInsane ? 'dead' : card.factionCode()].primary,
+                borderColor: COLORS.faction[killedOrInsane ? 'dead' : card.factionCode()].background,
                 width: size,
                 height: size,
               },

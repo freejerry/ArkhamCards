@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, ScrollView } from 'react-native';
+import { Alert, ScrollView, StyleSheet } from 'react-native';
 import { EventSubscription, Navigation } from 'react-native-navigation';
 import { bindActionCreators, Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
@@ -7,20 +7,20 @@ import { t } from 'ttag';
 
 import LinkedScenarioListComponent from './LinkedScenarioListComponent';
 import CampaignGuideSummary from './CampaignGuideSummary';
-import withDialogs, { InjectedDialogProps } from 'components/core/withDialogs';
-import { Campaign } from 'actions/types';
-import BasicButton from 'components/core/BasicButton';
-import CampaignInvestigatorsComponent from 'components/campaignguide/CampaignInvestigatorsComponent';
-import CampaignLogComponent from 'components/campaignguide/CampaignLogComponent';
-import CampaignGuideContext from 'components/campaignguide/CampaignGuideContext';
-import TabView from 'components/core/TabView';
-import { deleteCampaign, updateCampaign } from 'components/campaign/actions';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import withUniversalCampaignData, { UniversalCampaignProps } from 'components/campaignguide/withUniversalCampaignData';
-import { campaignGuideReduxData, CampaignGuideReduxData, constructCampaignGuideContext } from 'components/campaignguide/contextHelper';
-import { getCampaign, AppState } from 'reducers';
-import { NavigationProps } from 'components/nav/types';
-import COLORS from 'styles/colors';
+import withDialogs, { InjectedDialogProps } from '@components/core/withDialogs';
+import { Campaign } from '@actions/types';
+import BasicButton from '@components/core/BasicButton';
+import CampaignInvestigatorsComponent from '@components/campaignguide/CampaignInvestigatorsComponent';
+import CampaignLogComponent from '@components/campaignguide/CampaignLogComponent';
+import CampaignGuideContext from '@components/campaignguide/CampaignGuideContext';
+import TabView from '@components/core/TabView';
+import { deleteCampaign, updateCampaign } from '@components/campaign/actions';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import withUniversalCampaignData, { UniversalCampaignProps } from '@components/campaignguide/withUniversalCampaignData';
+import { campaignGuideReduxData, CampaignGuideReduxData, constructCampaignGuideContext } from '@components/campaignguide/contextHelper';
+import { getCampaign, AppState } from '@reducers';
+import { NavigationProps } from '@components/nav/types';
+import COLORS from '@styles/colors';
 
 export interface LinkedCampaignGuideProps {
   campaignId: number;
@@ -143,7 +143,7 @@ class LinkedCampaignGuideView extends React.Component<Props> {
         key: 'investigators',
         title: t`Decks`,
         node: (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.container}>
             <CampaignGuideSummary
               difficulty={processedCampaignA.campaignLog.campaignData.difficulty}
               campaignGuide={contextA.campaignGuide}
@@ -184,7 +184,7 @@ class LinkedCampaignGuideView extends React.Component<Props> {
         key: 'scenarios',
         title: t`Scenarios`,
         node: (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.container}>
             <LinkedScenarioListComponent
               componentId={componentId}
               fontScale={fontScale}
@@ -200,7 +200,7 @@ class LinkedCampaignGuideView extends React.Component<Props> {
         key: 'log',
         title: t`Log`,
         node: (
-          <ScrollView>
+          <ScrollView contentContainerStyle={styles.container}>
             <CampaignGuideSummary
               difficulty={processedCampaignA.campaignLog.campaignData.difficulty}
               campaignGuide={contextA.campaignGuide}
@@ -286,3 +286,9 @@ export default withDimensions<LinkedCampaignGuideProps & NavigationProps>(
     )
   )
 );
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLORS.background,
+  },
+});

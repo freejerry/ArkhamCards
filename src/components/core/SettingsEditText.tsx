@@ -13,8 +13,11 @@ import {
   Alert,
   AlertType,
 } from 'react-native';
+// @ts-ignore TS7016
 import DialogAndroid from 'react-native-dialogs';
 import { TouchableProps } from 'react-native-svg';
+
+import COLORS from '@styles/colors';
 
 interface Props {
   containerProps?: ViewProps;
@@ -192,7 +195,7 @@ const style = StyleSheet.create({
   defaultContainerStyle: {
     padding: 0,
     minHeight: 50,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.background,
     alignItems: 'center',
     flexDirection: 'row',
   },
@@ -201,13 +204,13 @@ const style = StyleSheet.create({
     fontSize: 16,
   },
   defaultValueStyle: {
-    color: 'rgb(160,160,160)',
+    color: COLORS.lightText,
     fontSize: 14,
     flex: 1,
     textAlign: 'right',
   },
   defaultDisabledOverlayStyle: {
-    backgroundColor: 'rgba(255,255,255,0.6)',
+    backgroundColor: COLORS.disabledOverlay,
     position: 'absolute',
     top: 0,
     right: 0,

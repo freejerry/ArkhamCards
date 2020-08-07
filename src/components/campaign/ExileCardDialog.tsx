@@ -4,9 +4,9 @@ import { throttle } from 'lodash';
 import { Navigation, EventSubscription } from 'react-native-navigation';
 import { t } from 'ttag';
 
-import { Slots } from 'actions/types';
+import { Slots } from '@actions/types';
 import ExileCardSelectorComponent from './ExileCardSelectorComponent';
-import COLORS from 'styles/colors';
+import COLORS from '@styles/colors';
 
 interface Props {
   componentId: string;
@@ -103,5 +103,6 @@ export default class ExileCardDialog extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    backgroundColor: COLORS.background,
   },
 });

@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { t } from 'ttag';
 
-import EncounterIcon from 'icons/EncounterIcon';
-import NavButton from 'components/core/NavButton';
-import { ChallengeData, Scenario } from 'data/scenario/types';
-import typography from 'styles/typography';
-import space, { s, m } from 'styles/space';
-import SingleCardWrapper from 'components/card/SingleCardWrapper';
-import { ChallengeScenarioProps } from 'components/campaignguide/ChallengeScenarioView';
+import EncounterIcon from '@icons/EncounterIcon';
+import NavButton from '@components/core/NavButton';
+import { ChallengeData, Scenario } from '@data/scenario/types';
+import typography from '@styles/typography';
+import space, { s, m } from '@styles/space';
+import SingleCardWrapper from '@components/card/SingleCardWrapper';
+import { ChallengeScenarioProps } from '@components/campaignguide/ChallengeScenarioView';
+import COLORS from '@styles/colors';
 
 interface Props {
   componentId: string;
@@ -87,7 +88,7 @@ export default class SideScenarioButton extends React.Component<Props> {
             <EncounterIcon
               encounter_code={scenario.id}
               size={28}
-              color="#000000"
+              color={COLORS.darkText}
             />
           </View>
           <View style={styles.column}>

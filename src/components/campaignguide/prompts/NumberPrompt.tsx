@@ -6,14 +6,14 @@ import {
 } from 'react-native';
 import { t } from 'ttag';
 
-import BasicButton from 'components/core/BasicButton';
+import BasicButton from '@components/core/BasicButton';
 import SetupStepWrapper from '../SetupStepWrapper';
 import ScenarioGuideContext, { ScenarioGuideContextType } from '../ScenarioGuideContext';
 import CampaignGuideTextComponent from '../CampaignGuideTextComponent';
-import PlusMinusButtons from 'components/core/PlusMinusButtons';
-import { BulletType, Effect, Option } from 'data/scenario/types';
-import typography from 'styles/typography';
-import space from 'styles/space';
+import PlusMinusButtons from '@components/core/PlusMinusButtons';
+import { BulletType, Effect, Option } from '@data/scenario/types';
+import typography from '@styles/typography';
+import space from '@styles/space';
 
 interface Props {
   id: string;
@@ -152,6 +152,13 @@ export default class NumberPrompt extends React.Component<Props, State> {
                   <CampaignGuideTextComponent text={text} />
                 </SetupStepWrapper>
               ) }
+              { !!confirmText && (
+                <SetupStepWrapper bulletType="small">
+                  <CampaignGuideTextComponent 
+                    text={count === undefined ? t`${confirmText} <i>(included automatically)</i>` : confirmText} 
+                  />
+                </SetupStepWrapper>
+              ) } 
               <SetupStepWrapper
                 bulletType={count === undefined ? 'none' : 'small'}
                 border={count === undefined}
@@ -162,11 +169,6 @@ export default class NumberPrompt extends React.Component<Props, State> {
               </SetupStepWrapper>
               { (count === undefined) && (
                 <BasicButton title={t`Proceed`} onPress={this._submit} />
-              ) }
-              { count !== undefined && !!confirmText && (
-                <SetupStepWrapper bulletType="small">
-                  <CampaignGuideTextComponent text={confirmText} />
-                </SetupStepWrapper>
               ) }
             </View>
           );

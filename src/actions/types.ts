@@ -1,6 +1,6 @@
-import { ChaosBag, ChaosTokenType, FactionCodeType, SkillCodeType, SlotCodeType } from 'constants';
-import { CardFilterData, FilterState } from 'lib/filters';
-import Card from 'data/Card';
+import { ChaosBag, ChaosTokenType, FactionCodeType, SkillCodeType, SlotCodeType } from '@app_constants';
+import { CardFilterData, FilterState } from '@lib/filters';
+import Card from '@data/Card';
 
 export const SORT_BY_TYPE = 'type';
 export const SORT_BY_FACTION = 'faction';
@@ -297,6 +297,7 @@ export const GUIDED_CAMPAIGNS = new Set([
   RTNOTZ,
   RTDWL,
   RTPTC,
+//  RTTFA,
   TDE,
   TDEA,
   TDEB,
@@ -363,6 +364,12 @@ export const SET_SINGLE_CARD_VIEW = 'SET_SINGLE_CARD_VIEW';
 export interface SetSingleCardViewAction {
   type: typeof SET_SINGLE_CARD_VIEW;
   singleCardView: boolean;
+}
+
+export const SET_ALPHABETIZE_ENCOUNTER_SETS = 'SET_ALPHABETIZE_ENCOUNTER_SETS';
+export interface SetAlphabetizeEncounterSetsAction {
+  type: typeof SET_ALPHABETIZE_ENCOUNTER_SETS;
+  alphabetizeEncounterSets: boolean;
 }
 
 export const PACKS_FETCH_START = 'PACKS_FETCH_START';

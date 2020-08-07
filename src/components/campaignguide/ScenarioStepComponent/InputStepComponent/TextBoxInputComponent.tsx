@@ -2,12 +2,12 @@ import React from 'react';
 import { NativeSyntheticEvent, TextInput, TextInputSubmitEditingEventData, StyleSheet } from 'react-native';
 import { t } from 'ttag';
 
-import BasicButton from 'components/core/BasicButton';
-import SetupStepWrapper from 'components/campaignguide/SetupStepWrapper';
-import CampaignGuideTextComponent from 'components/campaignguide/CampaignGuideTextComponent';
-import ScenarioStepContext, { ScenarioStepContextType } from 'components/campaignguide/ScenarioStepContext';
-import { m, s } from 'styles/space';
-import COLORS from 'styles/colors';
+import BasicButton from '@components/core/BasicButton';
+import SetupStepWrapper from '@components/campaignguide/SetupStepWrapper';
+import CampaignGuideTextComponent from '@components/campaignguide/CampaignGuideTextComponent';
+import ScenarioStepContext, { ScenarioStepContextType } from '@components/campaignguide/ScenarioStepContext';
+import { m, s } from '@styles/space';
+import COLORS from '@styles/colors';
 
 interface Props {
   id: string;
@@ -92,5 +92,6 @@ const styles = StyleSheet.create({
     padding: 8,
     paddingTop: 12,
     paddingBottom: 12,
+    color: COLORS.darkText,
   },
 });

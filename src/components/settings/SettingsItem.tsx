@@ -5,15 +5,15 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {
-  SettingsButton,
-} from 'react-native-settings-components';
 // @ts-ignore
 import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons';
 
-import COLORS from 'styles/colors';
-import typography from 'styles/typography';
-import space from 'styles/space';
+import {
+  SettingsButton,
+} from '@lib/react-native-settings-components';
+import COLORS from '@styles/colors';
+import typography from '@styles/typography';
+import space from '@styles/space';
 
 interface Props {
   loading?: boolean;
@@ -23,16 +23,6 @@ interface Props {
 }
 export default class SettingsItem extends React.Component<Props> {
   _dummyOnPress = () => {};
-
-  _renderIcon = () => {
-    return (
-      <MaterialCommunityIcons
-        size={28}
-        color={COLORS.button}
-        name="chevron-right"
-      />
-    );
-  };
 
   render() {
     const { loading, navigation, text, onPress } = this.props;
@@ -55,7 +45,13 @@ export default class SettingsItem extends React.Component<Props> {
         title={text}
         titleStyle={{ color: COLORS.darkText }}
         containerStyle={styles.categoryContainer}
-        rightIcon={navigation ? this._renderIcon : undefined}
+        rightIcon={navigation ? (
+          <MaterialCommunityIcons
+            size={28}
+            color={COLORS.button}
+            name="chevron-right"
+          />
+        ): undefined}
         disabled={!onPress}
       />
     );
@@ -72,6 +68,8 @@ const styles = StyleSheet.create({
     height: 20,
   },
   categoryContainer: {
-    backgroundColor: COLORS.background,
+    backgroundColor: COLORS.background, 
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: COLORS.divider,
   },
 });

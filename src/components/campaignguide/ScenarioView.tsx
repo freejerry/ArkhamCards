@@ -16,10 +16,10 @@ import { ScenarioGuideContextType } from './ScenarioGuideContext';
 import StepsComponent from './StepsComponent';
 import { CampaignLogProps } from './CampaignLogView';
 import withScenarioGuideContext, { ScenarioGuideInputProps } from './withScenarioGuideContext';
-import { iconsMap } from 'app/NavIcons';
-import withDimensions, { DimensionsProps } from 'components/core/withDimensions';
-import { NavigationProps } from 'components/nav/types';
-import COLORS from 'styles/colors';
+import { iconsMap } from '@app/NavIcons';
+import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
+import { NavigationProps } from '@components/nav/types';
+import COLORS from '@styles/colors';
 
 interface OwnProps {
   showLinkedScenario?: (
@@ -186,7 +186,7 @@ class ScenarioView extends React.Component<Props> {
         keyboardVerticalOffset={100}
       >
         <KeepAwake />
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.container}>
           <StepsComponent
             componentId={componentId}
             fontScale={fontScale}
@@ -208,6 +208,9 @@ export default withScenarioGuideContext<InputProps>(
 const styles = StyleSheet.create({
   footer: {
     marginTop: 64,
+  },
+  container: {
+    backgroundColor: COLORS.background,
   },
   keyboardView: {
     flex: 1,

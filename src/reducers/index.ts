@@ -12,7 +12,7 @@ import cards from './cards';
 import decks from './decks';
 import packs from './packs';
 import settings from './settings';
-import { CardFilterData, FilterState } from 'lib/filters';
+import { CardFilterData, FilterState } from '@lib/filters';
 import {
   Campaign,
   ChaosBagResults,
@@ -24,34 +24,39 @@ import {
   CampaignGuideState,
   NEW_CHAOS_BAG_RESULTS,
   SORT_BY_TYPE,
-} from 'actions/types';
-import Card, { CardsMap } from 'data/Card';
+} from '@actions/types';
+import Card, { CardsMap } from '@data/Card';
 
 const packsPersistConfig = {
   key: 'packs',
+  timeout: 0,
   storage: AsyncStorage,
   blacklist: ['loading', 'error'],
 };
 
 const cardsPersistConfig = {
   key: 'cards',
+  timeout: 0,
   storage: AsyncStorage,
   blacklist: ['loading', 'error'],
 };
 
 const guidesPersistConfig = {
   key: 'guides',
+  timeout: 0,
   storage: AsyncStorage,
 };
 
 const decksPersistConfig = {
   key: 'decks',
+  timeout: 0,
   storage: AsyncStorage,
   blacklist: ['refreshing', 'error'],
 };
 
 const settingsPeristConfig = {
   key: 'settings',
+  timeout: 0,
   storage: AsyncStorage,
   blacklist: [],
 };

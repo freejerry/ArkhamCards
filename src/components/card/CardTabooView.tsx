@@ -6,16 +6,17 @@ import {
   Text,
   View,
 } from 'react-native';
-import Database from 'data/Database';
-import DbRender from 'components/data/DbRender';
+import Database from '@data/Database';
+import DbRender from '@components/data/DbRender';
 import { t } from 'ttag';
 
-import Card from 'data/Card';
-import TabooSet from 'data/TabooSet';
+import Card from '@data/Card';
+import TabooSet from '@data/TabooSet';
 import CardTextComponent from './CardTextComponent';
-import { NavigationProps } from 'components/nav/types';
-import { l, m, xs, s } from 'styles/space';
-import typography from 'styles/typography';
+import { NavigationProps } from '@components/nav/types';
+import { l, m, xs, s } from '@styles/space';
+import typography from '@styles/typography';
+import COLORS from '@styles/colors';
 
 export interface CardTabooProps {
   id: string;
@@ -49,7 +50,7 @@ export default class CardTabooView extends React.Component<Props> {
         ) }
         <View style={styles.gameTextBlock}>
           { !!taboo.extra_xp && (
-            <Text>
+            <Text style={typography.text}>
               { taboo.extra_xp > 0 ?
                 t`Additional XP: ${taboo.extra_xp}.` :
                 t`XP Discount: ${taboo.extra_xp}.` }
@@ -104,7 +105,7 @@ export default class CardTabooView extends React.Component<Props> {
       id,
     } = this.props;
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <DbRender name="taboo" getData={this._getData} ids={[id]}>
           { this._renderData }
         </DbRender>
@@ -123,6 +124,7 @@ export default class CardTabooView extends React.Component<Props> {
 const styles = StyleSheet.create({
   container: {
     margin: m,
+    backgroundColor: COLORS.background,
   },
   header: {
     marginTop: l,
