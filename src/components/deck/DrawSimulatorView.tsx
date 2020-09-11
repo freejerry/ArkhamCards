@@ -2,14 +2,13 @@ import React from 'react';
 import { concat, filter, flatMap, map, shuffle, range, without } from 'lodash';
 import {
   FlatList,
-  Platform,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
 import { Button } from 'react-native-elements';
+import { c, t } from 'ttag';
 
-import { t } from 'ttag';
 import { Slots } from '@actions/types';
 import withPlayerCards, { PlayerCardProps } from '@components/core/withPlayerCards';
 import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
@@ -133,6 +132,9 @@ class DrawSimulatorView extends React.Component<Props, State> {
         Object.keys(slots),
         cardId => {
           const card = cards[cardId];
+          if (!card) {
+            return [];
+          }
           // DUKE=02014
           if (card.permanent || card.double_sided || card.code === '02014') {
             return [];
@@ -172,31 +174,31 @@ class DrawSimulatorView extends React.Component<Props, State> {
         <View style={styles.drawButtonRow}>
           <Text style={styles.text}>{ t`Draw: ` }</Text>
           <View style={styles.buttonContainer}>
-            <Button 
-              title="1" 
+            <Button
+              title="1"
               disabled={deckEmpty}
-              onPress={this._drawOne} 
+              onPress={this._drawOne}
             />
           </View>
           <View style={styles.buttonContainer}>
-            <Button 
-              title="2" 
+            <Button
+              title="2"
               disabled={deckEmpty}
-              onPress={this._drawTwo} 
+              onPress={this._drawTwo}
             />
           </View>
           <View style={styles.buttonContainer}>
-            <Button 
+            <Button
               title="5"
-              disabled={deckEmpty} 
-              onPress={this._drawFive} 
+              disabled={deckEmpty}
+              onPress={this._drawFive}
             />
           </View>
           <View style={styles.buttonContainer}>
-            <Button 
-              title={t`All`} 
-              disabled={deckEmpty} 
-              onPress={this._drawAll} 
+            <Button
+              title={c('Draw Cards').t`All`}
+              disabled={deckEmpty}
+              onPress={this._drawAll}
             />
           </View>
         </View>
@@ -227,6 +229,9 @@ class DrawSimulatorView extends React.Component<Props, State> {
   _renderCardItem = ({ item }: { item: Item }) => {
     const { fontScale } = this.props;
     const card = this.props.cards[item.code];
+    if (!card) {
+      return null;
+    }
     return (
       <CardSearchResult
         key={item.key}

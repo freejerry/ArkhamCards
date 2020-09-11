@@ -35,7 +35,6 @@ interface ReduxProps {
   in_collection: {
     [code: string]: boolean;
   };
-  lang: string;
 }
 
 type Props = NavigationProps &
@@ -65,7 +64,7 @@ class SelectCampaignDialog extends React.Component<Props> {
   };
 
   _editCollection = () => {
-    Navigation.push<{}>(this.props.componentId, {
+    Navigation.push(this.props.componentId, {
       component: {
         name: 'My.Collection',
       },
@@ -138,7 +137,6 @@ class SelectCampaignDialog extends React.Component<Props> {
 function mapStateToProps(state: AppState): ReduxProps {
   return {
     in_collection: getPacksInCollection(state),
-    lang: state.cards.lang || 'en',
   };
 }
 

@@ -2596,6 +2596,7 @@
       "input": {
         "type": "counter",
         "text": "Brood of Yog-Sothoth in play or set aside:",
+        "max": 5,
         "effects": [
           {
             "type": "campaign_log_count",
@@ -7485,7 +7486,7 @@
     {
       "id": "daniel_possessed",
       "type": "story",
-      "text": "You decide to lay low for some time in Ma’s Boarding House, unsure whether news of the events at the asylum will get out to the general public. You take this time to make extensive notes of the events you’ve experienced thus far, including the brief dialogue between you and Daniel. He’d spoke of The King in Yellow as if it were an actual being, and even named it. “Hastur.” He’d rambled and muttered and screeched other phrases, as well. You doubt you’ll ever forget them. “He made us speak the Oath.” “The price was paid.” “They are opening the path to Carcosa.”\nOn the third night, you return to your room to find the door broken open. You enter cautiously, wondering if the police are onto you. Or worse, the Stranger. You are surprised to find the body of Daniel Chesterfield instead, lying on the ground with a pained, wide-eyed expression on his face. He is dead. His eyes are bloodshot and yellow, and he clutches a copy of The King in Yellow in his stiff hands. You pry the playbook from his deathly grasp and examine it. Daniel has scribbled notes in the margins of each page, mostly incomprehensible, but with a few lucid standouts. The first time the fictional city of Carcosa is mentioned, scrawled next to it Daniel has written:\n<center><fancy>*Carcosa is real\nDo not let them open the path</fancy></center>\nWhen Cassilda speaks of the tattered king, Daniel has written:<center><fancy>Hastur is the king in tatters\nlocked in his prison in the stars\nseal him away and stop this madness!</fancy></center>\nYour mind swims with questions. How did he escape the asylum? How did he die? And why does he appear human to your eyes now? With little time to spare, you clean the room of your belongings and flee. Daniel’s words, which he begged you to heed, play out in your mind over and over again."
+      "text": "You decide to lay low for some time in Ma’s Boarding House, unsure whether news of the events at the asylum will get out to the general public. You take this time to make extensive notes of the events you’ve experienced thus far, including the brief dialogue between you and Daniel. He’d spoke of The King in Yellow as if it were an actual being, and even named it. “Hastur.” He’d rambled and muttered and screeched other phrases, as well. You doubt you’ll ever forget them. “He made us speak the Oath.” “The price was paid.” “They are opening the path to Carcosa.”\nOn the third night, you return to your room to find the door broken open. You enter cautiously, wondering if the police are onto you. Or worse, the Stranger. You are surprised to find the body of Daniel Chesterfield instead, lying on the ground with a pained, wide-eyed expression on his face. He is dead. His eyes are bloodshot and yellow, and he clutches a copy of The King in Yellow in his stiff hands. You pry the playbook from his deathly grasp and examine it. Daniel has scribbled notes in the margins of each page, mostly incomprehensible, but with a few lucid standouts. The first time the fictional city of Carcosa is mentioned, scrawled next to it Daniel has written:\n<center><fancy>[elder_sign]Carcosa is real</fancy></center>\n<center><fancy>Do not let them open the path</fancy></center>\nWhen Cassilda speaks of the tattered king, Daniel has written:\n<center><fancy>Hastur is the king in tatters</fancy></center>\n<center><fancy>locked in his prison in the stars</fancy></center>\n<center><fancy>seal him away and stop this madness!</fancy></center>\nYour mind swims with questions. How did he escape the asylum? How did he die? And why does he appear human to your eyes now? With little time to spare, you clean the room of your belongings and flee. Daniel’s words, which he begged you to heed, play out in your mind over and over again."
     },
     {
       "id": "ignore_the_warning",
@@ -12006,6 +12007,7 @@
       "input": {
         "type": "counter",
         "text": "Brood of Yog-Sothoth in play or set aside:",
+        "max": 5,
         "effects": [
           {
             "type": "campaign_log_count",
@@ -14820,7 +14822,7 @@
     {
       "id": "daniel_possessed",
       "type": "story",
-      "text": "You decide to lay low for some time in Ma’s Boarding House, unsure whether news of the events at the asylum will get out to the general public. You take this time to make extensive notes of the events you’ve experienced thus far, including the brief dialogue between you and Daniel. He’d spoke of The King in Yellow as if it were an actual being, and even named it. “Hastur.” He’d rambled and muttered and screeched other phrases, as well. You doubt you’ll ever forget them. “He made us speak the Oath.” “The price was paid.” “They are opening the path to Carcosa.”\nOn the third night, you return to your room to find the door broken open. You enter cautiously, wondering if the police are onto you. Or worse, the Stranger. You are surprised to find the body of Daniel Chesterfield instead, lying on the ground with a pained, wide-eyed expression on his face. He is dead. His eyes are bloodshot and yellow, and he clutches a copy of The King in Yellow in his stiff hands. You pry the playbook from his deathly grasp and examine it. Daniel has scribbled notes in the margins of each page, mostly incomprehensible, but with a few lucid standouts. The first time the fictional city of Carcosa is mentioned, scrawled next to it Daniel has written:\n<center><fancy>*Carcosa is real\nDo not let them open the path</fancy></center>\nWhen Cassilda speaks of the tattered king, Daniel has written:<center><fancy>Hastur is the king in tatters\nlocked in his prison in the stars\nseal him away and stop this madness!</fancy></center>\nYour mind swims with questions. How did he escape the asylum? How did he die? And why does he appear human to your eyes now? With little time to spare, you clean the room of your belongings and flee. Daniel’s words, which he begged you to heed, play out in your mind over and over again."
+      "text": "You decide to lay low for some time in Ma’s Boarding House, unsure whether news of the events at the asylum will get out to the general public. You take this time to make extensive notes of the events you’ve experienced thus far, including the brief dialogue between you and Daniel. He’d spoke of The King in Yellow as if it were an actual being, and even named it. “Hastur.” He’d rambled and muttered and screeched other phrases, as well. You doubt you’ll ever forget them. “He made us speak the Oath.” “The price was paid.” “They are opening the path to Carcosa.”\nOn the third night, you return to your room to find the door broken open. You enter cautiously, wondering if the police are onto you. Or worse, the Stranger. You are surprised to find the body of Daniel Chesterfield instead, lying on the ground with a pained, wide-eyed expression on his face. He is dead. His eyes are bloodshot and yellow, and he clutches a copy of The King in Yellow in his stiff hands. You pry the playbook from his deathly grasp and examine it. Daniel has scribbled notes in the margins of each page, mostly incomprehensible, but with a few lucid standouts. The first time the fictional city of Carcosa is mentioned, scrawled next to it Daniel has written:\n<center><fancy>[elder_sign]Carcosa is real</fancy></center>\n<center><fancy>Do not let them open the path</fancy></center>\nWhen Cassilda speaks of the tattered king, Daniel has written:\n<center><fancy>Hastur is the king in tatters</fancy></center>\n<center><fancy>locked in his prison in the stars</fancy></center>\n<center><fancy>seal him away and stop this madness!</fancy></center>\nYour mind swims with questions. How did he escape the asylum? How did he die? And why does he appear human to your eyes now? With little time to spare, you clean the room of your belongings and flee. Daniel’s words, which he begged you to heed, play out in your mind over and over again."
     },
     {
       "id": "ignore_the_warning",
@@ -21954,7 +21956,7 @@
       "type": "encounter_sets",
       "encounter_sets": [
         "pillars_of_judgment",
-        "return_to_pillars_of_judgement",
+        "return_to_pillars_of_judgment",
         "heart_of_the_elders",
         "return_to_heart_of_the_elders",
         "rainforest",
@@ -22019,12 +22021,12 @@
     },
     {
       "id": "chose_replay",
-      "text": "The investigators must replay <b>Scenario V-A: Heart of the Elders, Part 1</b>. Reset the game to this scenario’s <b>Setup</b>. Do not record anything else in your Campaign Log except for any trauma suffered from your previous game. No experience points are earned from your previous game. Any player whose investigator was killed or driven insane must choose a new investigator to play, as normal.",
+      "text": "The investigators must replay <b>Scenario V-A: Return to Heart of the Elders, Part 1</b>. Reset the game to this scenario’s <b>Setup</b>. Do not record anything else in your Campaign Log except for any trauma suffered from your previous game. No experience points are earned from your previous game. Any player whose investigator was killed or driven insane must choose a new investigator to play, as normal.",
       "effects": [
         {
           "type": "campaign_data",
           "setting": "replay_scenario",
-          "scenario": "heart_of_the_elders_part_1"
+          "scenario": "return_to_heart_of_the_elders_part_1"
         }
       ]
     },
@@ -23265,7 +23267,7 @@
     },
     {
       "id": "check_relic_is_missing",
-      "text": "<i>If the relic is missing<i>, the lead investigator reads <b>Growing Concern</b> instead.",
+      "text": "<i>If the relic is missing</i>, the lead investigator reads <b>Growing Concern</b> instead.",
       "type": "branch",
       "condition": {
         "type": "campaign_log",
@@ -23605,7 +23607,7 @@
             "section": "campaign_notes",
             "id": "paths_known",
             "operation": "set_input",
-            "text": "#X# paths are known to you"
+            "text": "#X# paths are known to you."
           },
           {
             "type": "earn_xp",
@@ -25798,17 +25800,6 @@
       ]
     },
     {
-      "id": "replay_scenario",
-      "text": "The investigators must replay <b>Scenario II: The Doom of Eztli</b>. Reset the game to this scenario’s Setup. Do not record anything in your Campaign Log except for any trauma suffered from your previous game. No experience points are earned from your previous game.",
-      "effects": [
-        {
-          "type": "campaign_data",
-          "setting": "replay_scenario",
-          "scenario": "eztli"
-        }
-      ]
-    },
-    {
       "id": "choose_new_investigators",
       "text": "Any player whose investigator was killed or driven insane must choose a new investigator to play, as normal."
     },
@@ -25977,6 +25968,17 @@
           }
         ]
       }
+    },
+    {
+      "id": "replay_scenario",
+      "text": "The investigators must replay <b>Scenario II: Return to The Doom of Eztli</b>. Reset the game to this scenario’s Setup. Do not record anything in your Campaign Log except for any trauma suffered from your previous game. No experience points are earned from your previous game.",
+      "effects": [
+        {
+          "type": "campaign_data",
+          "setting": "replay_scenario",
+          "scenario": "return_to_the_doom_of_eztli"
+        }
+      ]
     }
   ],
   "resolutions": [
@@ -27810,6 +27812,75 @@
       "type": "rule_reminder",
       "title": "Four Acts, Four Threads.",
       "text": "This scenario contains four different act decks —an “a/b” deck, a “c/d” deck, an “e/f” deck, and a “g/h” deck. Each of these act decks is constructed separately, in numerical order, as usual. During the course of this scenario, all four of these act decks will be in play, and players may choose which acts to pursue and which to ignore. The text of all four acts is considered active at all times. You might not have time to accomplish all four tasks, so choose which leads you wish to pursue wisely!\nThe contents of each of these act decks is altered depending on the circumstances below."
+    },
+    {
+      "id": "check_harbinger",
+      "type": "input",
+      "text": "Which of the following is true?",
+      "input": {
+        "type": "choose_one",
+        "choices": [
+          {
+            "id": "no_harbinger",
+            "text": "Harbinger did not enter play.",
+            "steps": []
+          },
+          {
+            "id": "victory_display",
+            "text": "Harbinger is in the victory display.",
+            "effects": [
+              {
+                "type": "campaign_log",
+                "section": "campaign_notes",
+                "id": "harbinger_alive",
+                "cross_out": true
+              }
+            ]
+          },
+          {
+            "id": "alive",
+            "text": "Harbinger is still in play or set aside.",
+            "steps": [
+              "record_harbinger"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "record_harbinger",
+      "text": "Record in your campaign log next to <i>“the Harbinger is still alive”</i>, record in parentheses how much damage is on the Harbinger of Valusia, replacing the number that was previously in parentheses.",
+      "type": "input",
+      "input": {
+        "type": "counter",
+        "text": "Damage on Harbinger of Valusia:",
+        "effects": [
+          {
+            "type": "campaign_log_count",
+            "section": "campaign_notes",
+            "id": "harbinger_alive",
+            "operation": "set_input",
+            "text": "the Harbinger is still alive (#X# damage)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "record_yigs_fury",
+      "type": "input",
+      "text": "For each vengeance point in the victory display, record one tally mark under “Yig’s Fury”in your Campaign Log.",
+      "input": {
+        "type": "counter",
+        "text": "Vengance in the victory display:",
+        "delta": true,
+        "effects": [
+          {
+            "type": "campaign_log_count",
+            "section": "yigs_fury",
+            "operation": "add_input"
+          }
+        ]
+      }
     }
   ],
   "resolutions": [
@@ -27836,6 +27907,8 @@
         "check_act_ef",
         "check_act_gh",
         "earn_expedition_journal",
+        "check_harbinger",
+        "record_yigs_fury",
         "earn_xp",
         "earn_act_xp",
         "resupply_point",
@@ -29483,12 +29556,939 @@
     "the_nights_usurper",
     "murder_at_the_excelsior_hotel",
     "blob_that_ate_everything",
-    "read_or_die"
+    "read_or_die",
+    "all_or_nothing"
   ],
   "setup": [],
-  "steps": []
+  "steps": [],
+  "standalone": [{
+      "id": "curse_of_the_roguarou",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, +1, 0, 0, 0, -1, -1, -1, -2, -2, -3, -3, -4, -4, -5, -6, [skull], [skull], [cultist], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "+1", "0", "0", "0", "-1", "-1", "-1", "-2", "-2", "-3", "-3", "-4", "-4", "-5", "-6", "skull", "skull", "cultist", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "hard",
+                "text": "Hard",
+                "description": "+1, 0, 0, 0, -1, -1, -1, -2, -2, -3, -3, -4, -4, -5, -6, -8, [skull], [skull], [cultist], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "0", "-1", "-1", "-1", "-2", "-2", "-3", "-3", "-4", "-4", "-5", "-6", "-8", "skull", "skull", "cultist", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }, {
+      "id": "carnevale_of_horrors",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, 0, 0, 0, -1, -1, -1, -2, -3, -4, -6, [skull], [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "0", "-1", "-1", "-1", "-2", "-3", "-4", "-6", "skull", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "hard",
+                "text": "Hard",
+                "description": "+1, 0, 0, 0, -1, -1, -3, -4, -5, -6, -7, [skull], [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "0", "-1", "-1", "-3", "-4", "-5", "-6", "-7", "skull", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }, {
+      "id": "the_eternal_slumber",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, +1, 0, 0, -1, -1, -1, -2, -2, -3, -3, -4, -6, [skull], [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "+1", "0", "0", "-1", "-1", "-1", "-2", "-2", "-3", "-3", "-4", "-6", "skull", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hard",
+                "text": "Hard",
+                "description": "+1, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3, -4, -4, -5, -7, [skull], [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "-1", "-1", "-1", "-2", "-2", "-2", "-3", "-3", "-4", "-4", "-5", "-7", "skull", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }, {
+      "id": "the_nights_usurper",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, +1, 0, 0, -1, -1, -1, -2, -2, -3, -3, -4, -6, [skull], [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "+1", "0", "0", "-1", "-1", "-1", "-2", "-2", "-3", "-3", "-4", "-6", "skull", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hard",
+                "text": "Hard",
+                "description": "+1, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3, -4, -4, -5, -7, [skull], [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "-1", "-1", "-1", "-2", "-2", "-2", "-3", "-3", "-4", "-4", "-5", "-7", "skull", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }, {
+      "id": "blob_that_ate_everything",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, 0, 0, 0, -1, -2, -2, -3, -4, -5, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "0", "-1", "-2", "-2", "-3", "-4", "-5", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hard",
+                "text": "Hard",
+                "description": "0, 0, 0, -1, -1, -2, -3, -4, -5, -6, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "0", "0", "0", "-1", "-1", "-2", "-3", "-4", "-5", "-6", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }, {
+      "id": "murder_at_the_excelsior_hotel",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, 0, -1, -1, -2, -3, -4, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "-1", "-1", "-2", "-3", "-4", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "hard",
+                "text": "Hard",
+                "description": "0, -1, -2, -3, -4, -4, -5, -6, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "0", "-1", "-2", "-3", "-4", "-4", "-5", "-6", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }, {
+      "id": "read_or_die",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "easy",
+                "text": "Easy",
+                "description": "+1, +1, 0, 0, 0, -1, -1, -1, -2, -2, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "easy"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "+1", "0", "0", "0", "-1", "-1", "-1", "-2", "-2", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, 0, 0, -1, -1, -1, -2, -2, -3, -4, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "-1", "-1", "-1", "-2", "-2", "-3", "-4", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "hard",
+                "text": "Hard",
+                "description": "0, 0, -1, -1, -2, -2, -3, -4, -5, -6, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "0", "0", "-1", "-1", "-2", "-2", "-3", "-4", "-5", "-6", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "expert",
+                "text": "Expert",
+                "description": "0, -1, -2, -3, -4, -5, -6, -7, -8, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "expert"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "0", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }, {
+      "id": "all_or_nothing",
+      "setup": ["choose_investigators", "difficulty_choice"],
+      "steps": [
+        {
+          "id": "choose_investigators",
+          "type": "input",
+          "input": {
+            "type": "scenario_investigators"
+          }
+        },
+        {
+          "id": "difficulty_choice",
+          "text": "Choose difficulty level:",
+          "type": "input",
+          "input": {
+            "type": "choose_one",
+            "choices": [
+              {
+                "id": "easy",
+                "text": "Easy",
+                "description": "+1, +1, 0, 0, 0, -1, -1, -1, -2, -2, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "easy"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "+1", "0", "0", "0", "-1", "-1", "-1", "-2", "-2", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "standard",
+                "text": "Standard",
+                "description": "+1, 0, 0, -1, -1, -1, -2, -2, -3, -4, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "standard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "+1", "0", "0", "-1", "-1", "-1", "-2", "-2", "-3", "-4", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "hard",
+                "text": "Hard",
+                "description": "0, 0, -1, -1, -2, -2, -3, -4, -5, -6, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "hard"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "0", "0", "-1", "-1", "-2", "-2", "-3", "-4", "-5", "-6", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              },{
+                "id": "expert",
+                "text": "Expert",
+                "description": "0, -1, -2, -3, -4, -5, -6, -7, -8, [skull], [skull], [cultist], [tablet], [elder_thing], [auto_fail], [elder_sign]",
+                "effects": [
+                  {
+                    "type": "campaign_data",
+                    "setting": "difficulty",
+                    "value": "expert"
+                  },
+                  {
+                    "type": "add_chaos_token",
+                    "tokens": [
+                      "0", "-1", "-2", "-3", "-4", "-5", "-6", "-7", "-8", "skull", "skull", "cultist", "tablet", "elder_thing", "auto_fail", "elder_sign"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 }
 , "scenarios": [
+{
+  "id": "all_or_nothing",
+  "scenario_name": "All or Nothing",
+  "full_name": "All or Nothing",
+  "xp_cost": 1,
+  "side_scenario_type": "challenge",
+  "challenge": {
+    "investigator": "01003",
+    "xp_cost": 2,
+    "requirements": []
+  },
+  "setup": [
+    "xp_cost",
+    "intro",
+    "gather_encounter_sets",
+    "gather_return_encounter_sets",
+    "gather_return_encounter_sets_bullets",
+    "new_scenario_card",
+    "new_act_agenda",
+    "remove_misc_cards",
+    "set_aside_cards",
+    "setup_locations",
+    "location_layout",
+    "setup_enemies",
+    "encounter_deck",
+    "$play_scenario"
+  ],
+  "steps": [
+    {
+      "id": "xp_cost",
+      "hidden": true,
+      "effects": [
+        {
+          "type": "earn_xp",
+          "investigator": "all",
+          "bonus": -1
+        },
+        {
+          "type": "earn_xp",
+          "investigator": "$fixed_investigator",
+          "fixed_investigator": "01002",
+          "bonus": -2
+        }
+      ]
+    },
+    {
+      "id": "intro",
+      "type": "story",
+      "text": "You’re willing to do whatever it takes to make things right. Your mother’s massive hospital debts won’t pay themselves off, so you’ve come up with a plan: gambling. The adrenaline rush of going all in and risking everything on the mercy of the cards is also a nice perk. Lately it feels as though life has dealt you a bad hand, but you’re often able to turn terrible hands into winning ones. Who needs skill when Lady Luck is on your side?\nYour game of choice is blackjack. Somehow the right cards tend to come up at the right time, and you try to hide your elation when the dealer busts yet again. You seem to go on a hot streak every night as stacks of chips grow ever taller in front of you. Such hot streaks go a long way in paying your debts, but your luck often draws the ire of both the dealer and fellow players alike. You know when to stop.\nOver the years, you’ve acquired a reputation for winning that some call “cheating.” As a result, you’ve been forced to keep a low profile and gamble at a rotating list of venues. There is one venue which you revel winning at over all others: the Clover Club. Vast amounts of money are at stake every night at the speakeasy, but it’s controlled by the O’Bannion gang. Intimidating. Unscrupulous. Ruthless. No one wants to draw the attention of the gang, as your reputation surely does.\nBut the Clover Club has a bottom line that, above all else, must be maintained. The brazen O’Bannions are not fond of being taken advantage of, and will use any means necessary to prevent it. Here, the house always wins.\nSurely that will change tonight. You pull your collar up and walk into La Bella Luna. The restaurant is virtually empty. A faint sound of bombastic music is coming from the back of the establishment. It’s clear where all the patrons are. All you can think about is getting a drink and winning big…"
+    },
+    {
+      "id": "gather_encounter_sets",
+      "title": "Scenario Setup",
+      "type": "encounter_sets",
+      "encounter_sets": [
+        "all_or_nothing",
+        "the_house_always_wins",
+        "bad_luck",
+        "naomis_crew",
+        "arkham",
+        "rats"
+      ],
+      "subtext": "When gathering <i>The Midnight Masks</i> encounter set, only gather the 5 treachery cards (2x False Lead and 3x Hunting Shadow). Do not gather the locations, act, agenda, and scenario reference cards from that set."
+    },
+    {
+      "id": "gather_return_encounter_sets",
+      "text": "You may optionally decide to gather the cards included in the <i>Return to the House Always Wins</i> encounter set, as well, if your collection includes them.",
+      "type": "encounter_sets",
+      "encounter_sets": [
+        "return_to_the_house_always_wins"
+      ],
+      "subtext": "If you do, perform the following additional steps:"
+    },
+    {
+      "id": "gather_return_encounter_sets_bullets",
+      "bullet_type": "none",
+      "bullets": [
+        {
+          "text": "Remove the “Return to” setup card from the game."
+        },
+        {
+          "text": "Remove the original version of the Clover Club Lounge from the game and use the new version of the Clover Club Lounge instead."
+        },
+        {
+          "text": "Set the Clover Club Stage aside, out of play."
+        },
+        {
+          "text": "Include the new treachery cards with the remainder of the encounter cards."
+        },
+        {
+          "text": "Remember that “Skids” O’Toole has “cheated.”"
+        }
+      ]
+    },
+    {
+      "id": "new_scenario_card",
+      "text": "Remove the original scenario reference card from <i>The House Always Wins</i> encounter set from the game. Use the new scenario reference card provided in the downloadable <i>All or Nothing</i> encounter set."
+    },
+    {
+      "id": "new_act_agenda",
+      "text": "Remove the original act and agenda deck from <i>The House Always Wins</i> encounter set from the game. Build the act and agenda decks using only the new act and agenda cards provided in the downloadable <i>All or Nothing</i> encounter set."
+    },
+    {
+      "id": "remove_misc_cards",
+      "text": "Remove the Peter Clover asset and the Dr. Francis Morgan story asset from the game. These cards are not used in this challenge scenario."
+    },
+    {
+      "id": "set_aside_cards",
+      "text": "Set the following cards aside, out of play: each copy of the Back Hall Doorway location, each copy of the Clover Club Bouncer enemy, and the Siobhan Riley enemy."
+    },
+    {
+      "id": "setup_locations",
+      "text": "Put each of the remaining locations into play: Darkened Hall, Clover Club Lounge, Clover Club Bar, Clover Club Cardroom, and La Bella Luna.",
+      "bullets": [
+        {
+          "text": "Each investigator begins play in La Bella Luna."
+        }
+      ]
+    },
+    {
+      "id": "location_layout",
+      "type": "location_setup",
+      "text": "Location Placement",
+      "horizontal": "normal",
+      "vertical": "half",
+      "locations": [
+        ["02050_back", "blank", "02056_back", "blank"],
+        ["blank", "02048_back", "blank", "blank"],
+        ["02049_back", "blank", "02053_back", "02054_back"],
+        ["blank", "02051_back", "blank", "blank"],
+        ["blank", "blank", "blank", "blank"],
+        ["blank", "02052_back", "blank", "blank"]
+      ]
+    },
+    {
+      "id": "setup_enemies",
+      "text": "Put the Clover Club Pit Boss enemy into play in the Clover Club Lounge."
+    },
+    {
+      "id": "encounter_deck",
+      "text": "Shuffle the remainder of the encounter cards to form the encounter deck."
+    },
+    {
+      "id": "resolution_2",
+      "type": "resolution",
+      "resolution": "R2"
+    },
+    {
+      "id": "skids_bad_swap",
+      "text": "“Skids” O’Toole must either upgrade Hospital Debts to its advanced version, or downgrade the advanced version of On the Lam to its original version.",
+      "type": "input",
+      "input": {
+        "type": "choose_one",
+        "choices": [
+          {
+            "id": "necronomicon",
+            "text": "Upgrade to advanced Hospital Debts",
+            "effects": [
+              {
+                "type": "remove_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "01011"
+              },
+              {
+                "type": "add_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "90010"
+              }
+            ]
+          },
+          {
+            "id": "tote_bag",
+            "text": "Downgrade from advanced On the Lam",
+            "effects": [
+              {
+                "type": "remove_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "90009"
+              },
+              {
+                "type": "add_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "01010"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "skids_good_swap",
+      "text": "“Skids” O’Toole may either upgrade On the Lam to its advanced version, or downgrade the advanced version of Hospital Debts to its original version.",
+      "type": "input",
+      "input": {
+        "type": "choose_one",
+        "choices": [
+          {
+            "id": "tote_bag",
+            "text": "Upgrade to advanced On the Lam",
+            "effects": [
+              {
+                "type": "remove_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "01010"
+              },
+              {
+                "type": "add_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "90009"
+              }
+            ]
+          },
+          {
+            "id": "necronomicon",
+            "text": "Downgrade advanced Hospital Debts",
+            "effects": [
+              {
+                "type": "remove_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "90010"
+              },
+              {
+                "type": "add_card",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "non_story": true,
+                "card": "01011"
+              }
+            ]
+          },
+          {
+            "id": "neither",
+            "text": "No change"
+          }
+        ]
+      }
+    },
+    {
+      "id": "earn_xp",
+      "text": "Each investigator earns experience equal to the combined Victory X value of each card in the victory display.",
+      "type": "input",
+      "input": {
+        "type": "counter",
+        "text": "Victory display:",
+        "effects": [
+          {
+            "type": "earn_xp",
+            "investigator": "all"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ask_act2_resources",
+      "type": "input",
+      "text": "If the number of resources on Act 2a is (choose one)...",
+      "input": {
+        "type": "choose_one",
+        "choices": [
+          {
+            "id": "resources_10",
+            "text": "10[per_investigator] or more resources...",
+            "steps": ["1_additional_resource"]
+          },
+          {
+            "id": "resources_20",
+            "text": "20[per_investigator] or more resources...",
+            "steps": ["2_additional_resources"]
+          },
+          {
+            "id": "resources_30",
+            "text": "30[per_investigator] or more resources...",
+            "steps": ["3_additional_resources"]
+          },
+          {
+            "id": "resource_40",
+            "text": "40[per_investigator] or more resources...",
+            "steps": ["4_additional_resources_1_xp"],
+            "effects": [
+              {
+                "type": "earn_xp",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "bonus": 1
+              }
+            ]
+          },
+          {
+            "id": "resource_50",
+            "text": "50[per_investigator] or more resources...",
+            "steps": ["5_additional_resources_2_xp"],
+            "effects": [
+              {
+                "type": "earn_xp",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "bonus": 2
+              }
+            ]
+          },
+          {
+            "id": "resource_60",
+            "text": "60[per_investigator] or more resources...",
+            "steps": ["6_additional_resources_3_xp"],
+            "effects": [
+              {
+                "type": "earn_xp",
+                "investigator": "$fixed_investigator",
+                "fixed_investigator": "01003",
+                "bonus": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "1_additional_resource",
+      "bullet_type": "small",
+      "text": "“Skids” O’Toole begins the next scenario with 1 additional resource."
+    },
+    {
+      "id": "2_additional_resources",
+      "bullet_type": "small",
+      "text": "“Skids” O’Toole begins the next scenario with 2 additional resources."
+    },
+    {
+      "id": "3_additional_resources",
+      "bullet_type": "small",
+      "text": "“Skids” O’Toole begins the next scenario with 3 additional resources."
+    },
+    {
+      "id": "4_additional_resources_1_xp",
+      "bullet_type": "small",
+      "text": "“Skids” O’Toole earns 1 bonus experience and begins the next scenario with 4 additional resources."
+    },
+    {
+      "id": "5_additional_resources_2_xp",
+      "bullet_type": "small",
+      "text": "“Skids” O’Toole earns 2 bonus experience and begins the next scenario with 5 additional resources."
+    },
+    {
+      "id": "6_additional_resources_3_xp",
+      "bullet_type": "small",
+      "text": "“Skids” O’Toole earns 3 bonus experience and begins the next scenario with 6 additional resources."
+    }
+  ],
+  "resolutions": [
+    {
+      "id": "no_resolution",
+      "title": "No resolution was reached\n(each investigator was defeated)",
+      "investigator_status": [
+        "resigned",
+        "physical",
+        "mental"
+      ],
+      "steps": ["resolution_2"]
+    },
+    {
+      "id": "R1",
+      "title": "Resolution 1",
+      "text": "Heart pounding and exhilaration coursing through your veins, you don’t know what gives you more of a rush: winning money from the O’Bannions or escaping from them. This night is proof of what you’ve always thought: “Skids” O’Toole always wins...",
+      "steps": [
+        "earn_xp",
+        "ask_act2_resources",
+        "skids_good_swap",
+        "$upgrade_decks"
+      ]
+    },
+    {
+      "id": "R2",
+      "title": "Resolution 2",
+      "text": "You’ve failed to go unnoticed. Within minutes, you are surrounded by the O’Bannion’s heartless enforcers and dragged into a dark room. The brutes clench their fists and roll up their sleeves. You close your eyes and brace for the hard lesson they’re about to teach you: Lady Luck is no use at the Clover Club.\nYou end up in a heap of trash outside the back alley entrance of the club. All things considered, it could have been worse. Bruised and battered, you remove the Clover Club from your rotating list. Gambling isn’t worth it if the stake is your life. You know firsthand that, at the Clover Club, the house always wins...",
+      "steps": [
+        "earn_xp",
+        "skids_bad_swap",
+        "$upgrade_decks"
+      ]
+    }
+  ]
+}
+,
 {
   "id": "blob_that_ate_everything",
   "scenario_name": "The Blob That Ate Everything",
@@ -29670,7 +30670,8 @@
         "effects": [
           {
             "type": "earn_xp",
-            "investigator": "all"
+            "investigator": "all",
+            "bonus": 3
           }
         ]
       }
@@ -29694,9 +30695,9 @@
       "text": "<smallcaps>Subject 8L-08 opens its maw, and devours…</smallcaps>\n<i>(If the combination of chaos tokens revealed is not listed, or if the listed aspect cannot be devoured, reveal two new chaos tokens and consult the chart again.)</i> ",
       "header": {
         "cells": [
-          { 
+          {
             "text": "<b>Chaos Tokens</b>\n<i>(in any order)</i>",
-            "size": 2        
+            "size": 2
           },
           {
             "text": "<center><b>Aspect of Reality Devoured</b></center>",
@@ -29804,7 +30805,7 @@
               "85029",
               "85030",
               "85031",
-              "85032" 
+              "85032"
             ]
           }
         ],
@@ -30293,7 +31294,7 @@
     {
       "id": "intro",
       "type": "story",
-      "text": "Minnie Klein, your contact at the Arkham Advertiser, had slipped you a draft of the article over a cup of coffee at Velma's Diner. It would have gone to print had Doyle Jeffries, the lead editor, not scoffed at the concept. \"I believe his exact words were, 'I ain't printing it off as news,'\" she explained. From the sly grin spreading across her face, you could tell she smelled a story.\nThe headline was sensaltionalist. Three killings in nine days was enough to spook a town, sure. But you doubt all of New Orleans is gripped by terror, or even knows about the killings. Still, something piqued your interest. \"Lady Esprit,\" the Voodoo priestess from the article, claimed that a malign curse had taken root in the bayou.\n\"There's something to this, isn't there? I know that look,\" Minnie said. You weren't sure. If Lady Esprit was right, this \"roux-ga-roux\" wouldn't stop killing at three, that's for sure. Bur curses? Wolf-people? How could such things be real? Only one way to find out. You put on your coat and head for the Northside Station."
+      "text": "Minnie Klein, your contact at the Arkham Advertiser, had slipped you a draft of the article over a cup of coffee at Velma's Diner. It would have gone to print had Doyle Jeffries, the lead editor, not scoffed at the concept. \"I believe his exact words were, 'I ain't printing it off as news,'\" she explained. From the sly grin spreading across her face, you could tell she smelled a story.\nThe headline was sensaltionalist. Three killings in nine days was enough to spook a town, sure. But you doubt all of New Orleans is gripped by terror, or even knows about the killings. Still, something piqued your interest. \"Lady Esprit,\" the Voodoo priestess from the article, claimed that a malign curse had taken root in the bayou.\n\"There's something to this, isn't there? I know that look,\" Minnie said. You weren't sure. If Lady Esprit was right, this \"roux-ga-roux\" wouldn't stop killing at three, that's for sure. But curses? Wolf-people? How could such things be real? Only one way to find out. You put on your coat and head for the Northside Station."
     },
     {
       "id": "gather_encounter_sets",
@@ -31918,7 +32919,9 @@
     "investigator": "01002",
     "xp_cost": 2,
     "requirements": [
-      "Daisy Walker’s deck must include at least 4 [[Tome]] assets. [[Tome]] weaknesses do not count toward this total."
+      {
+        "text": "Daisy Walker’s deck must include at least 4 [[Tome]] assets. [[Tome]] weaknesses do not count toward this total."
+      }
     ]
   },
   "setup": [
@@ -32949,7 +33952,7 @@
 {
   "id": "tcu",
   "position": 4,
-  "version": 2,
+  "version": 3,
   "name": "The Circle Undone",
   "campaign_log": [
     {
@@ -32958,7 +33961,7 @@
     },
     {
       "id": "mementos",
-      "title": "Mementos's Discovered"
+      "title": "Mementos Discovered"
     },
     {
       "id": "05046",
@@ -33632,6 +34635,32 @@
           "scenario": "the_price_of_progress"
         }
       ]
+    },
+    {
+      "id": "check_being_hunted",
+      "type": "branch",
+      "condition": {
+        "type": "campaign_log",
+        "section": "campaign_notes",
+        "id": "being_hunted",
+        "options": [
+          {
+            "boolCondition": true,
+            "border": true,
+            "effects": [
+              {
+                "type": "story_step",
+                "steps": ["being_hunted"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "being_hunted",
+      "type": "story",
+      "text": "You are startled from your reverie by the sensation of something crawling up your chest, an icy hand that clasps around your throat. It grips until your breath is trapped and your windpipe starts to crack. Only there is nothing there—just a chilly draft entering the room through the open window. The wind shrill, whistling wind rattles your window frame, penetrating the safety of your home. It almost sounds like the dissonant notes of a dreadful flute: a mindless, haunting music that fills you with inexplicable terror. You rush to the window and slam it shut, hands trembling. Still, the thin, discordant notes echo around you. <i>This can’t be real</i>, you think. <i>Not here, not now</i>. But denial provides no asylum.\nThe cold creeps its way up your back once again. A thin, grey mist pours into the room, seeping beneath your front door and through the cracks around your window. It crawls along the ground and coils slowly around your ankles, sending shivers up your body. You run into your bedroom, slam the door, and lock it. A few seconds of respite are all you receive before the invader resumes its assault. Over and over, a heavy force slams against the door, shaking the entire room. You press against the door, trying to hold it shut. With each pounding crash, dark mist seeps through cracks appearing in the wood. With a final crash, the door shatters. You are hurled back, landing not on the floor but in a cloud of mist, gripped by a hundred spectral arms that cling into your flesh and tear you limb from limb.\nNO!—That can’t be right. You are here, reading this very text. A wave of relief washes over you as you realize it is all in your head. Even so, the words compel your mind to torment you with visions of a macabre death. You find yourself glancing at your window, searching for dark mist that is not there. What if the text is trying to tell you something? Maybe—no, that’s impossible.\n“Real or imagined, your fate approaches all the same.”"
     }
   ],
   "resolutions": [
@@ -33661,13 +34690,13 @@
       "id": "R2",
       "title": "Resolution 2",
       "text": "You head out of the manor and are embraced by the brisk evening air. Your investigation has left you exhausted and strangely paranoid. Something about that event felt peculiar to you, though you aren’t sure why. Although the guests seemed oblivious, you noticed that the staff was sweaty and jittery, and the Lodge members seemed tense as well. More than once, you noticed their gaze drawn to you, watching your every move. If you didn’t know any better, you’d think the Silver Twilight Lodge was having you tailed for some reason. Regardless, you weren’t able to find much information about the four disappearances, and you doubt you ever will. Perhaps it was nothing, after all.",
-      "steps": ["learned_nothing_of_the_lodges_schemes", "earn_xp", "$upgrade_decks", "skip_price_of_progress"]
+      "steps": ["learned_nothing_of_the_lodges_schemes", "earn_xp", "$upgrade_decks", "skip_price_of_progress", "check_being_hunted"]
     },
     {
       "id": "R3",
       "title": "Resolution 3",
       "text": "You flee toward the manor’s entry hall, but the wall of spectral mist still blocks your way. Emerging from the mist are several ghostly faces and arms, writhing and screaming in torment. You turn and are confronted by the empty visage of the hooded Watcher. Before you even realize your doom, the creature’s ethereal body is swirling and swooping through the air as though composed of mist itself. The creature reconstitutes before you, and its charred hand grips your throat, holding you aloft with tremendous strength. You kick and dig your nails into the creature’s hand, struggling with the ferocity of a cornered animal, but it is no use. The last thing you see is the red glare of the thing’s eyes as it drills into your mind.",
-      "steps": ["never_seen_again", "earn_xp", "kill_not_resigned", "choose_new_investigators", "$upgrade_decks", "skip_price_of_progress"]
+      "steps": ["never_seen_again", "earn_xp", "kill_not_resigned", "choose_new_investigators", "$upgrade_decks", "skip_price_of_progress", "check_being_hunted"]
     }
   ]
 }
@@ -34075,6 +35104,7 @@
     "encounter_deck",
     "no_way_out",
     "agenda_1_results",
+    "maybe_ask_being_hunted",
     "resolution_1"
   ],
   "steps": [
@@ -34387,6 +35417,43 @@
       }
     },
     {
+      "id": "maybe_ask_being_hunted",
+      "type": "branch",
+      "hidden": true,
+      "condition": {
+        "type": "campaign_data",
+        "campaign_data": "version",
+        "min_version": 3,
+        "options": [
+          {
+            "boolCondition": true,
+            "steps": ["ask_being_hunted"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ask_being_hunted",
+      "type": "input",
+      "input": {
+        "type": "choose_one",
+        "choices": [
+          {
+            "id": "being_hunted",
+            "text": "Are you being hunted?",
+            "effects": [
+              {
+                "type": "campaign_log",
+                "section": "campaign_notes",
+                "id": "being_hunted",
+                "text": "you are being hunted."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "id": "resolution_1",
       "type": "resolution",
       "resolution": "no_resolution",
@@ -34424,7 +35491,8 @@
     "check_anette_arrested",
     "check_assumed_control_of_the_silver_twilight_lodge",
     "check_survived_the_watchers_embrace",
-    "check_signed_the_black_book"
+    "check_signed_the_black_book",
+    "check_being_hunted"
   ],
   "steps": [
     {
@@ -34517,6 +35585,32 @@
           "cross_out": true
         }
       ]
+    },
+    {
+      "id": "check_being_hunted",
+      "type": "branch",
+      "condition": {
+        "type": "campaign_log",
+        "section": "campaign_notes",
+        "id": "being_hunted",
+        "options": [
+          {
+            "border": true,
+            "boolCondition": true,
+            "effects": [
+              {
+                "type": "story_step",
+                "steps": ["being_hunted"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "being_hunted",
+      "type": "story",
+      "text": "No matter what you do, the creature’s assault on your mind never ceases. Its gaze haunts you everywhere you look. It controls your every thought—your hopes, your bonds, your fears, your ambitions. A reminder of your futile existence. Each night, you toss and turn, unable to wrench free from this sensation of worthlessness. Your thoughts turn to a grim, uncertain future. A future without life. A future without <i>you</i>. It is the one ordeal every mortal must endure, and yet the one experience no mortal could possibly describe. Ghosts? Realms beyond our mortal coil? Nothing but a last resort for a mind desperate to cling to life.\nWhen the creature next invades, you have come to a new conclusion. An icy draft surrounds you as the thing coalesces before you. Your throat constricts and tears well in your eyes, but you stand tall. You are unafraid. The creature gazes at you curiously, and the piping of infernal flutes fades into silence. It extends its clawed hand, and you shake it. You will never truly be free from its grasp, but perhaps you and the creature can work in agreement. Perhaps you can tame your fear. It doesn’t matter if the world has no point. It’s yours, damnit, and nothing will stop you from altering it to your liking."
     }
   ]
 }
@@ -36060,7 +37154,8 @@
     "check_silver_twilight_investigator",
     "progress_3",
     "check_josef_meiger",
-    "$upgrade_decks"
+    "$upgrade_decks",
+    "check_being_hunted"
   ],
   "steps": [
     {
@@ -36295,6 +37390,32 @@
           "text": "the investigators are deceiving the Lodge."
         }
       ]
+    },
+    {
+      "id": "check_being_hunted",
+      "type": "branch",
+      "condition": {
+        "type": "campaign_log",
+        "section": "campaign_notes",
+        "id": "being_hunted",
+        "options": [
+          {
+            "border": true,
+            "boolCondition": true,
+            "effects": [
+              {
+                "type": "story_step",
+                "steps": ["being_hunted"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "being_hunted",
+      "type": "story",
+      "text": "You are startled from your reverie by the sensation of something crawling up your chest, an icy hand that clasps around your throat. It grips until your breath is trapped and your windpipe starts to crack. Only there is nothing there—just a chilly draft entering the room through the open window. The wind shrill, whistling wind rattles your window frame, penetrating the safety of your home. It almost sounds like the dissonant notes of a dreadful flute: a mindless, haunting music that fills you with inexplicable terror. You rush to the window and slam it shut, hands trembling. Still, the thin, discordant notes echo around you. <i>This can’t be real</i>, you think. <i>Not here, not now</i>. But denial provides no asylum.\nThe cold creeps its way up your back once again. A thin, grey mist pours into the room, seeping beneath your front door and through the cracks around your window. It crawls along the ground and coils slowly around your ankles, sending shivers up your body. You run into your bedroom, slam the door, and lock it. A few seconds of respite are all you receive before the invader resumes its assault. Over and over, a heavy force slams against the door, shaking the entire room. You press against the door, trying to hold it shut. With each pounding crash, dark mist seeps through cracks appearing in the wood. With a final crash, the door shatters. You are hurled back, landing not on the floor but in a cloud of mist, gripped by a hundred spectral arms that cling into your flesh and tear you limb from limb.\nNO!—That can’t be right. You are here, reading this very text. A wave of relief washes over you as you realize it is all in your head. Even so, the words compel your mind to torment you with visions of a macabre death. You find yourself glancing at your window, searching for dark mist that is not there. What if the text is trying to tell you something? Maybe—no, that’s impossible.\n“Real or imagined, your fate approaches all the same.”"
     }
   ]
 },
@@ -41976,12 +43097,12 @@
     {
       "id": "drifter_dream",
       "type": "story",
-      "text": "The blare of sirens echoes through the streets behind you. They’re gaining on you. They have always been hot on your heels, and you were always one step ahead…until now. You run down an alleyway, and a bright-red glare follows you. They’re going to catch you. They’ll lock you in a cage and throw away the key. Your freedom, your lifestyle, everything you are, everything you love: they’ll take it all away. And why? Just because you wouldn’t play by their rules? When have they ever gotten everything right? You round a corner just as the bulls are about to catch up to you and spot the entrance into a brick building."
+      "text": "You meander through a field of flowers, a warm spring breeze nudging your steps forward. A train track divides the field, and as you meet its parallel lines, the roaring clatter of steam and iron lumbers toward you. As the train passes by, you grab onto a ladder hanging from one of its many rusted and weather-beaten cars. Given the appearance of the exterior, the train’s interior is full of unexpected luxury and affluence: Persian rugs hang as decoration, marble staircases wind to dizzying heights, and a crystal chandelier speckles the room with prismatic brilliance. Under the chandelier sits an ornate doorway, its gilded lattices forming the depiction of a fox in a forest."
     },
     {
       "id": "drifter_dream_effect",
       "bullet_type": "small",
-      "text": "You may replace a basic weakness in your deck with a different random basic weakness. If you do, suffer 1 trauma of your choice"
+      "text": "You may replace a basic weakness in your deck with a different random basic weakness. If you do, suffer 1 trauma of your choice."
     },
     {
       "id": "ask_replace_weakness",
@@ -47850,7 +48971,7 @@
       "condition": {
         "type": "campaign_log",
         "section": "campaign_notes",
-        "id": "randolph_did_not_survive_descen",
+        "id": "randolph_did_not_survive_descent",
         "options": [
           {
             "boolCondition": true
@@ -48152,7 +49273,7 @@
         "options": [
           {
             "boolCondition": true,
-            "steps": ["$upgrade_decks", "win"],
+            "steps": ["win_text", "$upgrade_decks", "win"],
             "effects": [
               {
                 "type": "campaign_data",
@@ -48169,9 +49290,13 @@
       }
     },
     {
-      "id": "win",
+      "id": "win_text",
       "bullet_type": "small",
-      "text": "The investigators win the campaign.",
+      "text": "The investigators win the campaign."
+    },
+    {
+      "id": "win",
+      "hidden": true,
       "effects": [
         {
           "type": "campaign_data",
@@ -48191,14 +49316,7 @@
         "options": [
           {
             "boolCondition": true,
-            "steps": ["win_never_seen_again"],
-            "effects": [
-              {
-                "type": "campaign_data",
-                "setting": "skip_scenario",
-                "scenario": "epilogue"
-              }
-            ]
+            "steps": ["win_never_seen_again"]
           },
           {
             "boolCondition": false,
@@ -48212,6 +49330,11 @@
       "bullet_type": "small",
       "text": "The investigators win the campaign… and are never seen or heard from again.",
       "effects": [
+        {
+          "type": "campaign_data",
+          "setting": "skip_scenario",
+          "scenario": "epilogue"
+        },
         {
           "type": "campaign_data",
           "setting": "result",
@@ -48372,7 +49495,7 @@
     {
       "id": "R3",
       "title": "Resolution 3",
-      "text": "In the distance, you can see the tower that loomed behind the spider god as it spun its web, the entrance beckoning you closer. You recall the Tower of Koth in the Underworld and the way to the surface. Is this the root of that same tower? Does it penetrate through this world-between-worlds? If so, you might be able to escape. Instead of climbing back the way you came, you swing your web from side to side and make a leap through the void, landing at the base of the tower. Then you begin the long climb up—above the usrface of the Sea of Pitch, under the ground below the City of Gugs, then farther upward still. Finally, after miles and miles of restless travel, you push aside the stone slab at the top of the tower, and you emerge in the Enchanted Wood. You seal the entrance behind you. Nothing from the hellish Underworld can follow you hear. For the first time since entering the Dreamlands, you breathe a sigh of relief. Recalling the first chapter's of Virgil Gray's story, you follow a narrow path through the woods until you reach a staircase of solid stone that ascends into the clouds. It is time to return home.",
+      "text": "In the distance, you can see the tower that loomed behind the spider god as it spun its web, the entrance beckoning you closer. You recall the Tower of Koth in the Underworld and the way to the surface. Is this the root of that same tower? Does it penetrate through this world-between-worlds? If so, you might be able to escape. Instead of climbing back the way you came, you swing your web from side to side and make a leap through the void, landing at the base of the tower. Then you begin the long climb up—above the surface of the Sea of Pitch, under the ground below the City of Gugs, then farther upward still. Finally, after miles and miles of restless travel, you push aside the stone slab at the top of the tower, and you emerge in the Enchanted Wood. You seal the entrance behind you. Nothing from the hellish Underworld can follow you here. For the first time since entering the Dreamlands, you breathe a sigh of relief. Recalling the first chapter's of Virgil Gray's story, you follow a narrow path through the woods until you reach a staircase of solid stone that ascends into the clouds. It is time to return home.",
       "steps": ["returned_to_reality", "send_returned_to_reality", "two_physical_trauma", "maybe_win_campaign"]
     },
     {
@@ -48385,7 +49508,7 @@
       "id": "R5",
       "title": "Resoultion 5",
       "text": "You ahve stopped the spider god from completing its web, but in the process, you have cut off the quickest way for you to return home. So, with your task complete, you begin the long climb towards reality. You are lucky that remnants of the web-bridge still remain intact, or you would have been stranded in this hellish world between worlds. It takes many hours for you to retrace your steps to the Underworld. You eventually emerge from the thick, tar-like Sea of Pitch, close to the shoreline. To your dismay, you realize that you are on the opposite shore of the sea from the dark vale from which you once embarked. With no way to cross the deadly sea, you'll have to find another way out of this barren expanse. Days pass as you continue to explore the Underworld, reaching darker and more forbidden lands as you travel deeper and deeper below the crust of the Earth's Dreamlands. Though you eventually find a stairway up, it is very different from the one leading to the Unnamable: a spiraling otherworldy series of steps that reach dizzying heights and break all laws of reality. When you reach the top, your heart sinks. There is no sign of Arkham here. You are greeted instead by a strange, ruined city and its half-human denizens. The creatures inform you that you have reached the lost city of \"Sarkomand.\" It appears your return journey is far from over.",
-      "steps": ["still_in_the_dreamlands", "send_still_in_the_dreamlands", "two_physical_trauma","maybe_win_campaign"]
+      "steps": ["still_in_the_dreamlands", "send_still_in_the_dreamlands", "two_physical_trauma", "maybe_win_campaign"]
     }
   ]
 }
@@ -51216,7 +52339,7 @@
     },
     {
       "id": "check_relic_is_missing",
-      "text": "<i>If the relic is missing<i>, the lead investigator reads <b>Growing Concern</b> instead.",
+      "text": "<i>If the relic is missing</i>, the lead investigator reads <b>Growing Concern</b> instead.",
       "type": "branch",
       "condition": {
         "type": "campaign_log",
@@ -51457,7 +52580,7 @@
     },
     {
       "id": "setup_locations",
-      "text": "Put Metropolitan Cathedral, Zócalo, Temple Ruins, Xochimilco, Chapultepec Park, and Coyoacán into play. Each investigator begins play in either Zócalo or Coyoacán (their choice)."
+      "text": "Put Metropolitan Cathedral, Zócalo, Temple Ruins, Xochimilco, Chapultepec Park, and Coyoacán into play. Each investigator begins play in either Zócalo or Coyoacán (their choice)."
     },
     {
       "id": "location_layout",
@@ -51515,7 +52638,7 @@
             "section": "campaign_notes",
             "id": "paths_known",
             "operation": "set_input",
-            "text": "#X# paths are known to you"
+            "text": "#X# paths are known to you."
           },
           {
             "type": "earn_xp",

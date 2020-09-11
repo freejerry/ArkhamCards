@@ -60,6 +60,7 @@
 	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Conkordia.ttf</string>
 		<string>Teutonic.ttf</string>
 		<string>forgotten.ttf</string>
 		<string>circle.ttf</string>
@@ -95,5 +96,23 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Arkham Cards Backup File</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.arkhamcards.ArkhamCards.acb</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>acb</string>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

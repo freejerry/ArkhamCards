@@ -75,7 +75,7 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
 
     this.state = {
       saving: false,
-      deckName: this.deckName(),
+      deckName: undefined,
       offlineDeck: !props.signedIn || !props.isConnected || props.networkType === NetInfoStateType.none,
       optionSelected: [true],
       tabooSetId: props.defaultTabooSetId,
@@ -181,7 +181,7 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
       saveNewDeck,
     } = this.props;
     const {
-      deckName,
+      deckName = this.defaultDeckName(),
       offlineDeck,
       saving,
       starterDeck,
@@ -220,15 +220,15 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
       investigatorId,
       investigators,
     } = this.props;
-    return investigators[investigatorId] || undefined;
+    return (investigators && investigators[investigatorId]) || undefined;
   }
 
-  deckName() {
+  defaultDeckName() {
     const investigator = this.investigator();
-    if (!investigator) {
-      return undefined;
+    if (!investigator || !investigator.name) {
+      return t`New Deck`;
     }
-    switch (investigator.faction_code) {
+    switch (investigator.factionCode()) {
       case 'guardian':
         return t`The Adventures of ${investigator.name}`;
       case 'seeker':
@@ -257,15 +257,21 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
       investigator.deck_requirements ? investigator.deck_requirements.card : [],
       cardRequirement => {
         const code = cardRequirement.code;
-        if (code && cards[code]) {
-          result[0].push(cards[code]);
+        if (code) {
+          const card = cards[code];
+          if (card) {
+            result[0].push(card);
+          }
         }
         if (cardRequirement.alternates && cardRequirement.alternates.length) {
           forEach(cardRequirement.alternates, (altCode, index) => {
             while (result.length <= index + 1) {
               result.push([]);
             }
-            result[index + 1].push(cards[altCode]);
+            const card = cards[altCode];
+            if (card) {
+              result[index + 1].push(card);
+            }
           });
         }
       }
@@ -301,6 +307,7 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
       return (
         <ActivityIndicator
           style={styles.spinner}
+          color={COLORS.lightText}
           size="large"
           animating
         />
@@ -318,6 +325,8 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
           dialogDescription={t`Enter a name for this deck.`}
           onValueChange={this._onDeckNameChange}
           value={deckName}
+          placeholder={this.defaultDeckName()}
+          settingsStyle
         />
         <TabooSetPicker
           color={COLORS.faction[investigator.factionCode()].background}
@@ -355,7 +364,7 @@ class NewDeckOptionsDialog extends React.Component<Props, State> {
             settingsStyle
           />
         ) : (
-          <SettingsItem 
+          <SettingsItem
             navigation
             text={t`Sign in to ArkhamDB`}
             onPress={login}

@@ -8,6 +8,7 @@ import { Navigation } from 'react-native-navigation';
 import { filter } from 'lodash';
 import { t } from 'ttag';
 
+import withStyles, { StylesProps } from '@components/core/withStyles';
 import BasicButton from '@components/core/BasicButton';
 import LocationSetupButton from './LocationSetupButton';
 import TableStepComponent from './TableStepComponent';
@@ -16,7 +17,6 @@ import ResolutionStepComponent from './ResolutionStepComponent';
 import CampaignGuideContext, { CampaignGuideContextType } from '../CampaignGuideContext';
 import ScenarioGuideContext, { ScenarioGuideContextType } from '../ScenarioGuideContext';
 import ScenarioStepContext, { ScenarioStepContextType } from '../ScenarioStepContext';
-import CampaignLogCountComponent from './CampaignLogCountComponent';
 import XpCountComponent from './XpCountComponent';
 import BranchStepComponent from './BranchStepComponent';
 import EncounterSetStepComponent from './EncounterSetStepComponent';
@@ -29,6 +29,7 @@ import ScenarioStep from '@data/scenario/ScenarioStep';
 import typography from '@styles/typography';
 import COLORS from '@styles/colors';
 import space, { m, s } from '@styles/space';
+import CampaignGuide from '@data/scenario/CampaignGuide';
 
 interface Props {
   componentId: string;
@@ -39,8 +40,8 @@ interface Props {
   switchCampaignScenario: () => void;
 }
 
-export default class ScenarioStepComponent extends React.Component<Props> {
-  renderContent(): React.ReactNode {
+class ScenarioStepComponent extends React.Component<Props & StylesProps> {
+  renderContent(campaignGuide: CampaignGuide, campaignId: number): React.ReactNode {
     const {
       componentId,
       step: { step, campaignLog },
@@ -74,7 +75,14 @@ export default class ScenarioStepComponent extends React.Component<Props> {
           </View>
         );
       case 'encounter_sets':
-        return <EncounterSetStepComponent step={step} />;
+        return (
+          <EncounterSetStepComponent
+            step={step}
+            campaignGuide={campaignGuide}
+            campaignId={campaignId}
+            componentId={componentId}
+          />
+        );
       case 'location_connectors':
         return <LocationConnectorsStepComponent step={step} />;
       case 'rule_reminder':
@@ -82,11 +90,11 @@ export default class ScenarioStepComponent extends React.Component<Props> {
       case 'resolution':
         return <ResolutionStepComponent step={step} />;
       case 'campaign_log_count':
-        return <CampaignLogCountComponent step={step} />;
+        return null;
       case 'xp_count':
         return (
-          <XpCountComponent 
-            step={step} 
+          <XpCountComponent
+            step={step}
             campaignLog={campaignLog}
           />
         );
@@ -126,10 +134,10 @@ export default class ScenarioStepComponent extends React.Component<Props> {
   }
 
   render() {
-    const { step, border } = this.props;
+    const { step, border, gameFont } = this.props;
     return (
       <CampaignGuideContext.Consumer>
-        { ({ campaignInvestigators }: CampaignGuideContextType) => (
+        { ({ campaignInvestigators, campaignGuide, campaignId }: CampaignGuideContextType) => (
           <ScenarioGuideContext.Consumer>
             { (scenarioGuideContext: ScenarioGuideContextType) => {
               const safeCodes = new Set(step.campaignLog.investigatorCodesSafe());
@@ -148,6 +156,7 @@ export default class ScenarioStepComponent extends React.Component<Props> {
                     <View style={styles.titleWrapper}>
                       <Text style={[
                         typography.bigGameFont,
+                        { fontFamily: gameFont },
                         styles.title,
                         space.paddingTopL,
                         border ? typography.center : {},
@@ -156,7 +165,7 @@ export default class ScenarioStepComponent extends React.Component<Props> {
                       </Text>
                     </View>
                   ) }
-                  { this.renderContent() }
+                  { this.renderContent(campaignGuide, campaignId) }
                   { (step.step.id === '$proceed') && (
                     <BasicButton
                       onPress={this._proceed}
@@ -172,6 +181,8 @@ export default class ScenarioStepComponent extends React.Component<Props> {
     );
   }
 }
+
+export default withStyles(ScenarioStepComponent);
 
 const styles = StyleSheet.create({
   title: {

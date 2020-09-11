@@ -29,9 +29,11 @@ import EditScenarioResultView from '@components/campaign/EditScenarioResultView'
 import CampaignDetailView from '@components/campaign/CampaignDetailView';
 import CampaignEditWeaknessDialog from '@components/campaign/CampaignEditWeaknessDialog';
 import CampaignDrawWeaknessDialog from '@components/campaign/CampaignDrawWeaknessDialog';
-import CampaignDifficultyDialog from '@components/campaign/CampaignDifficultyDialog';
+import EncounterCardErrataView from '@components/campaignguide/EncounterCardErrataView';
 import EditChaosBagDialog from '@components/campaign/EditChaosBagDialog';
 import MyCampaignsView from '@components/campaign/MyCampaignsView';
+import BackupView from '@components/settings/BackupView';
+import MergeBackupView from '@components/settings/MergeBackupView';
 import NewCampaignView from '@components/campaign/NewCampaignView';
 import SelectCampaignDialog from '@components/campaign/SelectCampaignDialog';
 import MyDecksSelectorDialog from '@components/campaign/MyDecksSelectorDialog';
@@ -44,6 +46,7 @@ import NewDeckView from '@components/deck/NewDeckView';
 import NewDeckOptionsDialog from '@components/deck/NewDeckOptionsDialog';
 import DeckDetailView from '@components/deck/DeckDetailView';
 import DeckEditView from '@components/deck/DeckEditView';
+import DeckChecklistView from '@components/deck/DeckChecklistView';
 import DrawSimulatorView from '@components/deck/DrawSimulatorView';
 import DeckChartsView from '@components/deck/DeckChartsView';
 import DeckHistoryView from '@components/deck/DeckHistoryView';
@@ -55,16 +58,15 @@ import CardLocationFilterView from '@components/filter/CardLocationFilterView';
 import PackFilterView from '@components/filter/PackFilterView';
 import DiagnosticsView from '@components/settings/DiagnosticsView';
 import CollectionEditView from '@components/settings/CollectionEditView';
+import SafeModeView from '@components/settings/SafeModeView';
 import SettingsView from '@components/settings/SettingsView';
 import PackCardsView from '@components/settings/PackCardsView';
 import SpoilersView from '@components/settings/SpoilersView';
-import CardSortDialog from '@components/cardlist/CardSortDialog';
-import InvestigatorSortDialog from '@components/cardlist/InvestigatorSortDialog';
-import ScenarioDialog from '@components/campaign/ScenarioDialog';
 import ExileCardDialog from '@components/campaign/ExileCardDialog';
 import AboutView from '@components/settings/AboutView';
 import WeaknessDrawDialog from '@components/weakness/WeaknessDrawDialog';
 import SealTokenDialog from '@components/campaign/SealTokenDialog';
+import ScenarioFaqView from '@components/campaignguide/ScenarioFaqView';
 
 // register all screens of the app (including internal ones)
 export function registerScreens(Provider: any, store: any) {
@@ -74,6 +76,7 @@ export function registerScreens(Provider: any, store: any) {
   Navigation.registerComponentWithRedux('Deck', () => DeckDetailView, Provider, store);
   Navigation.registerComponentWithRedux('Deck.Charts', () => DeckChartsView, Provider, store);
   Navigation.registerComponentWithRedux('Deck.History', () => DeckHistoryView, Provider, store);
+  Navigation.registerComponentWithRedux('Deck.Checklist', () => DeckChecklistView, Provider, store);
   Navigation.registerComponentWithRedux('Deck.DrawSimulator', () => DrawSimulatorView, Provider, store);
   Navigation.registerComponentWithRedux('Deck.Description', () => DeckDescriptionView, Provider, store);
   Navigation.registerComponentWithRedux('Deck.Edit', () => DeckEditView, Provider, store);
@@ -94,6 +97,8 @@ export function registerScreens(Provider: any, store: any) {
   Navigation.registerComponentWithRedux('Guide.Campaign', () => gestureHandlerRootHOC(CampaignGuideView), Provider, store);
   Navigation.registerComponentWithRedux('Guide.LinkedCampaign', () => gestureHandlerRootHOC(LinkedCampaignGuideView), Provider, store);
   Navigation.registerComponentWithRedux('Guide.SideScenario', () => AddSideScenarioView, Provider, store);
+  Navigation.registerComponentWithRedux('Guide.CardErrata', () => EncounterCardErrataView, Provider, store);
+  Navigation.registerComponentWithRedux('Guide.ScenarioFaq', () => ScenarioFaqView, Provider, store);
   Navigation.registerComponentWithRedux('Guide.ChallengeScenario', () => ChallengeScenarioView, Provider, store);
   Navigation.registerComponentWithRedux('Guide.ChaosBag', () => GuideChaosBagView, Provider, store);
   Navigation.registerComponentWithRedux('Guide.OddsCalculator', () => GuideOddsCalculatorView, Provider, store);
@@ -108,6 +113,9 @@ export function registerScreens(Provider: any, store: any) {
   Navigation.registerComponentWithRedux('OddsCalculator', () => OddsCalculatorView, Provider, store);
   Navigation.registerComponentWithRedux('Settings', () => SettingsView, Provider, store);
   Navigation.registerComponentWithRedux('Settings.Diagnostics', () => DiagnosticsView, Provider, store);
+  Navigation.registerComponentWithRedux('Settings.Backup', () => BackupView, Provider, store);
+  Navigation.registerComponentWithRedux('Settings.MergeBackup', () => MergeBackupView, Provider, store);
+  Navigation.registerComponentWithRedux('Settings.SafeMode', () => SafeModeView, Provider, store);
   Navigation.registerComponentWithRedux('SearchFilters', () => CardFilterView, Provider, store);
   Navigation.registerComponentWithRedux('SearchFilters.Enemy', () => CardEnemyFilterView, Provider, store);
   Navigation.registerComponentWithRedux('SearchFilters.Location', () => CardLocationFilterView, Provider, store);
@@ -120,11 +128,7 @@ export function registerScreens(Provider: any, store: any) {
   Navigation.registerComponentWithRedux('Dialog.DeckSelector', () => gestureHandlerRootHOC(MyDecksSelectorDialog), Provider, store);
   Navigation.registerComponentWithRedux('Dialog.EditChaosBag', () => EditChaosBagDialog, Provider, store);
   Navigation.registerComponentWithRedux('Dialog.ExileCards', () => ExileCardDialog, Provider, store);
-  Navigation.registerComponentWithRedux('Dialog.Sort', () => CardSortDialog, Provider, store);
-  Navigation.registerComponentWithRedux('Dialog.InvestigatorSort', () => InvestigatorSortDialog, Provider, store);
-  Navigation.registerComponentWithRedux('Dialog.Scenario', () => ScenarioDialog, Provider, store);
   Navigation.registerComponentWithRedux('Dialog.Campaign', () => SelectCampaignDialog, Provider, store);
-  Navigation.registerComponentWithRedux('Dialog.CampaignDifficulty', () => CampaignDifficultyDialog, Provider, store);
   Navigation.registerComponentWithRedux('Dialog.CampaignDrawWeakness', () => CampaignDrawWeaknessDialog, Provider, store);
   Navigation.registerComponentWithRedux('Dialog.CampaignEditWeakness', () => CampaignEditWeaknessDialog, Provider, store);
   Navigation.registerComponentWithRedux('Dialog.SealToken', () => SealTokenDialog, Provider, store);

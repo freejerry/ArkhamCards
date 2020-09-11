@@ -50,6 +50,7 @@ export default function withPlayerCards<Props>(
           <View style={styles.activityIndicatorContainer}>
             <ActivityIndicator
               style={styles.spinner}
+              color={COLORS.lightText}
               size="small"
               animating
             />
@@ -67,7 +68,7 @@ export default function withPlayerCards<Props>(
       );
     }
   }
-  const result = connect<ReduxProps, {}, Props & TabooSetOverride, AppState>(mapStateToProps)(
+  const result = connect<ReduxProps, unknown, Props & TabooSetOverride, AppState>(mapStateToProps)(
     // @ts-ignore TS2345
     WrappingComponent
   );

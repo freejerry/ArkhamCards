@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { t } from 'ttag';
 
-import SettingsEditText from './SettingsEditText'
+import withStyles, { StylesProps } from '@components/core/withStyles';
+import SettingsEditText from './SettingsEditText';
 import COLORS from '@styles/colors';
-import { m, s } from '@styles/space';
+import { m, s, xs } from '@styles/space';
 import typography from '@styles/typography';
 
 interface Props {
@@ -13,19 +14,25 @@ interface Props {
   placeholder?: string;
   value?: string;
   onValueChange: (text: string) => void;
+  settingsStyle?: boolean;
 }
 
-export default function EditText({
+function EditText({
   title,
   dialogDescription,
   placeholder,
   value,
   onValueChange,
-}: Props) {
+  gameFont,
+  settingsStyle,
+}: Props & StylesProps) {
   return (
     <SettingsEditText
       title={title}
-      titleStyle={typography.mediumGameFont}
+      titleStyle={
+        settingsStyle ?
+        { ...typography.label, paddingLeft: 0 } :
+        { ...typography.mediumGameFont, fontFamily: gameFont }}
       dialogDescription={dialogDescription}
       valuePlaceholder={placeholder}
       valueProps={{
@@ -35,12 +42,17 @@ export default function EditText({
       valueStyle={styles.value}
       onValueChange={onValueChange}
       value={value}
-      containerStyle={styles.container}
+      containerStyle={{
+        ...styles.container,
+        paddingLeft: Platform.OS === 'ios' && settingsStyle ? s + xs : m,
+      }}
       positiveButtonTitle={t`Done`}
       negativeButtonTitle={t`Cancel`}
     />
   );
 }
+
+export default withStyles(EditText);
 
 const styles = StyleSheet.create({
   value: {
@@ -53,10 +65,10 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: COLORS.divider,
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    paddingLeft: m,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: m,
     paddingTop: s,
     paddingBottom: s,
   },

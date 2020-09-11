@@ -13,7 +13,9 @@ import decks from './decks';
 import packs from './packs';
 import settings from './settings';
 import { CardFilterData, FilterState } from '@lib/filters';
+import { getSystemLanguage } from '@lib/i18n';
 import {
+  BackupState,
   Campaign,
   ChaosBagResults,
   SingleCampaign,
@@ -26,6 +28,7 @@ import {
   SORT_BY_TYPE,
 } from '@actions/types';
 import Card, { CardsMap } from '@data/Card';
+import { State } from 'react-native-gesture-handler';
 
 const packsPersistConfig = {
   key: 'packs',
@@ -101,7 +104,19 @@ export const getCampaigns = createSelector(
   )
 );
 
-export function getBackupData(state: AppState) {
+export function getBackupData(state: AppState): BackupState {
+  const deckIds: { [id: string]: string } = {};
+  forEach(state.decks.all, deck => {
+    if (deck.local && deck.uuid) {
+      deckIds[deck.id] = deck.uuid;
+    }
+  });
+  const campaignIds: { [id: string]: string } = {};
+  forEach(state.campaigns.all, campaign => {
+    if (campaign.uuid) {
+      campaignIds[campaign.id] = campaign.uuid;
+    }
+  });
   const guides: { [id: string]: CampaignGuideState } = {};
   forEach(state.guides.all, (guide, id) => {
     if (guide) {
@@ -112,6 +127,8 @@ export function getBackupData(state: AppState) {
     campaigns: values(state.campaigns.all || {}),
     decks: filter(values(state.decks.all), deck => !!deck.local),
     guides,
+    deckIds,
+    campaignIds,
   };
 }
 
@@ -256,9 +273,9 @@ export const getLatestCampaignInvestigators = createSelector(
     return uniq([
       ...flatMap(
         filter(latestDecks, deck => !!(deck && deck.investigator_code)),
-        deck => investigators[deck.investigator_code]
+        deck => investigators[deck.investigator_code] || []
       ),
-      ...map(nonDeckInvestigators, code => investigators[code]),
+      ...flatMap(nonDeckInvestigators, code => investigators[code] || []),
     ]);
   }
 );
@@ -382,12 +399,20 @@ export const getCampaign = createSelector(
 
 const getChaosBagResultsWithId = (state: AppState, id: number) => state.campaigns.chaosBagResults;
 
+const EMPTY_CHAOS_BAG_RESULTS = {
+  drawnTokens: [],
+  sealedTokens: [],
+  totalDrawnTokens: 0,
+};
 export const getChaosBagResults = createSelector(
   getChaosBagResultsWithId,
   getIdWithId,
   (chaosBagResults, id): ChaosBagResults => {
-    if (chaosBagResults && chaosBagResults[id]) {
-      return chaosBagResults[id];
+    if (chaosBagResults) {
+      const result = chaosBagResults[id];
+      if (result) {
+        return result;
+      }
     }
     return NEW_CHAOS_BAG_RESULTS;
   }
@@ -427,6 +452,10 @@ export function getNextLocalDeckId(state: AppState): number {
     return smallestDeckId - 1;
   }
   return -1;
+}
+
+export function getDeckChecklist(state: AppState, id: number): Set<string> {
+  return new Set((state.decks.checklist || {})[id] || []);
 }
 
 export function getFilterState(
@@ -475,4 +504,38 @@ export function getCampaignGuideState(
   campaignId: number
 ): CampaignGuideState {
   return getGuideState(state, campaignId);
+}
+
+export function getLangChoice(state: AppState) {
+  if (state.settings.lang) {
+    return state.settings.lang;
+  }
+  if (state.cards.lang) {
+    return state.cards.lang;
+  }
+  return 'en';
+}
+
+export function getLangPreference(
+  state: AppState
+): string {
+  if (state.settings.lang === 'system') {
+    return getSystemLanguage();
+  }
+  if (state.settings.lang) {
+    return state.settings.lang;
+  }
+  if (state.cards.lang) {
+    return state.cards.lang;
+  }
+  return getSystemLanguage();
+}
+
+export function getCardLang(
+  state: AppState
+): string {
+  if (state.cards.card_lang) {
+    return state.cards.card_lang;
+  }
+  return state.cards.lang || 'en';
 }

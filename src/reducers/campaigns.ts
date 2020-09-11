@@ -1,4 +1,5 @@
-import { find, filter, forEach, map, uniq } from 'lodash';
+import { find, filter, flatMap, forEach, map, uniq } from 'lodash';
+import uuid from 'react-native-uuid';
 import { t } from 'ttag';
 
 import {
@@ -8,6 +9,7 @@ import {
   UPDATE_CAMPAIGN,
   CAMPAIGN_ADD_INVESTIGATOR,
   UPDATE_CAMPAIGN_SPENT_XP,
+  RESTORE_COMPLEX_BACKUP,
   CAMPAIGN_REMOVE_INVESTIGATOR,
   CLEAN_BROKEN_CAMPAIGNS,
   UPDATE_CHAOS_BAG_RESULTS,
@@ -17,6 +19,7 @@ import {
   RESTORE_BACKUP,
   REPLACE_LOCAL_DECK,
   NEW_CHAOS_BAG_RESULTS,
+  ENSURE_UUID,
   Campaign,
   CampaignCycleCode,
   WeaknessSet,
@@ -29,7 +32,7 @@ export interface CampaignsState {
     [id: string]: Campaign;
   };
   chaosBagResults?: {
-    [id: string]: ChaosBagResults;
+    [id: string]: ChaosBagResults | undefined;
   };
 }
 
@@ -47,6 +50,7 @@ function newBlankGuidedCampaign(
 ): Campaign {
   return {
     id,
+    uuid: uuid.v4(),
     name,
     cycleCode,
     weaknessSet,
@@ -74,6 +78,55 @@ export default function(
   state: CampaignsState = DEFAULT_CAMPAIGNS_STATE,
   action: CampaignActions
 ): CampaignsState {
+  if (action.type === RESTORE_COMPLEX_BACKUP) {
+    const all = { ...state.all };
+    const chaosBagResults = { ...state.chaosBagResults };
+    forEach(action.campaigns, campaign => {
+      const remappedCampaign = {
+        ...campaign,
+        id: action.campaignRemapping[campaign.id],
+        baseDeckIds: flatMap(campaign.baseDeckIds, deckId => {
+          if (deckId < 0) {
+            const newDeckId = action.deckRemapping[deckId];
+            if (newDeckId) {
+              return [newDeckId];
+            }
+            // They chose not to import this deck.
+            return [];
+          }
+          return [deckId];
+        }),
+      };
+      all[remappedCampaign.id] = remappedCampaign;
+      chaosBagResults[remappedCampaign.id] = {
+        drawnTokens: [],
+        sealedTokens: [],
+        totalDrawnTokens: 0,
+      };
+    });
+    return {
+      ...state,
+      all,
+      chaosBagResults,
+    };
+  }
+  if (action.type === ENSURE_UUID) {
+    const all: { [id: string]: Campaign } = {};
+    forEach(state.all, (campaign, id) => {
+      if (campaign.uuid) {
+        all[id] = campaign;
+      } else {
+        all[id] = {
+          ...campaign,
+          uuid: uuid.v4(),
+        };
+      }
+    });
+    return {
+      ...state,
+      all,
+    };
+  }
   if (action.type === LOGOUT) {
     const all: { [id: string]: Campaign } = {};
     forEach(state.all, (campaign, id) => {
@@ -173,6 +226,7 @@ export default function(
 
     const newCampaign: Campaign = {
       id: action.id,
+      uuid: uuid.v4(),
       name: action.name,
       showInterludes: true,
       cycleCode: action.cycleCode,
@@ -288,6 +342,7 @@ export default function(
             Math.max((investigatorData.spentXp || 0) - 1, 0),
         },
       },
+      lastUpdated: action.now,
     };
     return {
       ...state,

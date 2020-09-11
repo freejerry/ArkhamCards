@@ -1,10 +1,12 @@
 import React from 'react';
-import { Alert, InteractionManager, Text, StyleSheet, View } from 'react-native';
+import { Alert, AppState, InteractionManager, Text, StyleSheet, View, AppStateStatus } from 'react-native';
 import { Navigation, EventSubscription } from 'react-native-navigation';
-import { flatMap, forEach, map, partition } from 'lodash';
+import { find, findLast, flatMap, forEach, map, partition } from 'lodash';
+import { isAfter } from 'date-fns';
 import { t } from 'ttag';
 
-import { Campaign, InvestigatorData } from '@actions/types';
+import withStyles, { StylesProps } from '@components/core/withStyles';
+import { Campaign, InvestigatorData, Trauma } from '@actions/types';
 import BasicButton from '@components/core/BasicButton';
 import InvestigatorCampaignRow from '@components/campaign/InvestigatorCampaignRow';
 import { ProcessedCampaign } from '@data/scenario';
@@ -14,26 +16,31 @@ import typography from '@styles/typography';
 import { s, l } from '@styles/space';
 import COLORS from '@styles/colors';
 
-interface Props {
+interface OwnProps {
   componentId: string;
   campaignData: CampaignGuideContextType;
   processedCampaign: ProcessedCampaign;
   fontScale: number;
   updateCampaign: (
     id: number,
-    sparseCampaign: Partial<Campaign>
+    sparseCampaign: Partial<Campaign>,
+    now?: Date
   ) => void;
   deleteCampaign?: () => void;
+  showTraumaDialog: (investigator: Card, traumaData: Trauma, onUpdate?: (code: string, trauma: Trauma) => void) => void;
 }
+
+type Props = OwnProps & StylesProps;
 
 interface State {
   spentXp: {
     [code: string]: number;
   };
   removeMode: boolean;
+  appState: AppStateStatus;
 }
 
-export default class CampaignInvestigatorsComponent extends React.Component<Props, State> {
+class CampaignInvestigatorsComponent extends React.Component<Props, State> {
   _navEventListener: EventSubscription;
 
   static contextType = CampaignGuideContext;
@@ -51,11 +58,28 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
     this.state = {
       spentXp,
       removeMode: false,
+      appState: AppState.currentState,
     };
     this._navEventListener = Navigation.events().bindComponent(this);
   }
 
+  _handleAppStateChange = (nextAppState: AppStateStatus) => {
+    const { appState } = this.state;
+    if (appState === 'active' && (nextAppState === 'inactive' || nextAppState === 'background')) {
+      this._syncCampaignData();
+    }
+    this.setState({
+      appState: nextAppState,
+    });
+  };
+
+  componentDidMount() {
+    AppState.addEventListener('change', this._handleAppStateChange);
+  }
+
   componentWillUnmount() {
+    AppState.removeEventListener('change', this._handleAppStateChange);
+
     this._navEventListener && this._navEventListener.remove();
     InteractionManager.runAfterInteractions(this._syncCampaignData);
   }
@@ -66,6 +90,8 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
         campaignId,
         campaignGuideVersion,
         campaignGuide,
+        campaignState,
+        lastUpdated,
       },
       processedCampaign: {
         campaignLog,
@@ -80,6 +106,12 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
         spentXp: xp,
       };
     });
+    const hasXpDifference = !!find(spentXp, (xp, code) => {
+      const adjust = this.props.campaignData.adjustedInvestigatorData[code];
+      return !adjust || adjust.spentXp !== xp;
+    });
+    const guideLastUpdated = campaignState.lastUpdated();
+    const newLastUpdated = isAfter(lastUpdated, guideLastUpdated) ? lastUpdated : guideLastUpdated;
     updateCampaign(
       campaignId,
       {
@@ -87,7 +119,6 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
         difficulty: campaignLog.campaignData.difficulty,
         investigatorData: campaignLog.campaignData.investigatorData,
         chaosBag: campaignLog.chaosBag,
-        lastUpdated: new Date(),
         scenarioResults: flatMap(scenarios, scenario => {
           if (scenario.type !== 'completed') {
             return [];
@@ -101,7 +132,8 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
           };
         }),
         adjustedInvestigatorData,
-      }
+      },
+      hasXpDifference ? new Date() : newLastUpdated
     );
   };
 
@@ -191,6 +223,48 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
     }
   };
 
+  canEditTrauma() {
+    const {
+      processedCampaign,
+    } = this.props;
+    return !find(processedCampaign.scenarios, scenario => scenario.type === 'started') &&
+      !!find(processedCampaign.scenarios, scenario => scenario.type === 'completed');
+  }
+
+  _updateTraumaData = (code: string, trauma: Trauma) => {
+    const { processedCampaign } = this.props;
+    const latestScenario = findLast(processedCampaign.scenarios, s => s.type === 'completed');
+    console.log(`Updating ${code} ${JSON.stringify({ trauma, latestScenario })}`);
+    this.context.campaignState.setInterScenarioInvestigatorData(
+      code,
+      trauma,
+      latestScenario ? latestScenario?.id.encodedScenarioId : undefined
+    );
+  };
+
+  _showTraumaDialog = (investigator: Card, traumaData: Trauma) => {
+    const { showTraumaDialog } = this.props;
+    showTraumaDialog(
+      investigator,
+      traumaData,
+      this._updateTraumaData
+    );
+  };
+
+  _disabledShowTraumaDialog = () => {
+    const {
+      processedCampaign,
+    } = this.props;
+    const campaignSetupCompleted = !!find(processedCampaign.scenarios, scenario => scenario.type === 'completed');
+
+    Alert.alert(
+      t`Investigator trauma`,
+      campaignSetupCompleted ?
+        t`You can only edit trauma here between scenarios.\n\nDuring scenario play it can be edited using the scenario guide.` :
+        t`Starting trauma can be adjusted after 'Campaign Setup' has been completed.`
+    );
+  };
+
   render() {
     const {
       processedCampaign: {
@@ -202,11 +276,13 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
       fontScale,
       componentId,
       deleteCampaign,
+      gameFont,
     } = this.props;
     const {
       removeMode,
       spentXp,
     } = this.state;
+    const canEditTrauma = this.canEditTrauma();
     return (
       <CampaignGuideContext.Consumer>
         { ({ campaignInvestigators, campaignId, latestDecks }: CampaignGuideContextType) => {
@@ -232,6 +308,7 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
                   traumaAndCardData={campaignLog.traumaAndCardData(investigator.code)}
                   chooseDeckForInvestigator={this._showChooseDeckForInvestigator}
                   removeInvestigator={removeMode ? this._removeInvestigatorPressed : undefined}
+                  showTraumaDialog={canEditTrauma ? this._showTraumaDialog : this._disabledShowTraumaDialog}
                 />
               )) }
               { !removeMode && (
@@ -249,7 +326,7 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
               }
               { killedInvestigators.length > 0 && (
                 <View style={styles.header}>
-                  <Text style={[typography.bigGameFont, typography.center, typography.underline]}>
+                  <Text style={[typography.bigGameFont, { fontFamily: gameFont }, typography.center, typography.underline]}>
                     { t`Killed and Insane Investigators` }
                   </Text>
                 </View>
@@ -286,6 +363,8 @@ export default class CampaignInvestigatorsComponent extends React.Component<Prop
     );
   }
 }
+
+export default withStyles(CampaignInvestigatorsComponent);
 
 const styles = StyleSheet.create({
   header: {

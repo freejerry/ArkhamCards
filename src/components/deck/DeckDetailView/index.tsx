@@ -50,6 +50,7 @@ import {
 import { Campaign, Deck, DeckMeta, ParsedDeck, Slots } from '@actions/types';
 import { updateCampaign } from '@components/campaign/actions';
 import withPlayerCards, { TabooSetOverride, PlayerCardProps } from '@components/core/withPlayerCards';
+import { DeckChecklistProps } from '@components/deck/DeckChecklistView';
 import Card, { CardsMap } from '@data/Card';
 import TabooSet from '@data/TabooSet';
 import { parseDeck, parseBasicDeck } from '@lib/parseDeck';
@@ -78,7 +79,7 @@ import COLORS from '@styles/colors';
 import { getDeckOptions, showCardCharts, showDrawSimulator } from '@components/nav/helper';
 
 const SHOW_DESCRIPTION_EDITOR = false;
-
+const SHOW_CHECKLIST_EDITOR = true;
 export interface DeckDetailProps {
   id: number;
   title?: string;
@@ -164,16 +165,18 @@ class DeckDetailView extends React.Component<Props, State> {
         [name: string]: Card[];
       } = {};
       forEach(props.cards, card => {
-        if (cardsByName[card.real_name]) {
-          cardsByName[card.real_name].push(card);
-        } else {
-          cardsByName[card.real_name] = [card];
-        }
-        if (card.bonded_name) {
-          if (bondedCardsByName[card.bonded_name]) {
-            bondedCardsByName[card.bonded_name].push(card);
+        if (card) {
+          if (cardsByName[card.real_name]) {
+            cardsByName[card.real_name].push(card);
           } else {
-            bondedCardsByName[card.bonded_name] = [card];
+            cardsByName[card.real_name] = [card];
+          }
+          if (card.bonded_name) {
+            if (bondedCardsByName[card.bonded_name]) {
+              bondedCardsByName[card.bonded_name].push(card);
+            } else {
+              bondedCardsByName[card.bonded_name] = [card];
+            }
           }
         }
       });
@@ -188,7 +191,7 @@ class DeckDetailView extends React.Component<Props, State> {
       const investigator = props.deck && props.deck.investigator_code;
       const parallelInvestigators: Card[] = [];
       forEach(props.investigators, card => {
-        if (investigator && card.alternate_of_code === investigator) {
+        if (card && investigator && card.alternate_of_code === investigator) {
           parallelInvestigators.push(card);
         }
       });
@@ -531,6 +534,39 @@ class DeckDetailView extends React.Component<Props, State> {
       });
     }
   }
+
+  _onChecklistPressed = () => {
+    const {
+      componentId,
+      deck,
+      cards,
+      tabooSetOverride,
+    } = this.props;
+    const {
+      slots,
+    } = this.state;
+    if (!deck) {
+      return;
+    }
+    this.setState({
+      menuOpen: false,
+    });
+    const investigator = cards[deck.investigator_code];
+    Navigation.push<DeckChecklistProps>(componentId, {
+      component: {
+        name: 'Deck.Checklist',
+        passProps: {
+          id: deck.id,
+          investigator: deck.investigator_code,
+          slots,
+          tabooSetOverride,
+        },
+        options: {
+          ...getDeckOptions(investigator, false, t`Checklist`, true),
+        },
+      },
+    });
+  };
 
   _onEditSpecialPressed = () => {
     const {
@@ -893,7 +929,8 @@ class DeckDetailView extends React.Component<Props, State> {
     const deltas = this.slotDeltas(deck, slots, ignoreDeckLimitSlots);
     const addedWeaknesses: string[] = [];
     forEach(deltas.additions, (addition, code) => {
-      if (cards[code] && cards[code].subtype_code === 'basicweakness') {
+      const card = cards[code];
+      if (card && card.subtype_code === 'basicweakness') {
         forEach(range(0, addition), () => addedWeaknesses.push(code));
       }
     });
@@ -1259,6 +1296,7 @@ class DeckDetailView extends React.Component<Props, State> {
       <Dialog title={t`Deleting`} visible={deleting} viewRef={viewRef}>
         <ActivityIndicator
           style={styles.spinner}
+          color={COLORS.lightText}
           size="large"
           animating
         />
@@ -1292,6 +1330,7 @@ class DeckDetailView extends React.Component<Props, State> {
       <Dialog title={t`Saving`} visible={saving} viewRef={viewRef}>
         <ActivityIndicator
           style={styles.spinner}
+          color={COLORS.lightText}
           size="large"
           animating
         />
@@ -1376,7 +1415,7 @@ class DeckDetailView extends React.Component<Props, State> {
       component: {
         name: 'Dialog.CardUpgrade',
         passProps,
-        options: options,
+        options,
       },
     });
   }
@@ -1669,6 +1708,14 @@ class DeckDetailView extends React.Component<Props, State> {
             />
           </>
         ) }
+        { SHOW_CHECKLIST_EDITOR && (
+          <SettingsButton
+            onPress={this._onChecklistPressed}
+            title={t`Checklist`}
+            titleStyle={styles.text}
+            containerStyle={styles.button}
+          />
+        ) }
         <SettingsButton
           onPress={this._showCardCharts}
           title={t`Charts`}
@@ -1861,6 +1908,7 @@ class DeckDetailView extends React.Component<Props, State> {
         <View style={styles.activityIndicatorContainer}>
           <ActivityIndicator
             style={styles.spinner}
+            color={COLORS.lightText}
             size="small"
             animating
           />
@@ -1877,6 +1925,7 @@ class DeckDetailView extends React.Component<Props, State> {
         <View style={styles.activityIndicatorContainer}>
           <ActivityIndicator
             style={styles.spinner}
+            color={COLORS.lightText}
             size="small"
             animating
           />

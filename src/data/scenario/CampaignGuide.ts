@@ -8,7 +8,8 @@ import GuidedCampaignLog from './GuidedCampaignLog';
 import CampaignStateHelper from './CampaignStateHelper';
 import ScenarioStateHelper from './ScenarioStateHelper';
 import ScenarioGuide from './ScenarioGuide';
-import { FullCampaign, Scenario, Supply } from './types';
+import { FullCampaign, Scenario, Supply, Errata, CardErrata, Question } from './types';
+import FaqEntry from '@data/FaqEntry';
 
 export interface CampaignLog {
   campaignId: string;
@@ -55,17 +56,38 @@ export const CAMPAIGN_SETUP_ID = '$campaign_setup';
 export default class CampaignGuide {
   private campaign: FullCampaign;
   private log: CampaignLog;
+  private encounterSets: { [code: string]: string };
 
   private sideCampaign: FullCampaign;
+  private errata: Errata;
 
   constructor(
     campaign: FullCampaign,
     log: CampaignLog,
-    sideCampaign: FullCampaign
+    encounterSets: { [code: string]: string},
+    sideCampaign: FullCampaign,
+    errata: Errata
   ) {
     this.campaign = campaign;
     this.log = log;
+    this.encounterSets = encounterSets;
     this.sideCampaign = sideCampaign;
+    this.errata = errata;
+  }
+
+  cardErrata(encounterSets: string[]): CardErrata[] {
+    const sets = new Set(encounterSets);
+    return flatMap(this.errata.cards, errata => {
+      if (sets.has(errata.encounter_code)) {
+        return errata.cards;
+      }
+      return [];
+    });
+  }
+
+  scenarioFaq(scenario: string): Question[] {
+    const scenarioFaq = find(this.errata.faq, faq => faq.scenario_code === scenario);
+    return scenarioFaq ? scenarioFaq.questions : [];
   }
 
   sideScenarios(): Scenario[] {
@@ -85,6 +107,10 @@ export default class CampaignGuide {
 
   campaignVersion() {
     return this.campaign.campaign.version;
+  }
+
+  encounterSet(code: string): string | undefined {
+    return this.encounterSets[code];
   }
 
   getFullScenarioName(

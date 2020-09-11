@@ -42,9 +42,13 @@ export default class AboutView extends React.Component {
         <Text style={typography.text}>
           <Text style={typography.bold}>Translation Support:</Text>
           { '\n' }
-          • Spanish: Midraed, Alvaro, and Casalderrey
+          • Spanish: Midraed, Alvaro, and @TengounplanAH
           { '\n' }
           • French: Fabrice2
+          { '\n' }
+          • German: Hauke
+          { '\n' }
+          • Russian:
         </Text>
         <Text style={typography.text}>
           <Text style={typography.bold}>Additional Support:</Text>
@@ -71,7 +75,7 @@ export default class AboutView extends React.Component {
             • <Text style={styles.underline}>Octopus Vectors by Vecteezy</Text>
           </Text>
         </TouchableOpacity>
-        
+
         <View style={styles.footer} />
       </ScrollView>
     );

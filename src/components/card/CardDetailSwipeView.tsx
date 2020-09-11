@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Linking,
-  ScrollView,
   StyleSheet,
   Platform,
   View,
 } from 'react-native';
 import { Navigation, EventSubscription } from 'react-native-navigation';
+import { ScrollView } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import { t } from 'ttag';
 import Swiper from 'react-native-swiper';
@@ -59,7 +59,7 @@ class CardDetailSwipeView extends React.Component<Props, State> {
       topBar: {
         backButton: {
           title: t`Back`,
-          color: passProps.whiteNav ? 'white' : COLORS.navButton,
+          color: passProps.whiteNav ? 'white' : '#007AFF',
         },
       },
     };
@@ -86,7 +86,6 @@ class CardDetailSwipeView extends React.Component<Props, State> {
 
   componentDidAppear() {
     const { componentId } = this.props;
-    console.log('merge options');
     Navigation.mergeOptions(componentId, CardDetailSwipeView.options(this.props));
   }
 
@@ -281,7 +280,6 @@ class CardDetailSwipeView extends React.Component<Props, State> {
     return (
       <ScrollView
         key={itemIndex}
-        style={styles.wrapper}
         overScrollMode="never"
         bounces={false}
         contentContainerStyle={styles.contentContainer}
@@ -304,9 +302,7 @@ class CardDetailSwipeView extends React.Component<Props, State> {
     const {
       cards,
     } = this.props;
-    const vm = this;
-
-    return cards.map((card, index) => vm.renderCard(card, index));
+    return cards.map((card, index) => this.renderCard(card, index));
   }
 
   render() {
@@ -330,9 +326,8 @@ class CardDetailSwipeView extends React.Component<Props, State> {
         <Swiper
           index={initialIndex}
           width={width}
-          height={height}
-          style={{ backgroundColor: COLORS.background }}
-          containerStyle={{ flex: 1, backgroundColor: COLORS.background }}
+          style={styles.contentContainer}
+          containerStyle={{ flex: 1, flexDirection: 'column', backgroundColor: COLORS.background }}
           loadMinimal
           loadMinimalSize={1}
           loadMinimalLoader={<View style={[styles.wrapper, { width, height }]} />}
@@ -362,7 +357,7 @@ function mapStateToProps(
 }
 
 export default withDimensions<NavigationProps & CardDetailSwipeProps>(
-  connect<ReduxProps, {}, NavigationProps & CardDetailSwipeProps & DimensionsProps, AppState>(mapStateToProps)(
+  connect<ReduxProps, unknown, NavigationProps & CardDetailSwipeProps & DimensionsProps, AppState>(mapStateToProps)(
     // @ts-ignore TS2345
     CardDetailSwipeView
   )

@@ -4,6 +4,7 @@ import { EventSubscription, Navigation } from 'react-native-navigation';
 import { filter, find, reverse, partition, sortBy, sumBy } from 'lodash';
 import { connect } from 'react-redux';
 import { ngettext, msgid } from 'ttag';
+import { t } from 'ttag';
 
 import BasicButton from '@components/core/BasicButton';
 import CardUpgradeOption from './CardUpgradeOption';
@@ -56,7 +57,6 @@ interface State {
 type Props = CardUpgradeDialogProps & ReduxProps & NavigationProps & DimensionsProps;
 
 class CardUpgradeDialog extends React.Component<Props, State> {
-
   _navEventListener?: EventSubscription;
 
   constructor(props: Props) {
@@ -94,10 +94,12 @@ class CardUpgradeDialog extends React.Component<Props, State> {
       [code]: (slots[code] || 0) + 1,
     };
 
-    const possibleDecrement = find(reverse(this.namedCards()), card => (
-      card.code !== code && newSlots[card.code] > 0 &&
-        (card.xp || 0) < (cards[code].xp || 0)
-    ));
+    const possibleDecrement = find(reverse(this.namedCards()), card => {
+      return (
+        card.code !== code && newSlots[card.code] > 0 &&
+        (card.xp || 0) < (cards[code]?.xp || 0)
+      );
+    });
 
     if (possibleDecrement) {
       newSlots[possibleDecrement.code]--;

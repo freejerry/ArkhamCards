@@ -17,11 +17,11 @@ import SettingsTabooPicker from './SettingsTabooPicker';
 import SettingsSwitch from '@components/core/SettingsSwitch';
 import { clearDecks } from '@actions';
 import { fetchCards } from '@components/card/actions';
-import { setSingleCardView, setAlphabetizeEncounterSets} from './actions';
+import { setSingleCardView, setAlphabetizeEncounterSets } from './actions';
 import { prefetch } from '@lib/auth';
 import Database from '@data/Database';
 import DatabaseContext, { DatabaseContextType } from '@data/DatabaseContext';
-import { getAllDecks, AppState } from '@reducers';
+import { getAllDecks, AppState, getLangPreference, getLangChoice } from '@reducers';
 import SettingsItem from './SettingsItem';
 import LoginButton from './LoginButton';
 import COLORS from '@styles/colors';
@@ -34,13 +34,14 @@ interface ReduxProps {
   showCardsingleCardView: boolean;
   alphabetizeEncounterSets: boolean;
   lang: string;
+  langChoice: string;
   cardsLoading?: boolean;
   cardsError?: string;
   deckCount: number;
 }
 
 interface ReduxActionProps {
-  fetchCards: (db: Database, lang: string) => void;
+  fetchCards: (db: Database, cardLang: string, choiceLang: string) => void;
   clearDecks: () => void;
   setSingleCardView: (value: boolean) => void;
   setAlphabetizeEncounterSets: (value: boolean) => void;
@@ -54,7 +55,7 @@ class SettingsView extends React.Component<Props> {
   context!: DatabaseContextType;
 
   navButtonPressed(screen: string, title: string) {
-    Navigation.push<{}>(this.props.componentId, {
+    Navigation.push(this.props.componentId, {
       component: {
         name: screen,
         options: {
@@ -91,16 +92,25 @@ class SettingsView extends React.Component<Props> {
     this.navButtonPressed('About', t`About Arkham Cards`);
   };
 
+  _backupPressed = () => {
+    this.navButtonPressed('Settings.Backup', t`Backup`);
+  };
+
   _contactPressed = () => {
     Linking.openURL('mailto:arkhamcards@gmail.com');
   }
 
+  _rules = () => {
+    Linking.openURL('https://arkhamdb.com/rules');
+  };
+
   _doSyncCards = () => {
     const {
       lang,
+      langChoice,
       fetchCards,
     } = this.props;
-    fetchCards(this.context.db, lang || 'en');
+    fetchCards(this.context.db, lang, langChoice);
   };
 
   syncCardsText() {
@@ -124,6 +134,7 @@ class SettingsView extends React.Component<Props> {
     this.props.setAlphabetizeEncounterSets(value);
   };
 
+
   render() {
     const { cardsLoading, showCardsingleCardView, alphabetizeEncounterSets } = this.props;
     return (
@@ -131,6 +142,11 @@ class SettingsView extends React.Component<Props> {
         <ScrollView style={styles.list}>
           <CategoryHeader title={t`Account`} />
           <LoginButton settings />
+          <SettingsItem
+            navigation
+            onPress={this._backupPressed}
+            text={t`Backup Data`}
+          />
           <CategoryHeader title={t`Card Settings`} />
           <SettingsItem
             navigation
@@ -144,6 +160,11 @@ class SettingsView extends React.Component<Props> {
           />
           <SettingsTabooPicker />
           <CategoryHeader title={t`Card Data`} />
+          <SettingsItem
+            navigation
+            onPress={this._rules}
+            text={t`Rules`}
+          />
           <SettingsItem
             onPress={cardsLoading ? undefined : this._doSyncCards}
             text={this.syncCardsText()}
@@ -191,7 +212,8 @@ function mapStateToProps(state: AppState): ReduxProps {
     cardsLoading: state.cards.loading,
     cardsError: state.cards.error || undefined,
     deckCount: keys(getAllDecks(state)).length,
-    lang: state.packs.lang || 'en',
+    lang: getLangPreference(state),
+    langChoice: getLangChoice(state),
   };
 }
 
@@ -216,9 +238,6 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    backgroundColor: COLORS.veryLightBackground,
-  },
-  categoryContainer: {
     backgroundColor: COLORS.veryLightBackground,
   },
 });

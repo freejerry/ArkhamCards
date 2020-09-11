@@ -3,15 +3,14 @@ import { debounce } from 'lodash';
 import {
   StyleSheet,
   Text,
-  View,
 } from 'react-native';
 
+import withStyles, { StylesProps } from '@components/core/withStyles';
 import BasicListRow from '@components/core/BasicListRow';
 import PlusMinusButtons from '@components/core/PlusMinusButtons';
 import typography from '@styles/typography';
-import { xs, s } from '@styles/space';
 
-interface Props {
+interface OwnProps {
   countChanged: (index: number, count: number) => void;
   index: number;
   title: string;
@@ -23,7 +22,9 @@ interface State {
   count?: number;
 }
 
-export default class EditCountComponent extends React.Component<Props, State> {
+type Props = OwnProps & StylesProps;
+
+class EditCountComponent extends React.Component<Props, State> {
   _countChanged!: (index: number, count: number) => void;
 
   constructor(props: Props) {
@@ -55,14 +56,14 @@ export default class EditCountComponent extends React.Component<Props, State> {
   render() {
     const {
       title,
-      isInvestigator,
+      gameFont,
     } = this.props;
     const {
       count,
     } = this.state;
     return (
       <BasicListRow>
-        <Text style={typography.mediumGameFont}>
+        <Text style={[typography.mediumGameFont, { fontFamily: gameFont }]}>
           { title }
         </Text>
         <PlusMinusButtons
@@ -81,27 +82,11 @@ export default class EditCountComponent extends React.Component<Props, State> {
   }
 }
 
+export default withStyles(EditCountComponent);
+
 const styles = StyleSheet.create({
-  marginTop: {
-    marginTop: xs,
-  },
-  container: {
-    paddingTop: s,
-    paddingLeft: s,
-    paddingRight: s,
-  },
   margin: {
     minWidth: 40,
     textAlign: 'center',
-  },
-  textColumn: {
-    flex: 1,
-    marginRight: s,
-  },
-  row: {
-    alignSelf: 'stretch',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
 });

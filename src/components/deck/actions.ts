@@ -10,13 +10,18 @@ import {
   UPDATE_DECK,
   DELETE_DECK,
   REPLACE_LOCAL_DECK,
+  RESET_DECK_CHECKLIST,
+  SET_DECK_CHECKLIST_CARD,
   ReplaceLocalDeckAction,
   NewDeckAvailableAction,
   UpdateDeckAction,
   DeleteDeckAction,
   Deck,
   DeckMeta,
+  DeckProblemType,
   Slots,
+  ResetDeckChecklistAction,
+  SetDeckChecklistCardAction,
 } from '@actions/types';
 import { login } from '@actions';
 import { saveDeck, loadDeck, upgradeDeck, newCustomDeck, UpgradeDeckResult, deleteDeck } from '@lib/authApi';
@@ -43,6 +48,28 @@ function updateDeck(
     id,
     deck,
     isWrite,
+  };
+}
+
+export function resetDeckChecklist(
+  id: number
+): ResetDeckChecklistAction {
+  return {
+    type: RESET_DECK_CHECKLIST,
+    id,
+  };
+}
+
+export function setDeckChecklistCard(
+  id: number,
+  card: string,
+  value: boolean
+): SetDeckChecklistCardAction {
+  return {
+    type: SET_DECK_CHECKLIST_CARD,
+    id,
+    card,
+    value,
   };
 }
 
@@ -119,17 +146,17 @@ export interface DeckChanges {
 
 function handleUpgradeDeckResult(
   result: UpgradeDeckResult,
-  dispatch: ThunkDispatch<AppState, {}, Action>
+  dispatch: ThunkDispatch<AppState, unknown, Action>
 ) {
   dispatch(updateDeck(result.deck.id, result.deck, false));
   dispatch(setNewDeck(result.upgradedDeck.id, result.upgradedDeck));
 }
 
 export const deleteDeckAction: ActionCreator<
-  ThunkAction<Promise<boolean>, AppState, {}, Action>
+  ThunkAction<Promise<boolean>, AppState, unknown, Action>
 > = (id: number, deleteAllVersion: boolean, local: boolean) => {
   return (
-    dispatch: ThunkDispatch<AppState, {}, Action>,
+    dispatch: ThunkDispatch<AppState, unknown, Action>,
   ) => {
     return new Promise<boolean>((resolve, reject) => {
       if (local) {
@@ -155,14 +182,14 @@ export const deleteDeckAction: ActionCreator<
 };
 
 export const saveDeckUpgrade: ActionCreator<
-  ThunkAction<Promise<Deck>, AppState, {}, Action>
+  ThunkAction<Promise<Deck>, AppState, unknown, Action>
 > = (
   deck: Deck,
   xp: number,
   exileCounts: Slots,
 ) => {
   return (
-    dispatch: ThunkDispatch<AppState, {}, Action>,
+    dispatch: ThunkDispatch<AppState, unknown, Action>,
     getState: () => AppState
   ) => {
     return new Promise<Deck>((resolve, reject) => {
@@ -204,12 +231,12 @@ export const saveDeckUpgrade: ActionCreator<
 };
 
 export const saveDeckChanges: ActionCreator<
-  ThunkAction<Promise<Deck>, AppState, {}, Action>
+  ThunkAction<Promise<Deck>, AppState, unknown, Action>
 > = (
   deck: Deck,
   changes: DeckChanges
 ) => {
-  return (dispatch: ThunkDispatch<AppState, {}, Action>): Promise<Deck> => {
+  return (dispatch: ThunkDispatch<AppState, unknown, Action>): Promise<Deck> => {
     return new Promise((resolve, reject) => {
       if (deck.local) {
         const newDeck = updateLocalDeck(
@@ -217,7 +244,7 @@ export const saveDeckChanges: ActionCreator<
           changes.name || deck.name,
           changes.slots || deck.slots,
           changes.ignoreDeckLimitSlots || deck.ignoreDeckLimitSlots || {},
-          (changes.problem !== undefined && changes.problem !== null) ? changes.problem : (deck.problem || ''),
+          ((changes.problem !== undefined && changes.problem !== null) ? changes.problem : (deck.problem || '')) as DeckProblemType,
           (changes.spentXp !== undefined && changes.spentXp !== null) ? changes.spentXp : (deck.spentXp || 0),
           (changes.xpAdjustment !== undefined && changes.xpAdjustment !== null) ? changes.xpAdjustment : (deck.xp_adjustment || 0),
           changes.tabooSetId !== undefined ? changes.tabooSetId : deck.taboo_id,
@@ -271,12 +298,12 @@ export interface NewDeckParams {
   meta?: DeckMeta;
 }
 export const saveNewDeck: ActionCreator<
-  ThunkAction<Promise<Deck>, AppState, {}, Action>
+  ThunkAction<Promise<Deck>, AppState, unknown, Action>
 > = (
   params: NewDeckParams
 ) => {
   return (
-    dispatch: ThunkDispatch<AppState, {}, Action>,
+    dispatch: ThunkDispatch<AppState, unknown, Action>,
     getState: () => AppState
   ): Promise<Deck> => {
     return new Promise<Deck>((resolve, reject) => {
@@ -326,13 +353,13 @@ export const saveNewDeck: ActionCreator<
 };
 
 export const saveClonedDeck: ActionCreator<
-  ThunkAction<Promise<Deck>, AppState, {}, Action>
+  ThunkAction<Promise<Deck>, AppState, unknown, Action>
 > = (
   local: boolean,
   cloneDeck: Deck,
   deckName: string
 ) => {
-  return (dispatch: ThunkDispatch<AppState, {}, Action>): Promise<Deck> => {
+  return (dispatch: ThunkDispatch<AppState, unknown, Action>): Promise<Deck> => {
     return new Promise<Deck>((resolve, reject) => {
       dispatch(saveNewDeck({
         local,
@@ -364,11 +391,11 @@ export const saveClonedDeck: ActionCreator<
 };
 
 export const uploadLocalDeck: ActionCreator<
-  ThunkAction<Promise<Deck>, AppState, {}, Action>
+  ThunkAction<Promise<Deck>, AppState, unknown, Action>
 > = (
   localDeck: Deck
 ) => {
-  return (dispatch: ThunkDispatch<AppState, {}, Action>): Promise<Deck> => {
+  return (dispatch: ThunkDispatch<AppState, unknown, Action>): Promise<Deck> => {
     return dispatch(saveClonedDeck(
       false,
       localDeck,
@@ -390,4 +417,6 @@ export default {
   saveNewDeck,
   saveClonedDeck,
   uploadLocalDeck,
+  resetDeckChecklist,
+  setDeckChecklistCard,
 };

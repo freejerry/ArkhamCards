@@ -1,13 +1,8 @@
 import React from 'react';
 import { concat, filter, find, findIndex, forEach, head, last, map } from 'lodash';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { View } from 'react-native';
 import { bindActionCreators, Dispatch, Action } from 'redux';
 import { connect } from 'react-redux';
-import { Navigation } from 'react-native-navigation';
 import { t } from 'ttag';
 
 import { Campaign, SingleCampaign, DecksMap, Pack, ScenarioResult, CUSTOM } from '@actions/types';
@@ -20,7 +15,6 @@ import SinglePickerComponent from '@components/core/SinglePickerComponent';
 import { ShowTextEditDialog } from '@components/core/withDialogs';
 import Database from '@data/Database';
 import { getAllDecks, getAllCyclePacks, getAllStandalonePacks, getPack, getTabooSet, AppState } from '@reducers';
-import { s } from '@styles/space';
 
 interface OwnProps {
   componentId: string;
@@ -112,7 +106,7 @@ class ScenarioSection extends React.Component<Props, State> {
     const {
       allScenarios,
     } = this.props;
-    const scenarioName = this.possibleScenarios()[index];    
+    const scenarioName = this.possibleScenarios()[index];
     this.setState({
       selectedScenario: find(
         allScenarios,
@@ -131,22 +125,6 @@ class ScenarioSection extends React.Component<Props, State> {
     this.setState({
       resolution: value,
     }, this._updateManagedScenario);
-  };
-
-  _showScenarioDialog = () => {
-    const {
-      selectedScenario,
-    } = this.state;
-    Navigation.showOverlay({
-      component: {
-        name: 'Dialog.Scenario',
-        passProps: {
-          scenarioChanged: this._scenarioChanged,
-          scenarios: this.possibleScenarios(),
-          selected: selectedScenario === CUSTOM ? CUSTOM : selectedScenario.name,
-        },
-      },
-    });
   };
 
   possibleScenarios() {
@@ -289,15 +267,3 @@ export default connect(mapStateToPropsFix, mapDispatchToProps)(
     }
   )
 );
-
-const styles = StyleSheet.create({
-  margin: {
-    marginLeft: s,
-    marginRight: s,
-    marginBottom: s,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-});

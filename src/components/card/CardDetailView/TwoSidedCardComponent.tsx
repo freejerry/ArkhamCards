@@ -28,6 +28,7 @@ import { CardFaqProps } from '@components/card/CardFaqView';
 import { CardTabooProps } from '@components/card/CardTabooView';
 import { InvestigatorCardsProps } from '../../cardlist/InvestigatorCardsView';
 import Button from '@components/core/Button';
+import BasicButton from '@components/core/BasicButton';
 import CardCostIcon from '@components/core/CardCostIcon';
 import Card from '@data/Card';
 import COLORS from '@styles/colors';
@@ -88,7 +89,7 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
   editSpoilersPressed() {
     const { componentId } = this.props;
     if (componentId) {
-      Navigation.push<{}>(componentId, {
+      Navigation.push(componentId, {
         component: {
           name: 'My.Spoilers',
         },
@@ -333,7 +334,7 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
   }
 
   renderFactionIcon(card: Card) {
-    const color =  '#FFF';
+    const color = '#FFF';
     if (card.spoiler) {
       const encounter_code = card.encounter_code ||
         (card.linked_card && card.linked_card.encounter_code);
@@ -488,7 +489,8 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
     backFirst: boolean,
     isHorizontal: boolean,
     flavorFirst: boolean,
-    isFirst: boolean
+    isFirst: boolean,
+    key: string
   ) {
     const {
       componentId,
@@ -498,7 +500,7 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
     } = this.props;
     if (card.linked_card) {
       return (
-        <View>
+        <View key={key}>
           <TwoSidedCardComponent
             componentId={componentId}
             fontScale={fontScale}
@@ -518,16 +520,14 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
 
     if (!backFirst && card.spoiler && !this.state.showBack && card.type_code !== 'scenario') {
       return (
-        <View style={[styles.container, styles.buttonContainerPadding, { width }]}>
-          <View style={styles.buttonContainer}>
-            <Button grow text={t`Show back`} onPress={this._toggleShowBack} />
-          </View>
+        <View style={[styles.container, styles.buttonContainerPadding, { width }]} key={key}>
+          <BasicButton title={t`Show back`} onPress={this._toggleShowBack} />
         </View>
       );
     }
 
     return (
-      <View style={[styles.container, styles.containerPadding, { width }]}>
+      <View style={[styles.container, styles.containerPadding, { width }]} key={key}>
         <View style={[styles.card, {
           backgroundColor: COLORS.background,
           borderColor: COLORS.faction[
@@ -617,9 +617,9 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
                 <>
                   <Text style={typography.cardText}>
                     <EncounterIcon
-                      encounter_code={card.encounter_code} 
-                      size={16 * fontScale} 
-                      color={COLORS.darkText} 
+                      encounter_code={card.encounter_code}
+                      size={16 * fontScale}
+                      color={COLORS.darkText}
                     />
                     { ` ${card.encounter_name} #${card.encounter_position}. ${card.quantity && card.quantity > 1 ?
                       ngettext(
@@ -631,10 +631,10 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
                   </Text>
                   { card.encounter_name !== card.cycle_name && (
                     <Text style={typography.cardText}>
-                      <EncounterIcon 
-                        encounter_code={card.cycle_code || card.pack_code} 
-                        size={16 * fontScale} 
-                        color={COLORS.darkText} 
+                      <EncounterIcon
+                        encounter_code={card.cycle_code || card.pack_code}
+                        size={16 * fontScale}
+                        color={COLORS.darkText}
                       />
                       { ` ${card.cycle_name} #${(card.position || 0) % 1000}.` }
                     </Text>
@@ -642,10 +642,10 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
                 </>
               ) : (
                 <Text style={typography.cardText}>
-                  <EncounterIcon 
-                    encounter_code={card.cycle_code || card.pack_code} 
-                    size={16 * fontScale} 
-                    color={COLORS.darkText} 
+                  <EncounterIcon
+                    encounter_code={card.cycle_code || card.pack_code}
+                    size={16 * fontScale}
+                    color={COLORS.darkText}
                   />
                   { ` ${card.pack_name} #${(card.position || 0) % 1000}.` }
                 </Text>
@@ -726,30 +726,29 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
     backFirst: boolean,
     isHorizontal: boolean,
     flavorFirst: boolean,
-    isFirst: boolean
+    isFirst: boolean,
+    key: string
   ) {
     const {
       simple,
       width,
       fontScale,
     } = this.props;
-    if ((card.hidden || backFirst) && ((card.hidden && card.type_code !== 'investigator') || card.spoiler) && !this.state.showBack && card.code !== RANDOM_BASIC_WEAKNESS) {
+    if ((card.hidden || backFirst) &&
+      ((card.hidden && card.type_code !== 'investigator') || card.spoiler) &&
+      !this.state.showBack &&
+      card.code !== RANDOM_BASIC_WEAKNESS
+    ) {
       return (
-        <View style={[styles.container, styles.buttonContainerPadding, { width }]}>
-          <View style={styles.buttonContainer}>
-            <Button
-              grow
-              text={(card.hidden || backFirst) ? t`Show back` : t`Show front`}
-              onPress={this._toggleShowBack}
-            />
-          </View>
+        <View style={[styles.container, styles.buttonContainerPadding, { width }]} key={key}>
+          <BasicButton title={(card.hidden || backFirst) ? t`Show back` : t`Show front`} onPress={this._toggleShowBack} />
         </View>
       );
     }
 
     const isTablet = Platform.OS === 'ios' && DeviceInfo.isTablet();
     return (
-      <View style={[styles.container, styles.containerPadding]}>
+      <View style={[styles.container, styles.containerPadding]} key={key}>
         <View style={[
           styles.card,
           {
@@ -767,7 +766,7 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
                 <View style={styles.mainColumn}>
                   { this.renderMetadata(card) }
                   { this.renderPlaydata(card) }
-                  { !simple || !!(card.flavor && flavorFirst) &&
+                  { !!card.flavor && (simple || flavorFirst) &&
                     <CardFlavorTextComponent text={card.flavor} />
                   }
                   { isTablet && this.renderCardText(card, backFirst, isHorizontal, flavorFirst) }
@@ -808,9 +807,9 @@ export default class TwoSidedCardComponent extends React.Component<Props, State>
       !(isHorizontal || !card.spoiler) &&
       card.type_code !== 'scenario';
 
-    const sideA = backFirst && this.renderCardBack(card, backFirst, isHorizontal, flavorFirst, !notFirst);
-    const sideB = this.renderCardFront(card, !!backFirst, isHorizontal, flavorFirst, !notFirst && !sideA);
-    const sideC = !backFirst && this.renderCardBack(card, !!backFirst, isHorizontal, flavorFirst, !notFirst && !sideA && !sideB);
+    const sideA = backFirst && this.renderCardBack(card, backFirst, isHorizontal, flavorFirst, !notFirst, 'sideA');
+    const sideB = this.renderCardFront(card, !!backFirst, isHorizontal, flavorFirst, !notFirst && !sideA, 'sideB');
+    const sideC = !backFirst && this.renderCardBack(card, !!backFirst, isHorizontal, flavorFirst, !notFirst && !sideA && !sideB, 'sideC');
     return (
       <View>
         { sideA }

@@ -51,6 +51,7 @@ export interface DeckMeta {
 
 export interface Deck {
   id: number;
+  uuid?: string;
   name: string;
   description_md?: string;
   taboo_id?: number;
@@ -173,6 +174,10 @@ export interface InvestigatorData {
   [code: string]: TraumaAndCardData | undefined;
 }
 
+export interface InvestigatorTraumaData {
+  [code: string]: Trauma | undefined;
+}
+
 export interface WeaknessSet {
   packCodes: string[];
   assignedCards: Slots;
@@ -228,6 +233,14 @@ export interface ScenarioResult {
   xp?: number;
   scenarioPack?: string;
   interlude?: boolean;
+}
+
+export interface BackupState {
+  campaigns: Campaign[];
+  decks: Deck[];
+  guides: { [id: string]: CampaignGuideState };
+  deckIds: { [id: string]: string };
+  campaignIds: { [id: string]: string };
 }
 
 export enum CampaignDifficulty {
@@ -297,7 +310,7 @@ export const GUIDED_CAMPAIGNS = new Set([
   RTNOTZ,
   RTDWL,
   RTPTC,
-//  RTTFA,
+  RTTFA,
   TDE,
   TDEA,
   TDEB,
@@ -323,10 +336,11 @@ export interface CampaignNotes {
 
 export interface Campaign {
   id: number;
+  uuid?: string;
   name: string;
   difficulty?: CampaignDifficulty;
   cycleCode: CampaignCycleCode;
-  lastUpdated: Date;
+  lastUpdated: Date | string;
   showInterludes?: boolean;
   baseDeckIds?: number[];
   latestDeckIds?: number[]; // deprecated
@@ -346,7 +360,6 @@ export interface Campaign {
   };
   linkedCampaignId?: number;
 }
-
 
 export interface SingleCampaign extends Campaign {
   latestScenario?: ScenarioResult;
@@ -417,12 +430,19 @@ export interface CardFetchStartAction {
   type: typeof CARD_FETCH_START;
 }
 
+export const SET_LANGUAGE_CHOICE = 'SET_LANGUAGE_CHOICE';
+export interface SetLanguageChoiceAction {
+  type: typeof SET_LANGUAGE_CHOICE;
+  choiceLang: string;
+}
+
 export const CARD_FETCH_SUCCESS = 'CARD_FETCH_SUCCESS';
 export interface CardFetchSuccessAction {
   type: typeof CARD_FETCH_SUCCESS;
   cache?: CardCache;
   tabooCache?: TabooCache;
-  lang: string;
+  cardLang: string;
+  choiceLang: string;
 }
 
 export const CARD_FETCH_ERROR = 'CARD_FETCH_ERROR';
@@ -538,6 +558,24 @@ export interface RestoreBackupAction {
     [id: string]: CampaignGuideState;
   };
 }
+
+
+export const RESTORE_COMPLEX_BACKUP = 'RESTORE_COMPLEX_BACKUP';
+export interface RestoreComplexBackupAction {
+  type: typeof RESTORE_COMPLEX_BACKUP;
+  campaigns: Campaign[];
+  decks: Deck[];
+  guides: {
+    [id: string]: CampaignGuideState;
+  };
+  deckRemapping: {
+    [key: string]: number;
+  };
+  campaignRemapping: {
+    [key: string]: number;
+  };
+}
+
 export const UPDATE_CAMPAIGN = 'UPDATE_CAMPAIGN';
 export interface UpdateCampaignAction {
   type: typeof UPDATE_CAMPAIGN;
@@ -552,6 +590,7 @@ export interface UpdateCampaignSpentXpAction {
   id: number;
   investigator: string;
   operation: 'inc' | 'dec';
+  now: Date;
 }
 
 export const UPDATE_CHAOS_BAG_RESULTS = 'UPDATE_CHAOS_BAG_RESULTS';
@@ -740,12 +779,20 @@ export interface GuideChoiceInput extends BasicInput {
 
 export interface GuideStartScenarioInput extends BasicInput {
   type: 'start_scenario';
+  step: undefined;
+}
+
+export interface GuideInterScenarioInput extends BasicInput {
+  type: 'inter_scenario';
+  investigatorData: InvestigatorTraumaData;
+  step: undefined;
 }
 
 interface StartSideScenarioInput extends BasicInput {
   type: 'start_side_scenario';
   scenario: string;
   previousScenarioId: string;
+  step: undefined;
 }
 export interface GuideStartSideScenarioInput extends StartSideScenarioInput {
   sideScenarioType: 'official';
@@ -774,13 +821,15 @@ export type GuideInput =
   GuideStartScenarioInput |
   GuideCampaignLinkInput |
   GuideStartSideScenarioInput |
-  GuideStartCustomSideScenarioInput;
+  GuideStartCustomSideScenarioInput |
+  GuideInterScenarioInput;
 
 export const GUIDE_RESET_SCENARIO = 'GUIDE_RESET_SCENARIO';
 export interface GuideResetScenarioAction {
   type: typeof GUIDE_RESET_SCENARIO;
   campaignId: number;
   scenarioId: string;
+  now: Date;
 }
 
 export const GUIDE_SET_INPUT = 'GUIDE_SET_INPUT';
@@ -788,6 +837,7 @@ export interface GuideSetInputAction {
   type: typeof GUIDE_SET_INPUT;
   campaignId: number;
   input: GuideInput;
+  now: Date;
 }
 
 export const GUIDE_UNDO_INPUT = 'GUIDE_UNDO_INPUT';
@@ -795,6 +845,7 @@ export interface GuideUndoInputAction {
   type: typeof GUIDE_UNDO_INPUT;
   campaignId: number;
   scenarioId: string;
+  now: Date;
 }
 
 export interface SupplyCounts {
@@ -813,11 +864,31 @@ export interface StringChoices {
 
 export interface CampaignGuideState {
   inputs: GuideInput[];
+  lastUpdated?: Date;
 }
 
 export const DEFAULT_CAMPAIGN_GUIDE_STATE: CampaignGuideState = {
   inputs: [],
 };
+
+export const ENSURE_UUID = 'ENSURE_UUID';
+export interface EnsureUuidAction {
+  type: typeof ENSURE_UUID;
+}
+
+export const RESET_DECK_CHECKLIST = 'RESET_DECK_CHECKLIST';
+export interface ResetDeckChecklistAction {
+  type: typeof RESET_DECK_CHECKLIST;
+  id: number;
+}
+
+export const SET_DECK_CHECKLIST_CARD = 'SET_DECK_CHECKLIST_CARD';
+export interface SetDeckChecklistCardAction {
+  type: typeof SET_DECK_CHECKLIST_CARD;
+  id: number;
+  card: string;
+  value: boolean;
+}
 
 export type FilterActions =
   ClearFilterAction |
@@ -845,7 +916,10 @@ export type SignInActions =
   LogoutAction;
 
 export type DecksActions =
+  ResetDeckChecklistAction |
+  SetDeckChecklistCardAction |
   LogoutAction |
+  RestoreComplexBackupAction |
   RestoreBackupAction |
   MyDecksStartRefreshAction |
   MyDecksCacheHitAction |
@@ -855,10 +929,12 @@ export type DecksActions =
   DeleteDeckAction |
   UpdateDeckAction |
   ClearDecksAction |
-  ReplaceLocalDeckAction;
+  ReplaceLocalDeckAction |
+  EnsureUuidAction;
 
 export type CampaignActions =
   LogoutAction |
+  RestoreComplexBackupAction |
   ReplaceLocalDeckAction |
   CleanBrokenCampaignsAction |
   NewCampaignAction |
@@ -871,10 +947,12 @@ export type CampaignActions =
   RestoreBackupAction |
   UpdateChaosBagResultsAction |
   CampaignAddInvestigatorAction |
-  CampaignRemoveInvestigatorAction;
+  CampaignRemoveInvestigatorAction |
+  EnsureUuidAction;
 
 export type GuideActions =
   DeleteCampaignAction |
+  RestoreComplexBackupAction |
   RestoreBackupAction |
   LogoutAction |
   GuideSetInputAction |

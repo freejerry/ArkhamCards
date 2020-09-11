@@ -72,6 +72,7 @@ function chooseResolutionStep(resolutions: Resolution[]): InputStep {
               ...(hasInvestigatorDefeat ? [CHECK_INVESTIGATOR_DEFEAT_RESOLUTION_ID] : []),
               `$r_${resolution.id}`,
               ...resolution.steps,
+              INTER_SCENARIO_CHANGES_STEP_ID,
               PROCEED_STEP_ID,
             ],
             effects: [{
@@ -100,7 +101,7 @@ function chooseInvestigatorsStep(): InputStep {
       type: 'scenario_investigators',
     },
   };
-};
+}
 
 const UPGRADE_DECKS_STEP_ID = '$upgrade_decks';
 function upgradeDecksStep(): InputStep {
@@ -111,7 +112,7 @@ function upgradeDecksStep(): InputStep {
       type: 'upgrade_decks',
     },
   };
-};
+}
 
 const DRAW_WEAKNESS_STEP_ID = '$draw_weakness';
 function drawWeaknessStep(): InputStep {
@@ -138,8 +139,7 @@ function drawWeaknessStep(): InputStep {
       ],
     },
   };
-};
-
+}
 
 const RECORD_TRAUMA_STEP_ID = '$record_trauma';
 function recordTraumaStep(): InputStep {
@@ -179,7 +179,7 @@ function playScenarioStep(): InputStep {
       type: 'play_scenario',
     },
   };
-};
+}
 
 const EDIT_CAMPAIGN_LOG_STEP_ID = '$campaign_log';
 function editCampaignLogStep(): InputStep {
@@ -197,7 +197,7 @@ function editCampaignLogStep(): InputStep {
       ],
     },
   };
-};
+}
 
 const LEAD_INVESTIGATOR_STEP_ID = '$lead_investigator';
 function leadInvestigatorStep(): InputStep {
@@ -229,8 +229,7 @@ function leadInvestigatorStep(): InputStep {
       ],
     },
   };
-};
-
+}
 
 function resolutionStep(
   id: string,
@@ -261,11 +260,16 @@ function statusToString(
   status: InvestigatorStatus
 ): string {
   switch (status) {
-    case 'alive': return t`Alive`;
-    case 'resigned': return t`Resigned`;
-    case 'physical': return t`Defeated: physical trauma`;
-    case 'mental': return t`Defeated: mental trauma`;
-    case 'eliminated': return t`Defeated: no trauma`;
+    case 'alive':
+      return t`Alive`;
+    case 'resigned':
+      return t`Resigned`;
+    case 'physical':
+      return t`Defeated: physical trauma`;
+    case 'mental':
+      return t`Defeated: mental trauma`;
+    case 'eliminated':
+      return t`Defeated: no trauma`;
   }
 }
 
@@ -339,6 +343,15 @@ export function createInvestigatorStatusStep(
   };
 }
 
+export const INTER_SCENARIO_CHANGES_STEP_ID = '$inter_scenario_changes';
+function interScenarioChangesStep(): Step {
+  return {
+    id: INTER_SCENARIO_CHANGES_STEP_ID,
+    type: 'internal',
+    hidden: true,
+  };
+}
+
 export function getFixedStep(
   id: string,
   scenarioGuide: ScenarioGuide,
@@ -380,6 +393,8 @@ export function getFixedStep(
         ],
       };
     }
+    case INTER_SCENARIO_CHANGES_STEP_ID:
+      return interScenarioChangesStep();
     case EDIT_CAMPAIGN_LOG_STEP_ID:
       return editCampaignLogStep();
     case DRAW_WEAKNESS_STEP_ID:
@@ -403,6 +418,7 @@ export function scenarioStepIds(scenario: Scenario) {
   return (scenario.type === 'interlude' || scenario.type === 'epilogue') ?
     [
       ...scenario.setup,
+      INTER_SCENARIO_CHANGES_STEP_ID,
       PROCEED_STEP_ID,
     ] : [
       CHOOSE_INVESTIGATORS_STEP_ID,

@@ -70,6 +70,7 @@ class CardDetailView extends React.Component<Props, State> {
       topBar: {
         backButton: {
           title: t`Back`,
+          color: '#007AFF',
         },
       },
     };
@@ -85,12 +86,19 @@ class CardDetailView extends React.Component<Props, State> {
       showSpoilers: props.showSpoilers || false,
     };
     this.navUpdated = false;
+  }
 
+  componentDidMount() {
     this._navEventListener = Navigation.events().bindComponent(this);
   }
 
   componentWillUnmount() {
     this._navEventListener && this._navEventListener.remove();
+  }
+
+  componentDidAppear() {
+    const { componentId } = this.props;
+    Navigation.mergeOptions(componentId, CardDetailView.options);
   }
 
   navigationButtonPressed({ buttonId }: { buttonId: string }) {
@@ -162,7 +170,6 @@ class CardDetailView extends React.Component<Props, State> {
     });
   };
 
-
   render() {
     const {
       componentId,
@@ -218,7 +225,7 @@ function mapStateToProps(
 }
 
 export default
-connect<ReduxProps, {}, NavigationProps & CardDetailProps, AppState>(mapStateToProps)(
+connect<ReduxProps, unknown, NavigationProps & CardDetailProps, AppState>(mapStateToProps)(
   withDimensions(CardDetailView)
 );
 

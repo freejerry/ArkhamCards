@@ -1,7 +1,7 @@
 import { find } from 'lodash';
 
 import { Deck, NumberChoices } from '@actions/types';
-import { FullCampaign, Effect } from './types';
+import { FullCampaign, Effect, Errata } from './types';
 import CampaignGuide, { CampaignLog } from './CampaignGuide';
 import ScenarioGuide from './ScenarioGuide';
 import ScenarioStep from './ScenarioStep';
@@ -73,18 +73,41 @@ export type Choices = PersonalizedChoices | UniversalChoices;
 function load(lang: string): {
   allLogEntries: CampaignLog[];
   allCampaigns: FullCampaign[];
+  encounterSets: {
+    [code: string]: string;
+  };
+  errata: Errata;
 } {
   switch (lang) {
     case 'es':
       return {
         allLogEntries: require('../../../assets/campaignLogs_es.json'),
         allCampaigns: require('../../../assets/allCampaigns_es.json'),
+        encounterSets: require('../../../assets/encounterSets_es.json'),
+        errata: require('../../../assets/campaignErrata_es.json'),
       };
-      default:
-      case 'en':
+    case 'ru':
+      return {
+        allLogEntries: require('../../../assets/campaignLogs_ru.json'),
+        allCampaigns: require('../../../assets/allCampaigns_ru.json'),
+        encounterSets: require('../../../assets/encounterSets_ru.json'),
+        errata: require('../../../assets/campaignErrata_ru.json'),
+      };
+
+    case 'de':
+      return {
+        allLogEntries: require('../../../assets/campaignLogs_de.json'),
+        allCampaigns: require('../../../assets/allCampaigns_de.json'),
+        encounterSets: require('../../../assets/encounterSets_de.json'),
+        errata: require('../../../assets/campaignErrata_de.json'),
+      };
+    default:
+    case 'en':
       return {
         allLogEntries: require('../../../assets/campaignLogs.json'),
         allCampaigns: require('../../../assets/allCampaigns.json'),
+        encounterSets: require('../../../assets/encounterSets.json'),
+        errata: require('../../../assets/campaignErrata.json'),
       };
   }
 }
@@ -96,6 +119,8 @@ export function getCampaignGuide(
   const {
     allLogEntries,
     allCampaigns,
+    encounterSets,
+    errata,
   } = load(lang);
 
   const campaign = find(allCampaigns, campaign =>
@@ -108,7 +133,9 @@ export function getCampaignGuide(
     new CampaignGuide(
       campaign,
       logEntries,
-      sideCampaign
+      encounterSets,
+      sideCampaign,
+      errata,
     );
 }
 

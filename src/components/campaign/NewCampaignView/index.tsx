@@ -1,7 +1,6 @@
 import React from 'react';
-import { filter, forEach, keys, map, sumBy, throttle } from 'lodash';
+import { filter, forEach, map, throttle } from 'lodash';
 import {
-  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,6 +11,7 @@ import { connect } from 'react-redux';
 import { Navigation, EventSubscription } from 'react-native-navigation';
 import { t } from 'ttag';
 
+import withStyles, { StylesProps } from '@components/core/withStyles';
 import BasicButton from '@components/core/BasicButton';
 import PickerStyleButton from '@components/core/PickerStyleButton';
 import EditText from '@components/core/EditText';
@@ -36,6 +36,7 @@ import {
   getChaosBag,
   difficultyString,
 } from '../constants';
+import { maybeShowWeaknessPrompt } from '../campaignHelper';
 import AddCampaignNoteSectionDialog from '../AddCampaignNoteSectionDialog';
 import NavButton from '@components/core/NavButton';
 import SettingsSwitch from '@components/core/SettingsSwitch';
@@ -44,6 +45,7 @@ import withDialogs, { InjectedDialogProps } from '@components/core/withDialogs';
 import withDimensions, { DimensionsProps } from '@components/core/withDimensions';
 import DeckSelector from './DeckSelector';
 import WeaknessSetPackChooserComponent from '@components/weakness/WeaknessSetPackChooserComponent';
+import { showCampaignDifficultyDialog } from '@components/campaign/CampaignDifficultyDialog';
 import { getNextCampaignId, AppState } from '@reducers';
 import { newCampaign, newLinkedCampaign } from '@components/campaign/actions';
 import { NavigationProps } from '@components/nav/types';
@@ -86,7 +88,8 @@ interface ReduxActionProps {
 type Props = OwnProps &
   ReduxProps &
   ReduxActionProps &
-  DimensionsProps;
+  DimensionsProps &
+  StylesProps;
 
 interface State {
   hasGuide: boolean;
@@ -217,59 +220,20 @@ class NewCampaignView extends React.Component<Props, State> {
     }, this._updateNavigationButtons);
   };
 
+  _updateWeaknessAssignedCards = (weaknessAssignedCards: Slots) => {
+    this.setState({
+      weaknessAssignedCards,
+    });
+  };
+
   maybeShowWeaknessPrompt(deck: Deck) {
     const {
       cards,
     } = this.props;
-    const weaknesses = filter(keys(deck.slots), code => {
-      const card = cards[code];
-      return card && card.isBasicWeakness();
-    });
-    const count = sumBy(weaknesses, code => deck.slots[code]);
-    if (weaknesses.length) {
-      setTimeout(() => {
-        Alert.alert(
-          t`Adjust Weakness Set`,
-          /* eslint-disable prefer-template */
-          (count > 1 ?
-            t`This deck contains several basic weaknesses` :
-            t`This deck contains a basic weakness`) +
-          '\n\n' +
-          map(weaknesses, code => `${deck.slots[code]}x - ${cards[code].name}`).join('\n') +
-          '\n\n' +
-          (count > 1 ?
-            t`Do you want to remove them from the campaign’s Basic Weakness set?` :
-            t`Do you want to remove it from the campaign’s Basic Weakness set?`),
-          [
-            { text: t`Not Now`, style: 'cancel' },
-            {
-              text: t`Okay`,
-              style: 'default',
-              onPress: () => {
-                const {
-                  weaknessAssignedCards,
-                } = this.state;
-                const assignedCards = { ...weaknessAssignedCards };
-                forEach(weaknesses, code => {
-                  const count = deck.slots[code];
-                  if (!(code in assignedCards)) {
-                    assignedCards[code] = 0;
-                  }
-                  if ((assignedCards[code] + count) > (cards[code].quantity || 0)) {
-                    assignedCards[code] = cards[code].quantity || 0;
-                  } else {
-                    assignedCards[code] += count;
-                  }
-                });
-                this.setState({
-                  weaknessAssignedCards: assignedCards,
-                });
-              },
-            },
-          ],
-        );
-      }, 50);
-    }
+    const {
+      weaknessAssignedCards,
+    } = this.state;
+    maybeShowWeaknessPrompt(deck, cards, weaknessAssignedCards, this._updateWeaknessAssignedCards);
   }
 
   _investigatorAdded = (card: Card) => {
@@ -440,15 +404,7 @@ class NewCampaignView extends React.Component<Props, State> {
   };
 
   _showDifficultyDialog = () => {
-    Navigation.showOverlay({
-      component: {
-        name: 'Dialog.CampaignDifficulty',
-        passProps: {
-          difficulty: this.state.difficulty,
-          updateDifficulty: this._updateDifficulty,
-        },
-      },
-    });
+    showCampaignDifficultyDialog(this._updateDifficulty);
   };
 
   _campaignChanged = (campaignCode: CampaignCycleCode, campaign: string, hasGuide: boolean) => {
@@ -500,11 +456,11 @@ class NewCampaignView extends React.Component<Props, State> {
   }
 
   renderChaosBagSection() {
-    const { fontScale } = this.props;
+    const { fontScale, gameFont } = this.props;
     const chaosBag = this.getChaosBag();
     return (
       <View style={styles.block}>
-        <Text style={typography.mediumGameFont}>
+        <Text style={[typography.mediumGameFont, { fontFamily: gameFont }]}>
           { t`Chaos Bag` }
         </Text>
         <View style={space.marginTopS}>
@@ -529,11 +485,12 @@ class NewCampaignView extends React.Component<Props, State> {
     const {
       componentId,
       fontScale,
+      gameFont,
     } = this.props;
     return (
       <View style={[space.paddingBottomS, styles.underline]}>
         <View style={styles.block}>
-          <Text style={typography.mediumGameFont}>
+          <Text style={[typography.mediumGameFont, { fontFamily: gameFont }]}>
             { t`Weakness Set` }
           </Text>
           <Text style={typography.label}>
@@ -588,6 +545,7 @@ class NewCampaignView extends React.Component<Props, State> {
   }
 
   renderCampaignLogSection() {
+    const { gameFont } = this.props;
     if (this.isGuided()) {
       return null;
     }
@@ -598,7 +556,7 @@ class NewCampaignView extends React.Component<Props, State> {
     return (
       <View style={styles.underline}>
         <View style={styles.block}>
-          <Text style={typography.mediumGameFont}>
+          <Text style={[typography.mediumGameFont, { fontFamily: gameFont }]}>
             { t`Campaign Log` }
           </Text>
         </View>
@@ -662,6 +620,7 @@ class NewCampaignView extends React.Component<Props, State> {
       captureViewRef,
       nextId,
       fontScale,
+      gameFont,
     } = this.props;
 
     const {
@@ -710,7 +669,7 @@ class NewCampaignView extends React.Component<Props, State> {
           { campaignCode !== TDE && (
             <View style={styles.underline}>
               <View style={styles.block}>
-                <Text style={typography.mediumGameFont}>
+                <Text style={[typography.mediumGameFont, { fontFamily: gameFont }]}>
                   { t`Investigators` }
                 </Text>
               </View>
@@ -766,7 +725,9 @@ function mapDispatchToProps(dispatch: Dispatch<Action>): ReduxActionProps {
 export default connect(mapStateToProps, mapDispatchToProps)(
   withPlayerCards(
     withDialogs(
-      withDimensions(NewCampaignView)
+      withDimensions(
+        withStyles(NewCampaignView)
+      )
     )
   )
 );
@@ -778,13 +739,6 @@ const styles = StyleSheet.create({
   },
   footer: {
     minHeight: 100,
-  },
-  switch: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: COLORS.divider,
-    backgroundColor: COLORS.background,
-    paddingTop: s,
-    paddingBottom: s,
   },
   block: {
     padding: s,

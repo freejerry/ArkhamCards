@@ -5,17 +5,19 @@ import Card from '@data/Card';
 import typography from '@styles/typography';
 import space from '@styles/space';
 import COLORS from '@styles/colors';
+import withStyles, { StylesProps } from '@components/core/withStyles';
 
 interface Props {
   investigator: Card;
   detail?: string;
 }
 
-export default function InvestigatorNameRow({
+function InvestigatorNameRow({
   investigator,
   detail,
-}: Props) {
-  const backgroundColor = COLORS.faction[investigator.factionCode()].background
+  gameFont,
+}: Props & StylesProps) {
+  const backgroundColor = COLORS.faction[investigator.factionCode()].background;
   return (
     <View style={[
       styles.investigatorRow,
@@ -26,6 +28,7 @@ export default function InvestigatorNameRow({
       <View>
         <Text style={[
           typography.mediumGameFont,
+          { fontFamily: gameFont },
           styles.investigatorText,
         ]}>
           { investigator.name }
@@ -34,7 +37,7 @@ export default function InvestigatorNameRow({
       <View>
         { !!detail && (
           <Text style={[
-            typography.text, 
+            typography.text,
             styles.investigatorText,
           ]}>
             { detail }
@@ -44,6 +47,8 @@ export default function InvestigatorNameRow({
     </View>
   );
 }
+
+export default withStyles(InvestigatorNameRow);
 
 const styles = StyleSheet.create({
   investigatorText: {
